@@ -1,17 +1,13 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ODIN Suite</title>
+<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="icon" type="image/png" href="asgard-avatar.png">
 <link rel="apple-touch-icon" href="asgard-avatar.png">
 <meta property="og:title" content="ODIN Suite by Asgard Hashworks">
-<meta property="og:description" content="Self-learning quantitative hashrate engine and fleet supervisor, engineered in Rust for Windows and Linux. NiceHash order automation, miner supervision and phone command.">
+<meta property="og:description" content="Self-learning quantitative hashrate engine and fleet supervisor, engineered in Rust for Windows and Linux. NiceHash, Braiins Hashpower and MiningRigRentals under one engine, miner supervision and phone command.">
 <meta property="og:image" content="https://asgardhashworks.github.io/odin-suite-releases/asgard-avatar.png">
 <meta property="og:url" content="https://asgardhashworks.github.io/odin-suite-releases/">
-<meta name="description" content="ODIN Suite by Asgard Hashworks: a self-learning quantitative engine for NiceHash hashrate, miner supervision and a read-only phone dashboard. Windows and Linux.">
-<meta property="og:video" content="https://asgardhashworks.github.io/odin-suite-releases/media/odin-commercial-v2.mp4">
+<meta name="description" content="ODIN Suite by Asgard Hashworks: a self-learning quantitative engine for hashrate on NiceHash, Braiins Hashpower and MiningRigRentals, miner supervision and a read-only phone dashboard. Windows and Linux.">
+<meta property="og:video" content="https://asgardhashworks.github.io/odin-suite-releases/media/odin-commercial-v4.mp4">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
@@ -318,6 +314,35 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
 .state.live { color: var(--ok); } .state.watch { color: var(--amber); } .state.soon { color: var(--dim); }
 @media (max-width: 960px) { .mkts { grid-template-columns: minmax(0, 1fr); } }
 
+/* hot windows */
+.hot-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 22px; align-items: stretch; }
+.hotdash { background: #0a0b0c; border: 2px solid #00ff46; padding: 16px 18px; font: 500 13px/1.75 var(--mono); color: #c9cdcf; overflow: hidden; min-width: 0; animation: hotBorder 2s steps(1) infinite; }
+.hotdash .rule { height: 2px; background: #00ff46; margin: 6px 0; animation: hotBg 2s steps(1) infinite; }
+.hotdash .ban, .hotdash .f { color: #000; font-weight: 700; padding: 1px 6px; animation: hotBg 2s steps(1) infinite; }
+.hotdash .ban { display: block; margin: 8px 0 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hotdash .up { color: #00ffaf; font-weight: 700; }
+.hotdash .row { display: grid; grid-template-columns: 7ch 7ch 5ch minmax(40px, 1fr) 11ch; gap: 1.2ch; align-items: center; padding: 2px 6px; white-space: nowrap; }
+.hotdash .row.hd { color: #77797b; }
+.hotdash .row.p { background: #008700; color: #fff; animation: hotRow 2s steps(1) infinite; }
+.hotdash .row.l { background: #005f00; color: #fff; font-weight: 700; }
+.hotdash .row .tag { color: #000; font-weight: 700; padding: 0 6px; line-height: 1.6; text-align: left; animation: hotBg 2s steps(1) infinite; }
+.hotdash .row.l .tag { background: #00ff46; animation: none; }
+.hotdash .bar { display: block; height: 10px; background: #2a2e31; align-self: center; }
+.hotdash .bar i { display: block; height: 100%; background: #d8dcde; }
+.hotdash .row.p .bar, .hotdash .row.l .bar { background: rgba(0,0,0,.35); }
+@keyframes hotBg { 0% { background: #00ff46; } 50% { background: #ffd700; } }
+@keyframes hotRow { 0% { background: #008700; } 50% { background: #875f00; } }
+@keyframes hotBorder { 0% { border-color: #00ff46; } 50% { border-color: #ffd700; } }
+@media (prefers-reduced-motion: reduce) { .hotdash, .hotdash * { animation: none !important; } }
+.hot-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 22px; }
+.hot-steps .step { background: var(--panel); border: 1px solid var(--line); padding: 20px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.hot-steps .step .n { font: 700 12px/1 var(--mono); letter-spacing: .14em; color: var(--amber); }
+.hot-steps .step p { color: var(--dim); font-size: 14px; }
+.alert { font: 500 12px/1.5 var(--mono); border: 1px solid var(--gold-lo); background: #121518; padding: 10px 12px; color: var(--fg, #e6e8e9); overflow-wrap: anywhere; }
+.alert b { display: block; color: var(--gold-hi); letter-spacing: .04em; }
+.alert.act b { color: #ffd700; } .alert.on b { color: #00ff46; }
+@media (max-width: 960px) { .hot-grid, .hot-steps { grid-template-columns: minmax(0, 1fr); } }
+
 /* enterprise */
 .ent { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 28px; align-items: start; }
 .ent-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border: 1px solid var(--line); }
@@ -389,8 +414,6 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
 }
 </style>
 
-</head>
-<body>
 <header class="top">
   <div class="wrap nav">
     <a class="brand" href="#top" aria-label="ODIN Suite home">
@@ -401,6 +424,7 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
       <a href="#film">Film</a>
       <a href="#engine">Engine</a>
       <a href="#markets">Markets</a>
+      <a href="#hot">Hot windows</a>
       <a href="#enterprise">Enterprise</a>
       <a href="#plans">Plans</a>
       <a href="#order">Order</a>
@@ -416,7 +440,7 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
     <div>
       <div class="eyebrow"><b>// OPS</b> Self-learning hashrate engine · Rust · Windows · Linux</div>
       <h1>Run your mining farm like an <em>operations center</em>.</h1>
-      <p class="lead">ODIN Suite buys NiceHash hashrate with a quantitative engine that adapts to the live market. It re-prices every 2 seconds, checks its own math against what your pool actually pays, and spends hardest where the margin is widest. It also supervises every miner you own, and the whole operation fits on your phone. Same software for one GPU in a spare room or a warehouse of ASICs.</p>
+      <p class="lead">ODIN Suite buys hashrate with a quantitative engine that adapts to the live market: NiceHash today, with Braiins Hashpower and MiningRigRentals priced by the same model. It re-prices every 2 seconds, checks its own math against what your pool actually pays, and spends hardest where the margin is widest. It also supervises every miner you own, and the whole operation fits on your phone. Same software for one GPU in a spare room or a warehouse of ASICs.</p>
       <div class="cta">
         <a class="btn solid" href="https://github.com/asgardhashworks/odin-suite-releases/releases/latest" target="_blank" rel="noopener">Download free</a>
         <a class="btn" href="#plans">See plans</a>
@@ -453,10 +477,10 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
   <section class="film" id="film" aria-label="ODIN Suite film">
     <div class="wrap">
       <div class="film-frame">
-        <video id="filmVid" src="media/odin-commercial-v2.mp4" poster="media/odin-commercial-v2.jpg" autoplay muted loop playsinline preload="metadata" aria-label="ODIN Suite commercial: the order book, the learning engine, SLEIPNIR and HUGINN"></video>
+        <video id="filmVid" src="media/odin-commercial-v4.mp4" poster="media/odin-commercial-v4.jpg" autoplay muted loop playsinline preload="metadata" aria-label="ODIN Suite commercial: the order book, the learning engine, NiceHash, Braiins and MiningRigRentals, SLEIPNIR and HUGINN"></video>
       </div>
       <div class="film-bar">
-        <span class="eyebrow"><b class="rec">REC</b> ODIN Suite · 62 s · live footage and real algorithms</span>
+        <span class="eyebrow"><b class="rec">REC</b> ODIN Suite · 68 s · live footage, real algorithms, sound on for the voice</span>
         <div class="film-ctl">
           <button class="btn small solid" type="button" id="soundBtn" aria-pressed="false">▶ Sound on</button>
           <a class="btn small" href="https://youtu.be/AAvMzb12SpA" target="_blank" rel="noopener">Watch on YouTube</a>
@@ -466,8 +490,8 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
   </section>
 
   <div class="ticker" aria-hidden="true"><div class="ticker-in">
-    <span><b>01</b>Live hashvalue</span><span><b>02</b>Delay-aware calibration</span><span><b>03</b>Retarget forecast <span class="nc" style="padding:0">± σ</span></span><span><b>04</b>Budget pacing · Lagrangian</span><span><b>05</b>Spend into the dip</span><span><b>06</b>CUSUM change-points</span><span><b>07</b>Partial-fill curve · isotonic</span><span><b>08</b>Walk-forward tuning</span><span><b>◆</b>NiceHash · Braiins · hot switch</span>
-    <span><b>01</b>Live hashvalue</span><span><b>02</b>Delay-aware calibration</span><span><b>03</b>Retarget forecast <span class="nc" style="padding:0">± σ</span></span><span><b>04</b>Budget pacing · Lagrangian</span><span><b>05</b>Spend into the dip</span><span><b>06</b>CUSUM change-points</span><span><b>07</b>Partial-fill curve · isotonic</span><span><b>08</b>Walk-forward tuning</span><span><b>◆</b>NiceHash · Braiins · hot switch</span>
+    <span><b>01</b>Live hashvalue</span><span><b>02</b>Delay-aware calibration</span><span><b>03</b>Retarget forecast <span class="nc" style="padding:0">± σ</span></span><span><b>04</b>Budget pacing · Lagrangian</span><span><b>05</b>Spend into the dip</span><span><b>06</b>CUSUM change-points</span><span><b>07</b>Partial-fill curve · isotonic</span><span><b>08</b>Walk-forward tuning</span><span><b>◆</b>NiceHash · Braiins · MiningRigRentals · hot switch</span><span><b>◆</b>Rent-or-skip · rigs ≥ 7 PH/s</span><span><b>🔥</b>Hot windows · phone + e-mail alerts</span>
+    <span><b>01</b>Live hashvalue</span><span><b>02</b>Delay-aware calibration</span><span><b>03</b>Retarget forecast <span class="nc" style="padding:0">± σ</span></span><span><b>04</b>Budget pacing · Lagrangian</span><span><b>05</b>Spend into the dip</span><span><b>06</b>CUSUM change-points</span><span><b>07</b>Partial-fill curve · isotonic</span><span><b>08</b>Walk-forward tuning</span><span><b>◆</b>NiceHash · Braiins · MiningRigRentals · hot switch</span><span><b>◆</b>Rent-or-skip · rigs ≥ 7 PH/s</span><span><b>🔥</b>Hot windows · phone + e-mail alerts</span>
   </div></div>
 
   <section class="edge" id="edge">
@@ -528,19 +552,55 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
       <div class="sec-head">
         <div class="eyebrow"><b>// MARKETS</b> Multi-market · hot switch</div>
         <h2>One engine. Every market.</h2>
-        <p class="lead">ODIN prices every hashrate market with the same income model, fees included, and keeps separate learning for each. Turn a market on, off or live while ODIN runs, and the change applies within one 2-second cycle. ODIN tells you where new money earns more, and never moves it for you.</p>
+        <p class="lead">ODIN prices every hashrate market with the same income model, fees included, and keeps separate learning for each. Turn a market on, off or live while ODIN runs, and the change applies within one 2-second cycle. ODIN tells you where new money earns more, and never moves it for you. More venues plug into the same learning core as their APIs allow.</p>
       </div>
       <div class="mkts">
         <div class="mkt on"><div class="top"><h3>NiceHash</h3><span class="state live">LIVE</span></div><p>SHA256ASICBOOST order book, 3% buyer fee. The full engine: lock, park, pacing, dip speed.</p></div>
         <div class="mkt on"><div class="top"><h3>Braiins Hashpower</h3><span class="state watch">WATCH</span></div><p>Spot order book in the same BTC/EH/day unit, 0% fee during its beta. ODIN learns its fill curve, dip hours and market shifts, and keeps a shadow P/L. Live bidding follows once Braiins API v2 access opens.</p></div>
-        <div class="mkt"><div class="top"><h3>Next markets</h3><span class="state soon">ROADMAP</span></div><p>MiningRigRentals (a rent-or-skip engine for fixed-term rentals) and more as their APIs allow. Each one plugs into the same learning core.</p></div>
+        <div class="mkt on"><div class="top"><h3>MiningRigRentals</h3><span class="state watch">WATCH</span></div><p>Fixed-term rentals, so ODIN runs a <b>rent-or-skip</b> engine instead of bidding. It reads both of MRR's Bitcoin markets, SHA256 Asicboost (the large one, about 64 EH/s listed) and SHA-256, and scores every rig on delivered hashrate (measured, or MRR's RPI for idle rigs), its price after the next retarget, and how many hours your balance can fund. It only considers rigs of 7 PH/s or more, because in our own test rentals those were the ones that delivered in full. ODIN keeps a shadow P/L of every rental it would have taken, and live renting follows once that engine has been validated.</p></div>
       </div>
-      <div class="clip" style="max-width:760px"><video data-auto src="media/clip-markets.mp4" poster="media/clip-markets.jpg" muted loop playsinline preload="none" aria-label="Switching Braiins Hashpower on while ODIN runs"></video><span class="lbl">Hot switch</span></div>
+      <div class="clip" style="max-width:760px"><video data-auto src="media/clip-markets-v3.mp4" poster="media/clip-markets-v3.jpg" muted loop playsinline preload="none" aria-label="Switching Braiins Hashpower and MiningRigRentals on while ODIN runs"></video><span class="lbl">Hot switch</span></div>
       <div class="term"><span class="c"># switch markets while ODIN runs</span>
 odin --market                    <span class="c"># list modes</span>
 odin --market braiins watch      <span class="c"># start learning Braiins</span>
+odin --market mrr watch          <span class="c"># score every MRR rig, rent-or-skip</span>
 odin --market nicehash watch     <span class="c"># pause NiceHash trading, orders untouched</span>
 odin --market nicehash live      <span class="c"># resume</span></div>
+    </div>
+  </section>
+
+  <section class="band" id="hot">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow"><b>// HOT WINDOWS</b> Live profit alerts</div>
+        <h2>When profit hits, ODIN lights up.</h2>
+        <p class="lead">The moment any market turns profitable, and stays that way for a full minute, ODIN's dashboard flashes green and gold, the payout lights up and every profitable price level glows. Your phone and inbox get one alert per window, and each alert says who acts: <b>ODIN is on it</b> where it can trade, <b>Act now</b> with a direct link where you have to.</p>
+      </div>
+      <div class="hot-grid">
+        <div class="hotdash" role="img" aria-label="ODIN dashboard during a hot window: banner, flashing payout, profitable rows glowing">
+          <div class="rule"></div>
+          <div><b>ODIN · NiceHash SHA256ASICBOOST</b></div>
+          <div class="rule"></div>
+          <span class="ban">◆ HOT · NICEHASH PROFIT WINDOW 4m · ODIN BUYING · PAYOUT +4.6% ◆</span>
+          <div>Bitcoin pays <span class="f">0.4911</span> → <span class="f">0.4764</span> <span class="up">▲ +4.6%</span></div>
+          <div>Margin now <span class="f">+5.1% PROFIT</span></div>
+          <div style="height:10px"></div>
+          <div class="row hd"><span>PRICE</span><span>SPEED</span><span>FILL</span><span>DEPTH</span><span>STATUS</span></div>
+          <div class="row"><span>0.4641</span><span>0.0105</span><span>100%</span><span class="bar"><i style="width:8%"></i></span><span>✓ pass</span></div>
+          <div class="row p"><span>0.4551</span><span>0.0610</span><span>97%</span><span class="bar"><i style="width:17%"></i></span><span class="tag">▲▲ PROFIT</span></div>
+          <div class="row p"><span>0.4446</span><span>0.0183</span><span>88%</span><span class="bar"><i style="width:8%"></i></span><span class="tag">▲▲ PROFIT</span></div>
+          <div class="row l"><span>0.4402</span><span>0.8328</span><span>100%</span><span class="bar"><i style="width:100%"></i></span><span class="tag">◆ LOCKED</span></div>
+        </div>
+        <div class="clip"><video data-auto src="media/clip-hot.mp4" poster="media/clip-hot.jpg" muted loop playsinline preload="none" aria-label="A hot window: the dashboard flashes, the gold coin pops and a phone alert arrives"></video><span class="lbl">Hot window</span></div>
+      </div>
+      <div class="hot-steps">
+        <div class="step"><span class="n">01 · SPOTS IT</span><h3>Checked every 2 seconds</h3><p>A window opens when a market's price is at or under your profitable maximum for 60 seconds in a row, so a single stray tick never pages you. ODIN also flags a <b>payout surge</b>: Bitcoin paying 3% or more above its last-hour average, usually a fee spike.</p></div>
+        <div class="step"><span class="n">02 · LIGHTS UP</span><h3>You can't miss it</h3><p>A HOT banner, a flashing payout and margin, and glowing order-book rows, alternating green and gold every refresh until 10 minutes pass with no profit.</p></div>
+        <div class="step"><span class="n">03 · TELLS YOU WHO ACTS</span><h3>Phone push + e-mail</h3>
+          <div class="alert on"><b>HOT WINDOW · ODIN IS ON IT</b>NiceHash 0.4402 under max 0.4579 · buying the dip itself</div>
+          <div class="alert act"><b>HOT WINDOW · ACT NOW</b>MRR Asicboost 7.0 PH/s for 3h · expected profit · rent link included</div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -979,6 +1039,3 @@ odin --verify-audit odin_audit.jsonl   <span class="c"># AUDIT OK · hash chain 
   if (!still) setInterval(frame, 90);
 })();
 </script>
-
-</body>
-</html>
