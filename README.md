@@ -1,6 +1,7 @@
 # ODIN Suite
 
-**Your mining farm, run like a data center.** ODIN Suite supervises every miner you own, buys NiceHash hashrate only when it pays, and puts the whole operation on your phone. It works the same for one GPU in a spare room and for a warehouse of ASICs.
+**Your mining farm, run like a data center.**ODIN Suite: enterprise-grade control for Bitcoin mining farms.
+Unified supervision, automated hashrate procurement, and secure mobile oversight in one Windows platform. ODIN Suite keeps every miner online, enforces your capital limits on every NiceHash order, and puts live farm telemetry in your pocket. Deployed the same way for a home rig or a 1,000-unit site.
 
 | | What it does |
 | --- | --- |
