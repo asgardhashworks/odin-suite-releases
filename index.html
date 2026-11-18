@@ -145,6 +145,40 @@ tr.lock .bar { background: var(--amber); }
 .final-l { display: flex; gap: 28px; align-items: center; min-width: 0; }
 @media (max-width: 560px) { .emblem { width: 84px; height: 84px; } .final-l { gap: 18px; } }
 
+
+/* edge: speed vs precision */
+.edge { border-top: 1px solid var(--line); background:
+  radial-gradient(900px 300px at 85% 0%, rgba(216,170,69,.10), transparent 70%), var(--bg); }
+.edge > .wrap { padding-block: 88px; display: grid; gap: 44px; }
+.edge-quote { margin: 0; display: grid; gap: 20px; max-width: 980px; }
+.edge-quote .big { font: 700 clamp(34px, 5.4vw, 68px)/1.02 var(--display); text-transform: uppercase; letter-spacing: .005em; text-wrap: balance; }
+.edge-quote .big span { display: block; color: var(--dim); }
+.edge-quote .big em { font-style: normal; background: linear-gradient(180deg, var(--gold-hi), var(--amber) 50%, var(--gold-lo)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.edge-quote p { color: var(--dim); max-width: 70ch; font-size: 17px; }
+.edge-quote p b { color: var(--fg); font-weight: 600; }
+.scale { border: 1px solid var(--line); background: var(--panel); padding: 22px 22px 18px; display: grid; gap: 14px; min-width: 0; }
+.scale-title { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.ruler { overflow-x: auto; }
+.ruler-in { min-width: 620px; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); row-gap: 10px; font: 500 12px/1.3 var(--mono); }
+.tick { border-left: 1px solid var(--line); padding: 6px 0 6px 8px; color: var(--dim); letter-spacing: .08em; }
+.tick b { display: block; color: var(--fg); font-weight: 500; font-size: 13px; }
+.span { white-space: nowrap; padding: 8px 10px; letter-spacing: .06em; text-transform: uppercase; font-size: 11px; display: flex; align-items: center; gap: 8px; min-width: 0; }
+.span.hft { grid-column: 1 / 3; border: 1px dashed var(--line); color: var(--dim); }
+.span.nh { grid-column: 4 / 6; background: color-mix(in srgb, var(--fg) 6%, transparent); color: var(--fg); }
+.span.odin { grid-column: 4 / 5; background: linear-gradient(90deg, var(--gold-lo), var(--amber)); color: var(--amber-ink); font-weight: 700; }
+.span.deliv { grid-column: 6 / 7; color: var(--dim); border: 1px solid var(--line); }
+.edge-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid var(--line); }
+.edge-stat { padding: 22px; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.edge-stat + .edge-stat { border-left: 1px solid var(--line); }
+.edge-stat .v { font: 700 30px/1 var(--display); color: var(--amber); }
+.edge-stat .l { font: 500 11px/1.4 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--fg); }
+.edge-stat p { color: var(--dim); font-size: 14.5px; }
+@media (max-width: 720px) {
+  .edge > .wrap { padding-block: 60px; }
+  .edge-stats { grid-template-columns: minmax(0, 1fr); }
+  .edge-stat + .edge-stat { border-left: 0; border-top: 1px solid var(--line); }
+}
+
 /* sections */
 section.band { border-top: 1px solid var(--line); }
 section.band > .wrap { padding-block: 80px; display: grid; gap: 40px; }
@@ -287,7 +321,7 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
   <canvas id="bin" aria-hidden="true"></canvas>
   <div class="wrap hero">
     <div>
-      <div class="eyebrow"><b>// OPS</b> Mining farm control · Windows 10/11</div>
+      <div class="eyebrow"><b>// OPS</b> Quantitative hashrate engine · Rust · Windows 10/11</div>
       <h1>Run your mining farm like an <em>operations center</em>.</h1>
       <p class="lead">ODIN Suite watches every miner you own, restarts the ones that fail, and buys NiceHash hashrate only while the numbers work. The whole operation fits on your phone. Same software for one GPU in a spare room or a warehouse of ASICs.</p>
       <div class="cta">
@@ -322,6 +356,33 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
     </div>
   </div>
  </div>
+
+  <section class="edge" id="edge">
+    <div class="wrap">
+      <figure class="edge-quote">
+        <div class="eyebrow"><b>// DOCTRINE</b> Quantitative hashrate engine · engineered in Rust</div>
+        <div class="big"><span>Speed isn't the edge.</span><em>Quantitative precision is.</em></div>
+        <p>HFT platforms race in nanoseconds on markets that move in nanoseconds. NiceHash moves in seconds and minutes, so ODIN runs a <b>quantitative algorithmic engine</b> built for that market. It prices hashrate against live difficulty and block rewards every two seconds, learns from the market's own history which price levels truly hold, adapts its park price over time, and refuses any bid the math can't justify. <b>The longer it runs, the sharper it gets.</b></p>
+      </figure>
+
+      <div class="scale" role="img" aria-label="Time scale: HFT works in nanoseconds to microseconds; the NiceHash market moves over seconds to minutes; ODIN re-prices every 2 seconds; hashrate is delivered over hours.">
+        <div class="scale-title"><span class="eyebrow">Where each market lives · time scale</span><span class="eyebrow">log scale</span></div>
+        <div class="ruler"><div class="ruler-in">
+          <div class="tick"><b>ns</b>10⁻⁹ s</div><div class="tick"><b>µs</b>10⁻⁶ s</div><div class="tick"><b>ms</b>10⁻³ s</div><div class="tick"><b>s</b>1 s</div><div class="tick"><b>min</b>60 s</div><div class="tick"><b>h</b>3,600 s</div>
+          <div class="span hft">Stock-exchange HFT</div>
+          <div class="span nh" style="grid-row:3">NiceHash order book moves</div>
+          <div class="span odin" style="grid-row:4">◆ ODIN · every 2 s</div>
+          <div class="span deliv" style="grid-row:3">Hashrate delivered</div>
+        </div></div>
+      </div>
+
+      <div class="edge-stats">
+        <div class="edge-stat"><div class="v">2 s</div><div class="l">Re-pricing loop</div><p>Live difficulty, block reward, pool and NiceHash fees, recalculated every cycle.</p></div>
+        <div class="edge-stat"><div class="v">LEARNED</div><div class="l">Lock timing</div><p>How long a level must hold before ODIN commits is learned from the market's own history.</p></div>
+        <div class="edge-stat"><div class="v">ZERO</div><div class="l">Bids above your maximum</div><p>Above break-even, the profit guard parks the order and waits for a dip.</p></div>
+      </div>
+    </div>
+  </section>
 
   <section class="band" id="modules">
     <div class="wrap">
