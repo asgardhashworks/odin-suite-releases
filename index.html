@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ODIN Suite</title>
+<meta name="description" content="ODIN Suite by Asgard Hashworks: miner supervision, NiceHash hashrate order automation and a phone dashboard for mining farms of any size.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+/* Layout: a single dark operations-room page. Narrow left-aligned column, one wide "console" hero,
+   sections separated by thin steel rules with stencil-style section codes. Single dark theme by design. */
+:root {
+  --bg: #0a0c0d;          /* matte gunmetal black */
+  --panel: #111518;       /* raised console surface */
+  --line: #222a2f;        /* steel hairline */
+  --fg: #d9dee1;          /* cool off-white */
+  --dim: #7d888f;         /* steel grey text */
+  --amber: #e2a43b;       /* signal amber: the one accent */
+  --amber-ink: #1a1306;   /* text on amber */
+  --ok: #4fbf7a;          /* semantic: pass / online */
+  --warn: #c9873a;
+  --bad: #c8625a;
+  --display: "Chakra Petch", "Bahnschrift", "Arial Narrow", sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", "Cascadia Mono", Consolas, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font: 16px/1.6 var(--body);
+  -webkit-font-smoothing: antialiased;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+.wrap {
+  max-width: 1120px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.mono { font-family: var(--mono); }
+.eyebrow {
+  font: 500 12px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--dim);
+  display: flex; gap: 10px; align-items: center;
+}
+.eyebrow b { color: var(--amber); font-weight: 500; }
+h1, h2, h3 { font-family: var(--display); font-weight: 600; letter-spacing: .01em; text-wrap: balance; margin: 0; }
+h2 { font-size: clamp(28px, 4vw, 40px); line-height: 1.1; text-transform: uppercase; }
+h3 { font-size: 20px; text-transform: uppercase; letter-spacing: .04em; }
+p { margin: 0; }
+.lead { color: var(--dim); max-width: 62ch; font-size: 17px; }
+
+/* header */
+header.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.nav { display: flex; align-items: center; gap: 24px; height: 60px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font: 700 15px/1 var(--display); letter-spacing: .14em; text-transform: uppercase; }
+.brand svg { flex: none; }
+.brand small { color: var(--dim); font: 500 11px/1 var(--mono); letter-spacing: .12em; }
+.nav nav { margin-left: auto; display: flex; gap: 22px; font: 500 13px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+.nav nav a { text-decoration: none; color: var(--dim); }
+.nav nav a:hover { color: var(--fg); }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px; justify-content: center;
+  font: 600 14px/1 var(--display); letter-spacing: .12em; text-transform: uppercase; text-decoration: none;
+  padding: 14px 20px; border: 1px solid var(--amber); color: var(--amber); background: transparent;
+  cursor: pointer; transition: background .15s, color .15s;
+}
+.btn:hover { background: color-mix(in srgb, var(--amber) 12%, transparent); }
+.btn.solid { background: var(--amber); color: var(--amber-ink); }
+.btn.solid:hover { background: #f0b552; }
+.btn.small { padding: 10px 14px; font-size: 12px; }
+
+/* hero */
+.hero { padding-block: 72px 56px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 56px; align-items: center; }
+.hero h1 { font-size: clamp(38px, 5.6vw, 64px); line-height: 1.02; text-transform: uppercase; margin-top: 18px; }
+.hero h1 em { font-style: normal; color: var(--amber); }
+.hero .lead { margin-top: 20px; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.facts { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 8px 22px; font: 500 12px/1.4 var(--mono); letter-spacing: .06em; color: var(--dim); text-transform: uppercase; }
+.facts span::before { content: "■ "; color: var(--amber); font-size: 9px; vertical-align: 2px; }
+
+/* console */
+.console { background: var(--panel); border: 1px solid var(--line); font: 12.5px/1.55 var(--mono); min-width: 0; position: relative; }
+.console::before, .console::after { content: ""; position: absolute; width: 14px; height: 14px; border: 2px solid var(--amber); }
+.console::before { top: -6px; left: -6px; border-right: 0; border-bottom: 0; }
+.console::after { bottom: -6px; right: -6px; border-left: 0; border-top: 0; }
+.con-head { display: flex; justify-content: space-between; gap: 12px; padding: 10px 14px; border-bottom: 1px solid var(--line); color: var(--dim); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+.live { color: var(--ok); }
+.live::before { content: "●"; margin-right: 6px; animation: blink 1.6s steps(2, start) infinite; }
+@keyframes blink { 50% { opacity: .25; } }
+.ob { overflow-x: auto; }
+.ob table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; min-width: 420px; }
+.ob th { text-align: right; font-weight: 500; color: var(--dim); font-size: 10.5px; letter-spacing: .1em; padding: 8px 10px 6px; }
+.ob td { text-align: right; padding: 3px 10px; white-space: nowrap; }
+.ob th:first-child, .ob td:first-child { text-align: left; }
+.ob td.st { text-align: left; }
+.ob tr.pass td { color: var(--fg); }
+.ob tr.pass .st { color: var(--ok); }
+.ob tr.fail td { color: var(--dim); }
+.ob tr.fail .st { color: var(--bad); }
+.ob tr.lock td { background: color-mix(in srgb, var(--amber) 16%, transparent); color: var(--fg); }
+.ob tr.lock .st { color: var(--amber); font-weight: 700; }
+.bar { display: inline-block; height: 8px; background: var(--ok); vertical-align: 0; opacity: .8; }
+tr.fail .bar { background: var(--line); }
+tr.lock .bar { background: var(--amber); }
+.con-foot { border-top: 1px solid var(--line); padding: 10px 14px; display: grid; gap: 4px; }
+.con-foot .k { color: var(--dim); }
+.con-foot .g { color: var(--warn); }
+.sample { color: var(--dim); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; }
+
+/* sections */
+section.band { border-top: 1px solid var(--line); }
+section.band > .wrap { padding-block: 80px; display: grid; gap: 40px; }
+.sec-head { display: grid; gap: 14px; }
+
+/* modules */
+.mods { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid var(--line); }
+.mod { padding: 28px 24px; display: grid; gap: 14px; align-content: start; min-width: 0; }
+.mod + .mod { border-left: 1px solid var(--line); }
+.mod .code { font: 500 11px/1 var(--mono); color: var(--amber); letter-spacing: .14em; }
+.mod p { color: var(--dim); }
+.mod ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; font-size: 14.5px; }
+.mod li { padding-left: 18px; position: relative; }
+.mod li::before { content: ""; position: absolute; left: 0; top: .7em; width: 8px; height: 1px; background: var(--amber); }
+.freki { color: var(--dim); font-size: 14px; }
+.freki b { color: var(--fg); font-weight: 600; }
+
+/* sequence */
+.seq { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; counter-reset: s; }
+.step { padding: 0 22px 0 0; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.step .n { font: 700 13px/1 var(--mono); color: var(--amber); letter-spacing: .1em; display: flex; align-items: center; gap: 10px; }
+.step .n::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.step h3 { font-size: 17px; }
+.step p { color: var(--dim); font-size: 14.5px; }
+
+/* phones */
+.phones { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+.phone { margin: 0; display: grid; gap: 12px; min-width: 0; }
+.phone .frame { border: 1px solid var(--line); background: #000; padding: 8px; aspect-ratio: 9 / 16; max-width: 100%; overflow: hidden; }
+.phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+.phone figcaption { font: 500 12px/1.4 var(--mono); color: var(--dim); letter-spacing: .06em; text-transform: uppercase; }
+.phone figcaption b { color: var(--fg); font-weight: 500; }
+
+/* hardware table */
+.tbl { overflow-x: auto; border: 1px solid var(--line); }
+.tbl table { width: 100%; border-collapse: collapse; min-width: 640px; }
+.tbl th, .tbl td { text-align: left; padding: 14px 18px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: 0; }
+.tbl th { font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dim); background: var(--panel); }
+.tbl td:first-child { font-weight: 600; }
+.tbl td { font-size: 15px; }
+.tbl .muted { color: var(--dim); }
+.tag { font: 500 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; padding: 4px 7px; border: 1px solid currentColor; white-space: nowrap; }
+.tag.ok { color: var(--ok); }
+.tag.watch { color: var(--warn); }
+
+/* safety */
+.safety { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border: 1px solid var(--line); }
+.safe { padding: 24px; display: grid; gap: 8px; border-bottom: 1px solid var(--line); min-width: 0; }
+.safe:nth-child(odd) { border-right: 1px solid var(--line); }
+.safe:nth-last-child(-n+2) { border-bottom: 0; }
+.safe h3 { font-size: 16px; }
+.safe p { color: var(--dim); font-size: 14.5px; }
+
+/* plans */
+.plans { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border: 1px solid var(--line); }
+.plan { padding: 24px 20px; display: grid; gap: 16px; align-content: start; min-width: 0; }
+.plan + .plan { border-left: 1px solid var(--line); }
+.plan.pick { background: var(--panel); box-shadow: inset 0 2px 0 var(--amber); }
+.plan .name { font: 600 15px/1.2 var(--display); letter-spacing: .1em; text-transform: uppercase; }
+.plan .price { font: 600 34px/1 var(--display); }
+.plan .price small { font: 400 13px/1 var(--mono); color: var(--dim); letter-spacing: .04em; }
+.plan dl { margin: 0; display: grid; gap: 10px; font-size: 14px; }
+.plan dt { font: 500 10.5px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--dim); }
+.plan dd { margin: 3px 0 0; font-variant-numeric: tabular-nums; }
+.plan { position: relative; }
+.plan .badge { position: absolute; top: 9px; left: 20px; font: 500 10px/1 var(--mono); letter-spacing: .12em; color: var(--amber); text-transform: uppercase; }
+
+/* order */
+.order { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: start; }
+.order ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 16px; counter-reset: o; }
+.order li { counter-increment: o; display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 12px; }
+.order li::before { content: counter(o, decimal-leading-zero); font: 700 13px/1.7 var(--mono); color: var(--amber); }
+.order li p { color: var(--dim); }
+.order li b { color: var(--fg); font-weight: 600; }
+.mailbox { background: var(--panel); border: 1px solid var(--line); padding: 24px; display: grid; gap: 14px; }
+.mailbox .addr { font: 500 clamp(15px, 2.4vw, 19px)/1.3 var(--mono); user-select: all; word-break: break-all; }
+.mailbox .row { display: flex; flex-wrap: wrap; gap: 10px; }
+.mailbox .note { color: var(--dim); font-size: 13.5px; }
+.copied { font: 500 12px/1 var(--mono); color: var(--ok); letter-spacing: .08em; align-self: center; }
+
+/* final + footer */
+.final { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between; }
+footer { border-top: 1px solid var(--line); }
+footer .wrap { padding-block: 36px 48px; display: grid; gap: 14px; color: var(--dim); font-size: 13px; }
+footer .fine { max-width: 90ch; }
+footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+
+@media (max-width: 960px) {
+  .hero { grid-template-columns: minmax(0, 1fr); gap: 40px; padding-block: 48px 40px; }
+  .plans { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .plan + .plan { border-left: 0; }
+  .plan { border-bottom: 1px solid var(--line); }
+  .plan:nth-child(odd) { border-right: 1px solid var(--line); }
+  .plan:last-child { grid-column: 1 / -1; border-right: 0; border-bottom: 0; }
+  .seq { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 28px; }
+  .order { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 720px) {
+  .nav nav { display: none; }
+  .nav .btn { margin-left: auto; }
+  .mods { grid-template-columns: minmax(0, 1fr); }
+  .mod + .mod { border-left: 0; border-top: 1px solid var(--line); }
+  .phones { grid-template-columns: minmax(0, 1fr); max-width: 320px; }
+  .safety { grid-template-columns: minmax(0, 1fr); }
+  .safe:nth-child(odd) { border-right: 0; }
+  .safe:nth-last-child(2) { border-bottom: 1px solid var(--line); }
+  section.band > .wrap { padding-block: 56px; }
+}
+@media (max-width: 480px) {
+  .seq { grid-template-columns: minmax(0, 1fr); }
+  .plans { grid-template-columns: minmax(0, 1fr); }
+  .plan:nth-child(odd) { border-right: 0; }
+  .plan:last-child { border-bottom: 0; }
+  .cta .btn { flex: 1 1 100%; }
+}
+</style>
+</head>
+<body style="margin:0">
+
+
+<header class="top">
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="ODIN Suite home">
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M13 1 L25 13 L13 25 L1 13 Z" fill="none" stroke="#e2a43b" stroke-width="1.6"/><path d="M13 7 L19 13 L13 19 L7 13 Z" fill="#e2a43b"/></svg>
+      <span>ODIN Suite<br><small>Asgard Hashworks</small></span>
+    </a>
+    <nav aria-label="Sections">
+      <a href="#modules">Modules</a>
+      <a href="#hardware">Hardware</a>
+      <a href="#plans">Plans</a>
+      <a href="#order">Order</a>
+    </nav>
+    <a class="btn small solid" href="https://github.com/asgardhashworks/odin-suite-releases/releases/latest" target="_blank" rel="noopener">Download</a>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <div>
+      <div class="eyebrow"><b>// OPS</b> Mining farm control · Windows 10/11</div>
+      <h1>Run your mining farm like an <em>operations center</em>.</h1>
+      <p class="lead">ODIN Suite watches every miner you own, restarts the ones that fail, and buys NiceHash hashrate only while the numbers work. The whole operation fits on your phone. Same software for one GPU in a spare room or a warehouse of ASICs.</p>
+      <div class="cta">
+        <a class="btn solid" href="https://github.com/asgardhashworks/odin-suite-releases/releases/latest" target="_blank" rel="noopener">Download free</a>
+        <a class="btn" href="#plans">See plans</a>
+      </div>
+      <div class="facts"><span>Free to install</span><span>Keys stay on your PC</span><span>Starts in watch-only mode</span></div>
+    </div>
+
+    <div class="console" role="img" aria-label="Sample ODIN order book: price levels with pass or fail status and the locked level highlighted">
+      <div class="con-head"><span>ODIN · Order book · SHA256ASICBOOST</span><span class="live">Live</span></div>
+      <div class="ob">
+        <table>
+          <thead><tr><th>Price</th><th>Speed EH/s</th><th>Miners</th><th>Fill</th><th>Depth</th><th style="text-align:left">Status</th></tr></thead>
+          <tbody>
+            <tr class="pass"><td>0.4683</td><td>0.2244</td><td>6520</td><td>94%</td><td><span class="bar" style="width:22px"></span></td><td class="st">✓ pass</td></tr>
+            <tr class="pass"><td>0.4681</td><td>0.0026</td><td>53</td><td>100%</td><td><span class="bar" style="width:4px"></span></td><td class="st">✓ pass</td></tr>
+            <tr class="pass"><td>0.4677</td><td>14.0512</td><td>236732</td><td>99%</td><td><span class="bar" style="width:80px"></span></td><td class="st">✓ pass</td></tr>
+            <tr class="pass"><td>0.4676</td><td>0.9354</td><td>17542</td><td>91%</td><td><span class="bar" style="width:34px"></span></td><td class="st">✓ pass</td></tr>
+            <tr class="lock"><td>▸ 0.4674</td><td>0.0173</td><td>49</td><td>51%</td><td><span class="bar" style="width:8px"></span></td><td class="st">◆ LOCKED</td></tr>
+            <tr class="pass"><td>0.4673</td><td>1.1486</td><td>18041</td><td>38%</td><td><span class="bar" style="width:40px"></span></td><td class="st">▲ lowest ok</td></tr>
+            <tr class="fail"><td>0.4671</td><td>0.0001</td><td>0</td><td>1%</td><td><span class="bar" style="width:3px"></span></td><td class="st">× fail</td></tr>
+            <tr class="fail"><td>0.4660</td><td>0.0018</td><td>0</td><td>44%</td><td><span class="bar" style="width:3px"></span></td><td class="st">× fail</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="con-foot">
+        <div><span class="k">Profitable max</span> 0.4373 BTC/EH/day <span class="k">· market</span> 0.4674</div>
+        <div class="g">PROFIT GUARD · market above break-even → order parked at 0.4373, pays nothing until a dip</div>
+        <div class="sample">Sample data</div>
+      </div>
+    </div>
+  </div>
+
+  <section class="band" id="modules">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow"><b>// 01</b> Modules</div>
+        <h2>Three units. One operation.</h2>
+        <p class="lead">Each part does one job and reports to the others. Install all three with a single wizard.</p>
+      </div>
+      <div class="mods">
+        <article class="mod">
+          <span class="code">ODIN · TRADING</span>
+          <h3>Hashrate order engine</h3>
+          <p>Reads the live NiceHash order book every 2 seconds and buys SHA256 hashrate only while the margin is positive.</p>
+          <ul>
+            <li>Learns how stable each price level is</li>
+            <li>Parks your order instead of chasing the price</li>
+            <li>Daily spend and loss kill switches</li>
+            <li>Verified P/L with Kryptex pools</li>
+          </ul>
+        </article>
+        <article class="mod">
+          <span class="code">SLEIPNIR · SUPERVISION</span>
+          <h3>Miner supervisor</h3>
+          <p>Starts your miners at boot, restarts any that crash, freeze or slow down, and alerts you before hardware cooks.</p>
+          <ul>
+            <li>Core, hotspot, VRAM and ASIC chip temps</li>
+            <li>Polls hundreds of units in parallel</li>
+            <li>Power budget gauge in watts</li>
+            <li>Push alerts through ntfy</li>
+          </ul>
+        </article>
+        <article class="mod">
+          <span class="code">HUGINN · RECON</span>
+          <h3>Phone dashboard</h3>
+          <p>Trading and farm status on your phone over a private Tailscale link. Read-only by design.</p>
+          <ul>
+            <li>Order book, decisions and orders</li>
+            <li>Farm as a console or as cards</li>
+            <li>Protected by a random key</li>
+            <li>Can't place, change or cancel anything</li>
+          </ul>
+        </article>
+      </div>
+      <p class="freki"><b>FREKI</b>, optional: build notes for a CPU miner with 0% developer fee.</p>
+    </div>
+  </section>
+
+  <section class="band" id="how">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow"><b>// 02</b> How ODIN decides</div>
+        <h2>Bid only when it pays.</h2>
+      </div>
+      <div class="seq">
+        <div class="step"><span class="n">01</span><h3>Read the book</h3><p>Rates every price level on speed, miners, volume, fill and stability.</p></div>
+        <div class="step"><span class="n">02</span><h3>Price the hash</h3><p>Works out what 1 EH/s earns now from live difficulty and block rewards, minus pool and NiceHash fees.</p></div>
+        <div class="step"><span class="n">03</span><h3>Lock or park</h3><p>Locks a level once it holds steady. Above break-even, parks the order at your maximum and waits for a dip.</p></div>
+        <div class="step"><span class="n">04</span><h3>Protect capital</h3><p>Hard price ceiling, step-limited raises, chase detection and daily kill switches run the whole time.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="phone">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow"><b>// 03</b> HUGINN on your phone</div>
+        <h2>The whole farm in your pocket.</h2>
+      </div>
+      <div class="phones">
+        <figure class="phone"><div class="frame"><img src="huginn-odin_1.png" alt="HUGINN trading tab showing ODIN's order and decision" loading="lazy"></div><figcaption><b>Trading</b> · order, lock and profit guard</figcaption></figure>
+        <figure class="phone"><div class="frame"><img src="huginn-console.png" alt="HUGINN farm tab in console view" loading="lazy"></div><figcaption><b>Farm console</b> · every unit, one line each</figcaption></figure>
+        <figure class="phone"><div class="frame"><img src="huginn-cards.png" alt="HUGINN farm tab in card view" loading="lazy"></div><figcaption><b>Farm cards</b> · temps, power, shares</figcaption></figure>
+      </div>
+      <p class="sample mono">Screenshots use sample data.</p>
+    </div>
+  </section>
+
+  <section class="band" id="hardware">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow"><b>// 04</b> Supported hardware</div>
+        <h2>GPUs, CPUs and ASICs, small to industrial.</h2>
+      </div>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Type</th><th>How SLEIPNIR connects</th><th>Restarts</th></tr></thead>
+          <tbody>
+            <tr><td>NVIDIA, AMD and Intel Arc GPUs</td><td class="muted">SRBMiner-Multi or SpinelMiner API, plus LibreHardwareMonitor and HWiNFO sensors (RTX 50 hotspot)</td><td><span class="tag ok">Yes</span></td></tr>
+            <tr><td>CPUs</td><td class="muted">XMRig API, plus sensors</td><td><span class="tag ok">Yes</span></td></tr>
+            <tr><td>Large ASICs: Antminer, Whatsminer, Avalon, Braiins OS, LuxOS</td><td class="muted">cgminer API on TCP 4028</td><td><span class="tag watch">Watch + alert</span></td></tr>
+            <tr><td>Small ASICs: Bitaxe, NerdQAxe, other AxeOS</td><td class="muted">AxeOS HTTP API</td><td><span class="tag ok">Yes</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="safety">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow"><b>// 05</b> Security</div>
+        <h2>Your keys never leave your PC.</h2>
+      </div>
+      <div class="safety">
+        <div class="safe"><h3>Local secrets</h3><p>API keys live in one settings file that only your Windows account can read. ODIN talks to NiceHash directly.</p></div>
+        <div class="safe"><h3>No withdrawals</h3><p>Use a NiceHash key with withdrawals turned off. ODIN never needs to move coins out of your account.</p></div>
+        <div class="safe"><h3>Watch-only first</h3><p>Every install starts in watch-only mode. Nothing trades until you switch it on yourself.</p></div>
+        <div class="safe"><h3>Verified builds</h3><p>Programs are built by GitHub Actions. Each release ships SHA256 checksums to compare before you install.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="plans">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow"><b>// 06</b> Plans · USD per month</div>
+        <h2>Free to watch. Pro to trade.</h2>
+        <p class="lead">Every plan includes updates and patches. Free runs ODIN in watch-only mode and shows what Pro would have earned on your farm.</p>
+      </div>
+      <div class="plans">
+        <div class="plan">
+          <div class="name">Free</div><div class="price">$0</div>
+          <dl><div><dt>Trading</dt><dd>Watch-only</dd></div><div><dt>Units</dt><dd>Up to 5</dd></div><div><dt>Support</dt><dd>Community</dd></div></dl>
+        </div>
+        <div class="plan">
+          <div class="name">Pro Home</div><div class="price">$9<small> /mo</small></div>
+          <dl><div><dt>Trading</dt><dd>1 order · 5 PH/s</dd></div><div><dt>Units</dt><dd>Up to 10</dd></div><div><dt>Support</dt><dd>E-mail</dd></div></dl>
+        </div>
+        <div class="plan pick">
+          <div class="badge">Most farms</div>
+          <div class="name">Pro Farm</div><div class="price">$49<small> /mo</small></div>
+          <dl><div><dt>Trading</dt><dd>3 orders · 50 PH/s</dd></div><div><dt>Units</dt><dd>Up to 100</dd></div><div><dt>Support</dt><dd>E-mail, 24 h</dd></div></dl>
+        </div>
+        <div class="plan">
+          <div class="name">Pro Business</div><div class="price">$249<small> /mo</small></div>
+          <dl><div><dt>Trading</dt><dd>10 orders · 500 PH/s</dd></div><div><dt>Units</dt><dd>Up to 1,000</dd></div><div><dt>Support</dt><dd>Priority</dd></div></dl>
+        </div>
+        <div class="plan">
+          <div class="name">Enterprise</div><div class="price">Quote</div>
+          <dl><div><dt>Trading</dt><dd>Custom</dd></div><div><dt>Units</dt><dd>Unlimited</dd></div><div><dt>Support</dt><dd>Response-time agreement</dd></div></dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="order">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow"><b>// 07</b> Order ODIN Pro</div>
+        <h2>Paid in Bitcoin. Key by e-mail.</h2>
+      </div>
+      <div class="order">
+        <ol>
+          <li><p><b>E-mail the plan you want.</b> Include how many PCs will run ODIN.</p></li>
+          <li><p><b>Pay the BTC invoice.</b> You get a fresh address and the amount at that day's price.</p></li>
+          <li><p><b>Receive your key.</b> Sent once the payment has one confirmation.</p></li>
+          <li><p><b>Activate.</b> Enter the key in the installer, or run <span class="mono">odin.exe --activate KEY</span>. Plans renew monthly.</p></li>
+        </ol>
+        <div class="mailbox">
+          <div class="eyebrow">Orders and setup bookings</div>
+          <div class="addr" id="addr">schancellor007@gmail.com</div>
+          <div class="row">
+            <button class="btn small solid" type="button" id="copyBtn">Copy address</button>
+            <a class="btn small" href="mailto:schancellor007@gmail.com?subject=ODIN%20Pro%20order">Open e-mail</a>
+            <span class="copied" id="copied" hidden>Copied</span>
+          </div>
+          <p class="note">Want it installed and tuned for you? Remote setup is available for anything from one rig to an industrial site. Ask in the same e-mail.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap final">
+      <div class="sec-head">
+        <div class="eyebrow"><b>// DEPLOY</b> Windows 10/11 · one installer</div>
+        <h2>Start in watch-only mode today.</h2>
+      </div>
+      <a class="btn solid" href="https://github.com/asgardhashworks/odin-suite-releases/releases/latest" target="_blank" rel="noopener">Download ODIN Suite</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="row"><span>© 2026 Asgard Hashworks</span><a href="https://github.com/asgardhashworks/odin-suite-releases" target="_blank" rel="noopener">Releases</a><span>Oklahoma, USA</span></div>
+    <p class="fine">Trading hashrate can lose money. Prices, difficulty and coin values move, and past results don't predict future ones. ODIN Suite is software, not financial advice; you set every limit. Not affiliated with NiceHash, Kryptex, Bitmain, MicroBT, Canaan or the Bitaxe project.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var btn = document.getElementById('copyBtn'), ok = document.getElementById('copied'), addr = document.getElementById('addr');
+  function selectAddr() { var r = document.createRange(); r.selectNodeContents(addr); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+  btn.addEventListener('click', function () {
+    var done = function () { ok.hidden = false; setTimeout(function () { ok.hidden = true; }, 2000); };
+    try {
+      navigator.clipboard.writeText(addr.textContent.trim()).then(done, selectAddr);
+    } catch (e) { selectAddr(); }
+  });
+})();
+</script>
+
+</body>
+</html>
