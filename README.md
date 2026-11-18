@@ -1,5 +1,5 @@
 # ODIN Suite
-https://asgardhashworks.github.io/odin-suite-releases/
+**🌐 Website: [asgardhashworks.github.io/odin-suite-releases](https://asgardhashworks.github.io/odin-suite-releases/)** · **⬇ [Download the latest release](https://github.com/asgardhashworks/odin-suite-releases/releases/latest)**
 **Your mining farm, run like a data center.** ODIN Suite: enterprise-grade control for Bitcoin mining farms.
 Unified supervision, automated hashrate procurement and secure mobile oversight in one Windows platform. ODIN Suite keeps every miner online, enforces your capital limits on every NiceHash order, and puts live farm telemetry in your pocket. It deploys the same way for a home rig or a 1,000-unit site.
 
