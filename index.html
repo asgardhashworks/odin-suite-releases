@@ -7,10 +7,11 @@
 <link rel="icon" type="image/png" href="asgard-avatar.png">
 <link rel="apple-touch-icon" href="asgard-avatar.png">
 <meta property="og:title" content="ODIN Suite by Asgard Hashworks">
-<meta property="og:description" content="Enterprise-grade mining operations platform for Windows, engineered in Rust. Miner supervision, NiceHash order automation and phone command.">
+<meta property="og:description" content="Self-learning quantitative hashrate engine and fleet supervisor, engineered in Rust for Windows and Linux. NiceHash order automation, miner supervision and phone command.">
 <meta property="og:image" content="https://asgardhashworks.github.io/odin-suite-releases/asgard-avatar.png">
 <meta property="og:url" content="https://asgardhashworks.github.io/odin-suite-releases/">
-<meta name="description" content="ODIN Suite by Asgard Hashworks: miner supervision, NiceHash hashrate order automation and a phone dashboard for mining farms of any size.">
+<meta name="description" content="ODIN Suite by Asgard Hashworks: a self-learning quantitative engine for NiceHash hashrate, miner supervision and a read-only phone dashboard. Windows and Linux.">
+<meta property="og:video" content="https://asgardhashworks.github.io/odin-suite-releases/media/odin-commercial.mp4">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
@@ -266,6 +267,87 @@ footer .wrap { padding-block: 36px 48px; display: grid; gap: 14px; color: var(--
 footer .fine { max-width: 90ch; }
 footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
 
+/* film: the commercial under the banner */
+.film { border-top: 1px solid var(--line); background: radial-gradient(1000px 340px at 50% 0%, rgba(216,170,69,.09), transparent 70%), #070809; }
+.film > .wrap { padding-block: 44px 40px; display: grid; gap: 18px; }
+.film-frame { position: relative; border: 1px solid var(--gold-lo); background: #000; aspect-ratio: 16 / 9; box-shadow: 0 0 0 1px #000, 0 40px 120px rgba(0,0,0,.8), 0 0 60px rgba(216,170,69,.08); }
+.film-frame::before, .film-frame::after { content: ""; position: absolute; width: 18px; height: 18px; border: 2px solid var(--amber); z-index: 2; pointer-events: none; }
+.film-frame::before { top: -7px; left: -7px; border-right: 0; border-bottom: 0; }
+.film-frame::after { bottom: -7px; right: -7px; border-left: 0; border-top: 0; }
+.film-frame video { width: 100%; height: 100%; display: block; object-fit: cover; }
+.film-bar { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; justify-content: space-between; }
+.film-bar .eyebrow { line-height: 1.5; }
+.film-ctl { display: flex; gap: 10px; flex-wrap: wrap; }
+.rec { color: var(--bad); }
+.rec::before { content: "●"; margin-right: 6px; animation: blink 1.2s steps(2, start) infinite; }
+/* engine ticker */
+.ticker { overflow: hidden; border-block: 1px solid var(--line); background: var(--panel); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.ticker-in { display: flex; width: max-content; animation: tick 38s linear infinite; }
+.ticker span { font: 500 12px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dim); padding: 13px 22px; white-space: nowrap; }
+.ticker span b { color: var(--amber); font-weight: 500; margin-right: 8px; }
+@keyframes tick { to { transform: translateX(-50%); } }
+/* engine section */
+.models { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--line); }
+.model { padding: 20px 18px; display: grid; gap: 8px; align-content: start; min-width: 0; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); position: relative; }
+.model:nth-child(4n) { border-right: 0; }
+.model:nth-last-child(-n+4) { border-bottom: 0; }
+.model .k { font: 700 11px/1 var(--mono); color: var(--amber); letter-spacing: .14em; }
+.model h3 { font-size: 16px; }
+.model p { color: var(--dim); font-size: 14px; }
+.model .eq { font: 500 11.5px/1.45 var(--mono); color: var(--gold-hi); background: #070909; border: 1px solid var(--line); padding: 6px 8px; overflow-wrap: anywhere; }
+.viz { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.vz { background: var(--panel); border: 1px solid var(--line); display: grid; min-width: 0; }
+.vz canvas { width: 100%; height: 190px; display: block; background: #070909; }
+.vz .con-head { border-bottom: 1px solid var(--line); }
+.vz .cap { padding: 10px 14px 12px; color: var(--dim); font-size: 13.5px; }
+.vz .cap b { color: var(--fg); font-weight: 600; }
+.sim { font: 500 10px/1 var(--mono); color: var(--dim); letter-spacing: .1em; }
+.nc { text-transform: none; }
+/* footage in module cards */
+.clip { position: relative; aspect-ratio: 16 / 9; background: #000; border: 1px solid var(--line); overflow: hidden; }
+.clip video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.clip .lbl { position: absolute; left: 8px; top: 8px; font: 500 10px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--amber); background: rgba(7,8,9,.8); padding: 5px 7px; border: 1px solid var(--gold-lo); }
+/* enterprise */
+.ent { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 28px; align-items: start; }
+.ent-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border: 1px solid var(--line); }
+.ent-cards > div { padding: 20px; display: grid; gap: 6px; border-bottom: 1px solid var(--line); min-width: 0; }
+.ent-cards > div:nth-child(odd) { border-right: 1px solid var(--line); }
+.ent-cards > div:nth-last-child(-n+2) { border-bottom: 0; }
+.ent-cards h3 { font-size: 15px; }
+.ent-cards p { color: var(--dim); font-size: 14px; }
+.term { background: #070909; border: 1px solid var(--line); border-left: 2px solid var(--amber); font: 500 12.5px/1.7 var(--mono); padding: 14px 16px; overflow-x: auto; white-space: pre; color: var(--fg); }
+.term .c { color: #5d686e; }
+.pilot { border: 1px solid var(--gold-lo); background: linear-gradient(90deg, rgba(216,170,69,.10), rgba(216,170,69,.02)); padding: 20px; display: grid; gap: 10px; }
+.pilot .p { font: 700 28px/1 var(--display); color: var(--gold-hi); }
+.pilot ol { margin: 0; padding-left: 18px; color: var(--dim); font-size: 14px; display: grid; gap: 4px; }
+.pilot ol b { color: var(--fg); font-weight: 600; }
+.docs { display: grid; gap: 10px; }
+.doc { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 16px; border: 1px solid var(--line); background: var(--panel); text-decoration: none; transition: border-color .15s; }
+.doc:hover { border-color: var(--amber); }
+.doc b { font: 600 14px/1.3 var(--display); letter-spacing: .08em; text-transform: uppercase; }
+.doc small { display: block; color: var(--dim); font: 500 11px/1.4 var(--mono); letter-spacing: .06em; }
+.doc span.pdf { font: 700 11px/1 var(--mono); color: var(--amber); letter-spacing: .14em; border: 1px solid var(--gold-lo); padding: 6px 8px; }
+
+@media (max-width: 960px) {
+  .models { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .model:nth-child(4n) { border-right: 1px solid var(--line); }
+  .model:nth-child(2n) { border-right: 0; }
+  .model:nth-last-child(-n+4) { border-bottom: 1px solid var(--line); }
+  .model:nth-last-child(-n+2) { border-bottom: 0; }
+  .viz { grid-template-columns: minmax(0, 1fr); }
+  .ent { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 560px) {
+  .models { grid-template-columns: minmax(0, 1fr); }
+  .model { border-right: 0 !important; }
+  .model:nth-last-child(-n+2) { border-bottom: 1px solid var(--line); }
+  .model:last-child { border-bottom: 0; }
+  .ent-cards { grid-template-columns: minmax(0, 1fr); }
+  .ent-cards > div:nth-child(odd) { border-right: 0; }
+  .ent-cards > div:nth-last-child(2) { border-bottom: 1px solid var(--line); }
+}
+@media (prefers-reduced-motion: reduce) { .ticker-in { animation: none; } }
+
 @media (max-width: 960px) {
   .hero { grid-template-columns: minmax(0, 1fr); gap: 40px; padding-block: 48px 40px; }
   .plans { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -295,10 +377,9 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
   .cta .btn { flex: 1 1 100%; }
 }
 </style>
+
 </head>
-<body style="margin:0">
-
-
+<body>
 <header class="top">
   <div class="wrap nav">
     <a class="brand" href="#top" aria-label="ODIN Suite home">
@@ -306,8 +387,10 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
       <span>ODIN Suite<br><small>Asgard Hashworks</small></span>
     </a>
     <nav aria-label="Sections">
+      <a href="#film">Film</a>
+      <a href="#engine">Engine</a>
       <a href="#modules">Modules</a>
-      <a href="#hardware">Hardware</a>
+      <a href="#enterprise">Enterprise</a>
       <a href="#plans">Plans</a>
       <a href="#order">Order</a>
     </nav>
@@ -320,14 +403,14 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
   <canvas id="bin" aria-hidden="true"></canvas>
   <div class="wrap hero">
     <div>
-      <div class="eyebrow"><b>// OPS</b> Quantitative hashrate engine · Rust · Windows 10/11</div>
+      <div class="eyebrow"><b>// OPS</b> Self-learning hashrate engine · Rust · Windows · Linux</div>
       <h1>Run your mining farm like an <em>operations center</em>.</h1>
-      <p class="lead">ODIN Suite watches every miner you own, restarts the ones that fail, and buys NiceHash hashrate only while the numbers work. The whole operation fits on your phone. Same software for one GPU in a spare room or a warehouse of ASICs.</p>
+      <p class="lead">ODIN Suite buys NiceHash hashrate with a quantitative engine that adapts to the live market. It re-prices every 2 seconds, checks its own math against what your pool actually pays, and spends hardest where the margin is widest. It also supervises every miner you own, and the whole operation fits on your phone. Same software for one GPU in a spare room or a warehouse of ASICs.</p>
       <div class="cta">
         <a class="btn solid" href="https://github.com/asgardhashworks/odin-suite-releases/releases/latest" target="_blank" rel="noopener">Download free</a>
         <a class="btn" href="#plans">See plans</a>
       </div>
-      <div class="facts"><span>Free to install</span><span>Keys stay on your PC</span><span>Starts in watch-only mode</span></div>
+      <div class="facts"><span>Free to install</span><span>Keys stay on your machine</span><span>Starts in watch-only mode</span><span>Windows and Linux</span></div>
     </div>
 
     <div class="console" role="img" aria-label="Sample ODIN order book: price levels with pass or fail status and the locked level highlighted">
@@ -356,12 +439,32 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
   </div>
  </div>
 
+  <section class="film" id="film" aria-label="ODIN Suite film">
+    <div class="wrap">
+      <div class="film-frame">
+        <video id="filmVid" src="media/odin-commercial.mp4" poster="media/odin-commercial-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="ODIN Suite commercial: the order book, the learning engine, SLEIPNIR and HUGINN"></video>
+      </div>
+      <div class="film-bar">
+        <span class="eyebrow"><b class="rec">REC</b> ODIN Suite · 43 s · live footage from the running engine</span>
+        <div class="film-ctl">
+          <button class="btn small solid" type="button" id="soundBtn" aria-pressed="false">▶ Sound on</button>
+          <a class="btn small" href="https://youtu.be/AAvMzb12SpA" target="_blank" rel="noopener">Watch on YouTube</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true"><div class="ticker-in">
+    <span><b>01</b>Live hashvalue</span><span><b>02</b>Delay-aware calibration</span><span><b>03</b>Retarget forecast <span class="nc" style="padding:0">± σ</span></span><span><b>04</b>Budget pacing · Lagrangian</span><span><b>05</b>Spend into the dip</span><span><b>06</b>CUSUM change-points</span><span><b>07</b>Partial-fill curve · isotonic</span><span><b>08</b>Walk-forward tuning</span>
+    <span><b>01</b>Live hashvalue</span><span><b>02</b>Delay-aware calibration</span><span><b>03</b>Retarget forecast <span class="nc" style="padding:0">± σ</span></span><span><b>04</b>Budget pacing · Lagrangian</span><span><b>05</b>Spend into the dip</span><span><b>06</b>CUSUM change-points</span><span><b>07</b>Partial-fill curve · isotonic</span><span><b>08</b>Walk-forward tuning</span>
+  </div></div>
+
   <section class="edge" id="edge">
     <div class="wrap">
       <figure class="edge-quote">
         <div class="eyebrow"><b>// DOCTRINE</b> Quantitative hashrate engine · engineered in Rust</div>
         <div class="big"><span>Speed isn't the edge.</span><em>Quantitative precision is.</em></div>
-        <p>HFT platforms race in nanoseconds on markets that move in nanoseconds. NiceHash moves in seconds and minutes, so ODIN runs a <b>quantitative algorithmic engine</b> built for that market. It prices hashrate against live difficulty and block rewards every two seconds, learns from the market's own history which price levels truly hold, adapts its park price over time, and refuses any bid the math can't justify. <b>The longer it runs, the sharper it gets.</b></p>
+        <p>HFT platforms race in nanoseconds on markets that move in nanoseconds. NiceHash moves in seconds and minutes, so ODIN runs a <b>quantitative algorithmic engine</b> built for that market. It prices hashrate against live difficulty and block rewards every two seconds and checks that price against what your pool really credits. It learns which levels hold, when the market dips, how much of each order actually fills and when the market has shifted to a new level. It refuses any bid the math can't justify. <b>The longer it runs, the sharper it gets.</b></p>
       </figure>
 
       <div class="scale" role="img" aria-label="Time scale: HFT works in nanoseconds to microseconds; the NiceHash market moves over seconds to minutes; ODIN re-prices every 2 seconds; hashrate is delivered over hours.">
@@ -377,9 +480,35 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
 
       <div class="edge-stats">
         <div class="edge-stat"><div class="v">2 s</div><div class="l">Re-pricing loop</div><p>Live difficulty, block reward, pool and NiceHash fees, recalculated every cycle.</p></div>
-        <div class="edge-stat"><div class="v">LEARNED</div><div class="l">Lock timing</div><p>How long a level must hold before ODIN commits is learned from the market's own history.</p></div>
+        <div class="edge-stat"><div class="v">8 MODELS</div><div class="l">Learning in real time</div><p>Calibration, retarget forecast, pacing, dip speed, change-points, fill curve and more, all fitted to your own account.</p></div>
         <div class="edge-stat"><div class="v">ZERO</div><div class="l">Bids above your maximum</div><p>Above break-even, the profit guard parks the order and waits for a dip.</p></div>
       </div>
+    </div>
+  </section>
+
+  <section class="band" id="engine">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow"><b>// 00</b> The engine</div>
+        <h2>Eight models. One decision every 2 seconds.</h2>
+        <p class="lead">Every number ODIN can measure, it measures on your own account: the pool's payout delay, the price cut NiceHash accepts, the fill rate at each price, the dip hours, and the regime the market is in. Every number it has to estimate carries its uncertainty into the decision.</p>
+      </div>
+      <div class="models">
+        <div class="model"><span class="k">01 · HASHVALUE</span><h3>Live income per EH/s</h3><div class="eq">86400·R / (2³²·D) · (1−fee) · k</div><p>Difficulty and real block rewards, fees included, net of pool and buyer fees.</p></div>
+        <div class="model"><span class="k">02 · CALIBRATION</span><h3>Checked against your pool</h3><div class="eq">k = ΔCredits / ΔModel(t − lag)</div><p>Compares what the pool paid with what the model expected, after the payout delay ODIN measures itself.</p></div>
+        <div class="model"><span class="k">03 · FORECAST</span><h3>Retarget <span class="nc">± σ</span></h3><div class="eq">σ = (1+c)(B/2016)√(1/n + 1/B)</div><p>Next difficulty change with its error bar. The bid ceiling glides down ahead of it.</p></div>
+        <div class="model"><span class="k">04 · PACING</span><h3>Budget-aware parking</h3><div class="eq">argmax f·L·(δI − (1+μ)p)</div><p>Park price solved for the money you have and how long it must last, by Lagrangian duality.</p></div>
+        <div class="model"><span class="k">05 · DIP SPEED</span><h3>Spend into the dip</h3><div class="eq">L = L₀ + ΔL·clamp((m−m*)/2σ)</div><p>Speed climbs only when the margin clears the model's own error band. Changing speed is free.</p></div>
+        <div class="model"><span class="k">06 · CUSUM</span><h3>Change-point alarm</h3><div class="eq">S⁺ = max(0, S⁺ + z − k) &gt; h</div><p>Detects when the market jumps to a new level and down-weights stale history immediately.</p></div>
+        <div class="model"><span class="k">07 · FILL CURVE</span><h3>How much really fills</h3><div class="eq">q(gap) = isotonic( served / limit )</div><p>Learns the share of each order served at each distance from the clearing price.</p></div>
+        <div class="model"><span class="k">08 · VALIDATION</span><h3>Walk-forward tuning</h3><div class="eq">replay · no look-ahead · 2 halves</div><p>Replays your own recorded market, and adopts a setting only if it wins out of sample.</p></div>
+      </div>
+      <div class="viz">
+        <figure class="vz" style="margin:0"><div class="con-head"><span>CUSUM · change-points</span><span class="sim">SIM</span></div><canvas id="vzCusum" aria-label="Animated simulation: clearing price with a CUSUM detector flagging a level shift"></canvas><figcaption class="cap"><b>Market shift detected.</b> When the clearing price settles at a new level, ODIN discounts the old fill history.</figcaption></figure>
+        <figure class="vz" style="margin:0"><div class="con-head"><span>Dip speed · margin → limit</span><span class="sim">SIM</span></div><canvas id="vzDip" aria-label="Animated simulation: order speed rising as the price dips below break-even"></canvas><figcaption class="cap"><b>Speed follows margin.</b> 1 PH/s when the margin is thin, up to 5 PH/s when a dip clears the error band.</figcaption></figure>
+        <figure class="vz" style="margin:0"><div class="con-head"><span>Fill curve · isotonic</span><span class="sim">SIM</span></div><canvas id="vzFill" aria-label="Animated simulation: noisy fill observations with a monotone isotonic regression fit"></canvas><figcaption class="cap"><b>Learned, never assumed.</b> Noisy fill samples become a monotone curve: a higher bid never fills less.</figcaption></figure>
+      </div>
+      <p class="sample mono">Live simulations on synthetic data, running the same algorithms ODIN runs on your account.</p>
     </div>
   </section>
 
@@ -388,21 +517,23 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
       <div class="sec-head">
         <div class="eyebrow"><b>// 01</b> Modules</div>
         <h2>Three units. One operation.</h2>
-        <p class="lead">Each part does one job and reports to the others. Install all three with a single wizard.</p>
+        <p class="lead">Each part does one job and reports to the others. One wizard on Windows, one script on Linux.</p>
       </div>
       <div class="mods">
         <article class="mod">
+          <div class="clip"><video data-auto src="media/clip-orderbook.mp4" poster="media/clip-orderbook.jpg" muted loop playsinline preload="none" aria-label="ODIN reading the order book"></video><span class="lbl">Live · order book</span></div>
           <span class="code">ODIN · TRADING</span>
           <h3>Hashrate order engine</h3>
           <p>Reads the live NiceHash order book every 2 seconds and buys SHA256 hashrate only while the margin is positive.</p>
           <ul>
-            <li>Learns how stable each price level is</li>
-            <li>Parks your order instead of chasing the price</li>
+            <li>Learns which levels hold, and when dips come</li>
+            <li>Parks above break-even; speeds up in dips</li>
             <li>Daily spend and loss kill switches</li>
             <li>Verified P/L with Kryptex pools</li>
           </ul>
         </article>
         <article class="mod">
+          <div class="clip"><video data-auto src="media/clip-sleipnir.mp4" poster="media/clip-sleipnir.jpg" muted loop playsinline preload="none" aria-label="SLEIPNIR supervising miners"></video><span class="lbl">Live · fleet</span></div>
           <span class="code">SLEIPNIR · SUPERVISION</span>
           <h3>Miner supervisor</h3>
           <p>Starts your miners at boot, restarts any that crash, freeze or slow down, and alerts you before hardware cooks.</p>
@@ -414,6 +545,7 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
           </ul>
         </article>
         <article class="mod">
+          <div class="clip"><video data-auto src="media/clip-huginn.mp4" poster="media/clip-huginn.jpg" muted loop playsinline preload="none" aria-label="HUGINN phone dashboard"></video><span class="lbl">Live · phone</span></div>
           <span class="code">HUGINN · RECON</span>
           <h3>Phone dashboard</h3>
           <p>Trading and farm status on your phone over a private Tailscale link. Read-only by design.</p>
@@ -437,8 +569,8 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
       </div>
       <div class="seq">
         <div class="step"><span class="n">01</span><h3>Read the book</h3><p>Rates every price level on speed, miners, volume, fill and stability.</p></div>
-        <div class="step"><span class="n">02</span><h3>Price the hash</h3><p>Works out what 1 EH/s earns now from live difficulty and block rewards, minus pool and NiceHash fees.</p></div>
-        <div class="step"><span class="n">03</span><h3>Lock or park</h3><p>Locks a level once it holds steady. Above break-even, parks the order at your maximum and waits for a dip.</p></div>
+        <div class="step"><span class="n">02</span><h3>Price the hash</h3><p>Works out what 1 EH/s earns now and after the next retarget, then corrects it against your pool's real credits.</p></div>
+        <div class="step"><span class="n">03</span><h3>Lock, park or pace</h3><p>Locks a level once it holds. Above break-even it parks where your budget earns the most, and speeds up when a dip opens.</p></div>
         <div class="step"><span class="n">04</span><h3>Protect capital</h3><p>Hard price ceiling, step-limited raises, chase detection and daily kill switches run the whole time.</p></div>
       </div>
     </div>
@@ -476,6 +608,7 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
           </tbody>
         </table>
       </div>
+      <p class="sample mono">Windows and Linux. On Linux, GPU and CPU temperatures come from the miner APIs (HWiNFO and LibreHardwareMonitor are Windows-only).</p>
     </div>
   </section>
 
@@ -483,13 +616,57 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
     <div class="wrap">
       <div class="sec-head">
         <div class="eyebrow"><b>// 05</b> Security</div>
-        <h2>Your keys never leave your PC.</h2>
+        <h2>Your keys never leave your machine.</h2>
       </div>
       <div class="safety">
         <div class="safe"><h3>Local secrets</h3><p>API keys live in one settings file that only your Windows account can read. ODIN talks to NiceHash directly.</p></div>
         <div class="safe"><h3>No withdrawals</h3><p>Use a NiceHash key with withdrawals turned off. ODIN never needs to move coins out of your account.</p></div>
         <div class="safe"><h3>Watch-only first</h3><p>Every install starts in watch-only mode. Nothing trades until you switch it on yourself.</p></div>
-        <div class="safe"><h3>Verified builds</h3><p>Programs are built by GitHub Actions. Each release ships SHA256 checksums to compare before you install.</p></div>
+        <div class="safe"><h3>Verified builds</h3><p>Programs are built by GitHub Actions. Each release ships SHA256 checksums; the Linux installer refuses a mismatch.</p></div>
+        <div class="safe"><h3>Tamper-evident audit ledger</h3><p>Every decision is written as a SHA-256 hash chain. <span class="mono">odin --verify-audit</span> finds any edited, deleted or reordered line.</p></div>
+        <div class="safe"><h3>Offline licences</h3><p>Ed25519-signed licence files, bound to one machine or a whole site and checked locally. Air-gapped sites never phone home.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="enterprise">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow"><b>// 06</b> Enterprise · farms, hosting sites, desks</div>
+        <h2>Built for the server rack too.</h2>
+        <p class="lead">Native Linux services, offline licensing, an auditable decision history and a paid pilot that proves the numbers on your own allocation before you commit.</p>
+      </div>
+      <div class="ent">
+        <div style="display:grid;gap:18px;min-width:0">
+          <div class="ent-cards">
+            <div><h3>Linux x86_64</h3><p>Ubuntu 22.04+ and Debian 12+. Sandboxed systemd services, a no-login service account and root-only keys.</p></div>
+            <div><h3>Offline licences</h3><p>Signed <span class="mono">.lic</span> files: machine-bound or site-wide, with optional expiry. No licence server needed.</p></div>
+            <div><h3>Audit ledger</h3><p>Hash-chained JSON lines for every decision. Feed it to Loki, Splunk or Elastic.</p></div>
+            <div><h3>Published network list</h3><p>Outbound HTTPS to a short list of hosts. Nothing listens on the network; HUGINN uses loopback plus Tailscale.</p></div>
+          </div>
+          <div class="term"><span class="c"># deploy on Linux</span>
+tar -xzf odin-suite-v1.3.0-linux-x64.tar.gz &amp;&amp; cd odin-suite
+sudo ./install.sh --license-file site.lic
+sudo journalctl -u odin -f -o cat
+odin --verify-audit odin_audit.jsonl   <span class="c"># AUDIT OK · hash chain intact</span></div>
+        </div>
+        <div style="display:grid;gap:18px;min-width:0">
+          <div class="pilot">
+            <span class="eyebrow"><b>// PILOT</b> 30 days · 10–50 PH/s slice</span>
+            <div class="p">$3,500 <span class="mono" style="font-size:13px;color:var(--dim);font-weight:500">credited 100% to your licence</span></div>
+            <ol>
+              <li><b>Days 1–7 · Shadow.</b> Watch-only on live data, with a "would have earned" counter.</li>
+              <li><b>Days 8–10 · Capped live.</b> Your ceiling, caps and daily loss switch.</li>
+              <li><b>Days 11–30 · Scale.</b> Verified P/L report plus the audit ledger.</li>
+            </ol>
+            <a class="btn small solid" href="mailto:schancellor007@gmail.com?subject=ODIN%20Suite%20Enterprise%20pilot" style="justify-self:start">Book a pilot</a>
+          </div>
+          <div class="docs">
+            <a class="doc" href="ODIN_Suite_Enterprise_Brief.pdf" target="_blank" rel="noopener"><span><b>Enterprise Brief</b><small>2 pages · engine, governance, licensing, pilot</small></span><span class="pdf">PDF</span></a>
+            <a class="doc" href="ODIN_Suite_Architecture_Security_Whitepaper.pdf" target="_blank" rel="noopener"><span><b>Architecture &amp; Security Whitepaper</b><small>4 pages · models, security model, reviewer checklist</small></span><span class="pdf">PDF</span></a>
+            <a class="doc" href="ODIN_Suite_Linux_Deployment_Guide.pdf" target="_blank" rel="noopener"><span><b>Linux Deployment Guide</b><small>3 pages · install, hardening, pilot rollout</small></span><span class="pdf">PDF</span></a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -497,7 +674,7 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
   <section class="band" id="plans">
     <div class="wrap">
       <div class="sec-head">
-        <div class="eyebrow"><b>// 06</b> Plans · USD per month</div>
+        <div class="eyebrow"><b>// 07</b> Plans · USD per month</div>
         <h2>Free to watch. Pro to trade.</h2>
         <p class="lead">Every plan includes updates and patches. Free runs ODIN in watch-only mode and shows what Pro would have earned on your farm.</p>
       </div>
@@ -521,7 +698,7 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
         </div>
         <div class="plan">
           <div class="name">Enterprise</div><div class="price">Quote</div>
-          <dl><div><dt>Trading</dt><dd>Custom</dd></div><div><dt>Units</dt><dd>Unlimited</dd></div><div><dt>Support</dt><dd>Response-time agreement</dd></div></dl>
+          <dl><div><dt>Trading</dt><dd>50 orders · multi-EH/s</dd></div><div><dt>Units</dt><dd>Unlimited</dd></div><div><dt>Support</dt><dd>SLA · offline licence · <a href="#enterprise">pilot</a></dd></div></dl>
         </div>
       </div>
     </div>
@@ -530,7 +707,7 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
   <section class="band" id="order">
     <div class="wrap">
       <div class="sec-head">
-        <div class="eyebrow"><b>// 07</b> Order ODIN Pro</div>
+        <div class="eyebrow"><b>// 08</b> Order ODIN Pro</div>
         <h2>Paid in Bitcoin. Key by e-mail.</h2>
       </div>
       <div class="order">
@@ -538,7 +715,7 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
           <li><p><b>E-mail the plan you want.</b> Include how many PCs will run ODIN.</p></li>
           <li><p><b>Pay the BTC invoice.</b> You get a fresh address and the amount at that day's price.</p></li>
           <li><p><b>Receive your key.</b> Sent once the payment has one confirmation.</p></li>
-          <li><p><b>Activate.</b> Enter the key in the installer, or run <span class="mono">odin.exe --activate KEY</span>. Plans renew monthly.</p></li>
+          <li><p><b>Activate.</b> Enter the key in the installer, or run <span class="mono">odin --activate KEY</span>. Plans renew monthly. Air-gapped sites get a signed licence file instead.</p></li>
         </ol>
         <div class="mailbox">
           <div class="eyebrow">Orders and setup bookings</div>
@@ -559,7 +736,7 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
       <div class="final-l">
       <svg class="emblem" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="ge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6dc8c"/><stop offset=".5" stop-color="#d8aa45"/><stop offset="1" stop-color="#8a6418"/></linearGradient></defs><rect x="1" y="1" width="62" height="62" fill="#0d0f10" stroke="url(#ge)" stroke-width="1.5"/><g fill="url(#ge)"><path d="M24 8h7l-6 48h-7z"/><path d="M40 8h7l-6 48h-7z"/><rect x="9" y="21" width="47" height="7"/><rect x="7" y="36" width="47" height="7"/></g></svg>
       <div class="sec-head">
-        <div class="eyebrow"><b>// DEPLOY</b> Windows 10/11 · one installer</div>
+        <div class="eyebrow"><b>// DEPLOY</b> Windows 10/11 · Linux x86_64</div>
         <h2>Start in watch-only mode today.</h2>
       </div>
       </div>
@@ -625,6 +802,149 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
   var t; window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(size, 150); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawAll);
   if (!still) setInterval(tick, 110);
+})();
+
+/* film: sound toggle; footage clips play only while on screen */
+(function () {
+  var v = document.getElementById('filmVid'), b = document.getElementById('soundBtn');
+  var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (v && still) { v.removeAttribute('autoplay'); v.controls = true; try { v.pause(); } catch (e) {} }
+  if (v && b) b.addEventListener('click', function () {
+    var on = v.muted;
+    v.muted = !on;
+    if (on) { v.currentTime = 0; v.controls = true; }
+    var p = v.play(); if (p && p.catch) p.catch(function () {});
+    b.textContent = on ? '■ Mute' : '▶ Sound on';
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+  });
+  var clips = document.querySelectorAll('video[data-auto]');
+  if (!still && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        var c = e.target;
+        if (e.isIntersecting) { if (c.preload === 'none') c.preload = 'auto'; var p = c.play(); if (p && p.catch) p.catch(function () {}); }
+        else c.pause();
+      });
+    }, { threshold: 0.35 });
+    clips.forEach(function (c) { io.observe(c); });
+    if (v) new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); } else v.pause(); }); }, { threshold: 0.2 }).observe(v);
+  }
+})();
+
+/* engine visualisers: small live simulations running the same algorithms ODIN uses */
+(function () {
+  var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var GOLD = '#d8aa45', HI = '#f6dc8c', DIM = '#5d686e', LINE = '#222a2f', OK = '#4fbf7a', BAD = '#c8625a', FG = '#d9dee1';
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  function setup(id) {
+    var c = document.getElementById(id); if (!c || !c.getContext) return null;
+    var x = c.getContext('2d'), o = { c: c, x: x, w: 0, h: 0, vis: true };
+    function size() { var r = c.getBoundingClientRect(); o.w = r.width; o.h = r.height; c.width = r.width * dpr; c.height = r.height * dpr; x.setTransform(dpr, 0, 0, dpr, 0, 0); }
+    size(); window.addEventListener('resize', size);
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { o.vis = e[0].isIntersecting; }).observe(c);
+    return o;
+  }
+  function grid(o) {
+    var x = o.x; x.fillStyle = '#070909'; x.fillRect(0, 0, o.w, o.h);
+    x.strokeStyle = 'rgba(216,170,69,.06)'; x.lineWidth = 1;
+    for (var gx = 0; gx < o.w; gx += 24) { x.beginPath(); x.moveTo(gx + .5, 0); x.lineTo(gx + .5, o.h); x.stroke(); }
+    for (var gy = 0; gy < o.h; gy += 24) { x.beginPath(); x.moveTo(0, gy + .5); x.lineTo(o.w, gy + .5); x.stroke(); }
+  }
+  function label(o, t, xx, yy, col, al) { var x = o.x; x.font = '500 10px "JetBrains Mono", monospace'; x.fillStyle = col || DIM; x.textAlign = al || 'left'; x.fillText(t, xx, yy); }
+  var rnd = (function () { var s = 7; return function () { s = (s * 16807) % 2147483647; return s / 2147483647; }; })();
+  function gauss() { return Math.sqrt(-2 * Math.log(rnd() + 1e-9)) * Math.cos(2 * Math.PI * rnd()); }
+
+  /* 1 · CUSUM on a clearing price that shifts level */
+  var A = setup('vzCusum');
+  var cs = null;
+  function cusumReset() { cs = { pts: [], level: 0.4650, mean: 0.4650, v: 1e-6, sp: 0, sn: 0, n: 0, alarm: -1, shiftAt: 70 + (rnd() * 30 | 0), t: 0 }; }
+  function cusumStep() {
+    var s = cs; s.t++;
+    if (s.t === s.shiftAt) s.level += (rnd() < .5 ? 1 : -1) * 0.0045;
+    var c = s.level + gauss() * 0.0009;
+    s.pts.push(c);
+    if (s.n < 24) { s.n++; var d0 = c - s.mean; s.mean += d0 / s.n; s.v += (d0 * (c - s.mean) - s.v) / s.n; return; }
+    var sd = Math.max(Math.sqrt(s.v), 0.0010), z = (c - s.mean) / sd;
+    s.sp = Math.max(0, s.sp + z - 0.5); s.sn = Math.max(0, s.sn - z - 0.5);
+    if (s.alarm < 0 && (s.sp > 6 || s.sn > 6)) { s.alarm = s.pts.length - 1; s.mean = c; s.sp = s.sn = 0; }
+    else { var d = c - s.mean; s.mean += d / 48; s.v = (1 - 1 / 48) * (s.v + d * d / 48); }
+    if (s.pts.length > 170) cusumReset();
+  }
+  function cusumDraw() {
+    var o = A, x = o.x, s = cs; grid(o);
+    var N = 170, lo = 0.4580, hi = 0.4720, px = function (i) { return 10 + (o.w - 20) * i / N; }, py = function (v) { return 14 + (o.h - 44) * (1 - (v - lo) / (hi - lo)); };
+    if (s.alarm >= 0) { x.fillStyle = 'rgba(216,170,69,.08)'; x.fillRect(px(s.alarm), 0, o.w - px(s.alarm), o.h - 26); x.strokeStyle = GOLD; x.setLineDash([4, 3]); x.beginPath(); x.moveTo(px(s.alarm), 6); x.lineTo(px(s.alarm), o.h - 26); x.stroke(); x.setLineDash([]); label(o, 'SHIFT DETECTED', px(s.alarm) + 6, 16, HI); }
+    x.strokeStyle = FG; x.lineWidth = 1.3; x.beginPath();
+    s.pts.forEach(function (v, i) { i ? x.lineTo(px(i), py(v)) : x.moveTo(px(i), py(v)); }); x.stroke();
+    var m = Math.max(s.sp, s.sn) / 6, bw = o.w - 20;
+    x.fillStyle = LINE; x.fillRect(10, o.h - 16, bw, 6);
+    x.fillStyle = m > .8 ? BAD : GOLD; x.fillRect(10, o.h - 16, bw * Math.min(1, m), 6);
+    label(o, 'CUSUM ' + Math.max(s.sp, s.sn).toFixed(1) + ' / h=6', 10, o.h - 20, DIM);
+    label(o, 'clearing price', o.w - 10, 16, DIM, 'right');
+  }
+
+  /* 2 · speed follows margin */
+  var B = setup('vzDip'), dp = { t: 0, hist: [] };
+  var INC = 0.4562, FEE = 1.03, MREQ = 0.01, SIG = 0.01;
+  function dipSpeed(p) { var m = INC / (p * FEE) - 1; var f = Math.max(0, Math.min(1, (m - MREQ) / (2 * SIG))); return { m: m, L: 1 + 4 * f }; }
+  function dipStep() {
+    dp.t++;
+    var base = 0.4440 + 0.0035 * Math.sin(dp.t / 23) + 0.0018 * Math.sin(dp.t / 7.3);
+    var dip = Math.max(0, Math.sin(dp.t / 60)) ; var p = base - 0.0150 * Math.pow(dip, 6) + gauss() * 0.0004;
+    dp.hist.push(p); if (dp.hist.length > 170) dp.hist.shift();
+  }
+  function dipDraw() {
+    var o = B, x = o.x; grid(o);
+    var N = 170, lo = 0.4200, hi = 0.4520, ph = o.h - 30, px = function (i) { return 10 + (o.w - 20) * i / N; }, py = function (v) { return 10 + (ph - 10) * (1 - (v - lo) / (hi - lo)); };
+    var be = INC / FEE / (1 + MREQ);
+    x.strokeStyle = BAD; x.setLineDash([4, 3]); x.beginPath(); x.moveTo(10, py(be)); x.lineTo(o.w - 10, py(be)); x.stroke(); x.setLineDash([]);
+    label(o, 'profitable max ' + be.toFixed(4), o.w - 10, py(be) - 5, BAD, 'right');
+    dp.hist.forEach(function (p, i) { var L = dipSpeed(p).L; if (L > 1.01) { x.fillStyle = 'rgba(216,170,69,' + (0.10 + 0.12 * (L - 1)) + ')'; x.fillRect(px(i), py(p), Math.max(1, (o.w - 20) / N), ph - py(p)); } });
+    x.strokeStyle = FG; x.lineWidth = 1.3; x.beginPath();
+    dp.hist.forEach(function (p, i) { i ? x.lineTo(px(i), py(p)) : x.moveTo(px(i), py(p)); }); x.stroke();
+    var last = dp.hist[dp.hist.length - 1] || 0.444, sp = dipSpeed(last), bw = o.w - 20;
+    x.fillStyle = LINE; x.fillRect(10, o.h - 14, bw, 6); x.fillStyle = sp.L > 1.01 ? GOLD : DIM; x.fillRect(10, o.h - 14, bw * sp.L / 5, 6);
+    label(o, 'speed ' + (sp.L * 1000).toFixed(0) + ' TH/s · margin ' + (sp.m * 100).toFixed(1) + '%', 10, o.h - 18, sp.L > 1.01 ? HI : DIM);
+  }
+
+  /* 3 · isotonic regression (pool-adjacent-violators) on noisy fill samples */
+  var Cv = setup('vzFill'), fl = { s: [], t: 0 };
+  var GAPS = [-30, -25, -20, -15, -10, -5, 0, 5, 10, 15, 20, 25, 30];
+  function truth(g) { return 1 / (1 + Math.exp(-(g - 2) / 4)); }
+  function pav(sum, n) {
+    var bl = [];
+    for (var i = 0; i < 13; i++) {
+      var pr = GAPS[i] >= 0 ? 1 : 0, w = n[i] + 6; bl.push([(sum[i] + pr * 6) / w, w, 1]);
+      while (bl.length > 1 && bl[bl.length - 2][0] > bl[bl.length - 1][0]) { var b2 = bl.pop(), a = bl.pop(), ww = a[1] + b2[1]; bl.push([(a[0] * a[1] + b2[0] * b2[1]) / ww, ww, a[2] + b2[2]]); }
+    }
+    var out = []; bl.forEach(function (b) { for (var k = 0; k < b[2]; k++) out.push(b[0]); }); var top = Math.max(out[12], .05);
+    return out.map(function (v) { return Math.min(1, v / top); });
+  }
+  function fillStep() { fl.t++; for (var k = 0; k < 2; k++) { var i = rnd() * 13 | 0, g = GAPS[i]; fl.s.push([i, Math.max(0, Math.min(1.2, truth(g) + gauss() * 0.22))]); } if (fl.s.length > 520) fl.s = []; }
+  function fillDraw() {
+    var o = Cv, x = o.x; grid(o);
+    var px = function (i) { return 18 + (o.w - 36) * i / 12; }, py = function (v) { return 12 + (o.h - 40) * (1 - v / 1.2); };
+    x.strokeStyle = LINE; x.beginPath(); x.moveTo(px(6), 8); x.lineTo(px(6), o.h - 26); x.stroke();
+    label(o, 'bid = clearing', px(6) + 4, o.h - 30, DIM);
+    var sum = new Array(13).fill(0), n = new Array(13).fill(0);
+    fl.s.forEach(function (q) { sum[q[0]] += q[1]; n[q[0]] += 1; x.fillStyle = 'rgba(217,222,225,.28)'; x.fillRect(px(q[0]) + (q[1] * 997 % 7) - 3, py(q[1]) - 1, 2, 2); });
+    var c = pav(sum, n);
+    x.strokeStyle = GOLD; x.lineWidth = 2; x.beginPath(); c.forEach(function (v, i) { i ? x.lineTo(px(i), py(v)) : x.moveTo(px(i), py(v)); }); x.stroke();
+    c.forEach(function (v, i) { x.fillStyle = HI; x.fillRect(px(i) - 2, py(v) - 2, 4, 4); });
+    label(o, '−0.0030', 18, o.h - 10, DIM); label(o, 'gap to clearing', o.w / 2, o.h - 10, DIM, 'center'); label(o, '+0.0030', o.w - 18, o.h - 10, DIM, 'right');
+    label(o, fl.s.length + ' samples · fill at clearing ' + Math.round(c[6] * 100) + '%', 18, 20, HI);
+  }
+
+  if (A) cusumReset();
+  function frame() {
+    if (A && A.vis) { cusumStep(); cusumDraw(); }
+    if (B && B.vis) { dipStep(); dipDraw(); }
+    if (Cv && Cv.vis) { fillStep(); fillDraw(); }
+  }
+  // pre-roll so the first paint already shows a story
+  for (var i = 0; i < 120; i++) { if (A) cusumStep(); if (B) dipStep(); if (Cv) fillStep(); }
+  if (A) cusumDraw(); if (B) dipDraw(); if (Cv) fillDraw();
+  if (!still) setInterval(frame, 90);
 })();
 </script>
 

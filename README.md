@@ -1,9 +1,8 @@
 # ODIN Suite
-**🌐 Website: [asgardhashworks.github.io/odin-suite-releases](https://asgardhashworks.github.io/odin-suite-releases/)** · **⬇ [Download the latest release](https://github.com/asgardhashworks/odin-suite-releases/releases/latest)**
-**Your mining farm, run like a data center.** ODIN Suite: enterprise-grade control for Bitcoin mining farms. “In the hashrate market, speed isn’t the edge. Quantitative precision is. HFT platforms race in nanoseconds on markets that move in nanoseconds. NiceHash moves in seconds and minutes, so ODIN runs a quantitative algorithmic engine built for that market: it prices hashrate against live difficulty and block rewards every two seconds, learns from the market’s own history which price levels truly hold, adapts its park price over time, and refuses any bid the math can’t justify. The longer it runs, the sharper it gets.”
-Unified supervision, automated hashrate procurement and secure mobile oversight in one Windows platform. ODIN Suite keeps every miner online, enforces your capital limits on every NiceHash order, and puts live farm telemetry in your pocket. It deploys the same way for a home rig or a 1,000-unit site.
 
-Engineered in Rust. Every component is written in Rust and compiled to native machine code, the same language trusted for high-performance infrastructure. Each program is a single self-contained executable, with no runtime to install and no garbage-collector pauses. Rust’s strict, memory-safe design rules out entire classes of crashes and leaks before the software ships. The result runs around the clock on a light footprint, polls hundreds of units in parallel, and reacts to the order book every two seconds.
+**A self-learning quantitative engine for hashrate, and the supervisor for the farm behind it.** Native Rust · Windows 10/11 and Linux x86_64 · runs on your own hardware, with your keys never leaving it.
+
+**Your mining farm, run like a data center.** ODIN Suite supervises every miner you own, buys NiceHash hashrate only when it pays, and puts the whole operation on your phone. It works the same for one GPU in a spare room and for a warehouse of ASICs.
 
 | | What it does |
 | --- | --- |
@@ -30,6 +29,16 @@ Engineered in Rust. Every component is written in Rust and compiled to native ma
 
 All units are polled at the same time, so a farm of hundreds of units still refreshes in seconds. With more than 6 units the console switches to one line per unit.
 
+## Quick start (Linux x86_64)
+
+```bash
+tar -xzf odin-suite-v1.3.0-linux-x64.tar.gz && cd odin-suite
+sudo ./install.sh          # verifies checksums, creates the odin service account and systemd services
+sudo journalctl -u odin -f -o cat
+```
+
+See the [Linux Deployment Guide](ODIN_Suite_Linux_Deployment_Guide.pdf) (also `docs/LINUX.md` in the download) for the file layout, sandboxing and network list.
+
 ## Quick start (Windows 10/11)
 
 1. Download the latest `odin-suite-…-windows-x64.zip` from **Releases** and unzip it.
@@ -44,27 +53,51 @@ All units are polled at the same time, so a farm of hundreds of units still refr
 
 ## How ODIN decides
 
-1. Every 2 seconds it reads the public order book and rates each price level on speed, miners, volume, fill and stability.
-2. It works out what 1 EH/s earns right now from live Bitcoin difficulty and block rewards, minus your pool fee, and compares that with each level's cost plus NiceHash's 3% buyer fee.
-3. It locks onto a level only after it has stayed stable. How long it waits is learned from the market's own history.
-4. If the market is above your profitable maximum, the **profit guard** parks your order there. You pay only for hashrate you actually receive, so a parked order costs nothing until the market dips into profit.
-5. Capital protection runs throughout:
-   - a hard price ceiling and step-limited raises;
-   - a freeze when it detects it is chasing the price;
-   - daily spend and loss kill switches;
-   - order-count limits;
-   - with a Kryptex pool, a check that the hashrate billed actually arrived (verified P/L).
+Every 2 seconds ODIN reads the public order book. Every decision is re-derived from live data and from what ODIN has learned on your own account.
+
+**Pricing the hash**
+- **Live hashvalue.** Income per EH/s comes from current difficulty and the actual block rewards, fees included, net of your pool fee.
+- **Self-calibration.** Your pool's real credits are compared with the model's prediction, after the payout delay that ODIN measures itself. The income model is then corrected.
+- **Difficulty forecast with an error range.** The next retarget is projected with a standard deviation derived from block-arrival statistics. The bid ceiling glides down ahead of the change, because NiceHash only lets prices fall slowly.
+
+**Choosing the price**
+- **Level lock.** ODIN commits to a price level only after it has held. The wait is learned from the market's own survival times.
+- **Profit guard.** Above break-even the order parks at your profitable maximum. A parked order costs nothing until the market dips into it.
+- **Budget pacing.** The park price is solved for the money you actually have and how long it must last, using Lagrangian duality on the expected-value model. Hour-of-day fill rates are included.
+- **Spend into the dip.** Speed limits are free to change, so speed rises only when the margin clears the model's own error band. The budget is therefore spent where the margin is widest.
+- **Change-point detection.** A two-sided CUSUM watches the clearing price for level shifts. Stale history is down-weighted the moment the market moves.
+- **Partial-fill curve.** ODIN learns how much of its limit is really served at each distance from the clearing price. It uses isotonic regression, so a higher bid never "fills less".
+
+**Testing and protection**
+- **Walk-forward tuning.** `--optimize` replays your own recordings with no look-ahead and NiceHash's price-cut limits applied. It adopts a setting only if it wins in both halves of the history.
+- **Capital protection** runs throughout:
+  - a hard price ceiling and step-limited raises;
+  - a freeze when ODIN detects it is chasing the price;
+  - daily spend and loss kill switches;
+  - order-count limits;
+  - with a Kryptex pool, a check that the hashrate billed actually arrived (verified P/L).
 
 ## Safety
 
-- **Your keys stay on your PC.** They are written to `odin.env`, which only your Windows account can read. Nothing is sent anywhere except to NiceHash's own API.
+- **Your keys stay on your machine.** They live in `odin.env`, readable only by your Windows account (on Linux: root-only, injected by systemd). They are only ever sent to NiceHash's own API. The full outbound list is in the [whitepaper](ODIN_Suite_Architecture_Security_Whitepaper.pdf).
+- **Tamper-evident audit ledger.** Every event and decision is written to `odin_audit.jsonl` as a SHA-256 hash chain; `odin --verify-audit` proves it hasn't been edited.
+- **Offline licences for air-gapped sites.** These are Ed25519-signed licence files, machine-bound or site-wide, checked locally. See `docs/ENTERPRISE.md` in the download.
+- **Verify what you run.** Every release ships `SHA256SUMS.txt`; binaries are built by GitHub Actions from the tagged source.
 - **Use an API key with withdrawals turned off.** ODIN never needs to move coins out of your account.
 - **HUGINN is read-only** and protected by a random key. Reach it from your phone through Tailscale; don't open a port to the internet.
 - **Read `DISCLAIMER.md` in the download.** Trading hashrate can lose money.
 
 ## Settings
 
-Every option is listed in `docs\CONFIGURATION.md` inside the download. The phone app is covered in `docs\HUGINN.md`.
+Every option is listed in `docs/CONFIGURATION.md` inside the download. The phone app is covered in `docs/HUGINN.md`.
+
+## Enterprise
+
+Commercial farms and hosting sites get Linux and Windows deployment, offline licences, the hash-chained audit ledger, and a 30-day paid pilot credited toward the licence.
+
+- [Enterprise Brief (PDF)](ODIN_Suite_Enterprise_Brief.pdf)
+- [Architecture & Security Whitepaper (PDF)](ODIN_Suite_Architecture_Security_Whitepaper.pdf)
+- [Linux Deployment & Hardening Guide (PDF)](ODIN_Suite_Linux_Deployment_Guide.pdf)
 
 ## Professional setup and support
 
@@ -80,7 +113,7 @@ ODIN Suite is free to install. Live trading is unlocked by an **ODIN Pro** subsc
 | Pro Home | $9 / month | 1 order, up to 5 PH/s | Up to 10 | E-mail |
 | Pro Farm | $49 / month | 3 orders, up to 50 PH/s | Up to 100 | E-mail, 24 h |
 | Pro Business | $249 / month | 10 orders, up to 500 PH/s | Up to 1,000 | Priority |
-| Enterprise | Quoted per site | Custom | Unlimited | Response-time agreement |
+| Enterprise | Quoted per site | 50 orders, multi-EH/s, offline licence | Unlimited | Response-time agreement, paid pilot available |
 
 **Get ODIN Pro:** e-mail **[schancellor007@gmail.com](mailto:schancellor007@gmail.com?subject=ODIN%20Pro%20order)** with the plan you want. Pro is paid in Bitcoin; your license key is e-mailed back once the payment arrives. Then activate it: run `odin.exe --activate YOUR-KEY` in `C:\ODIN-Suite\odin`, or enter the key in the installer. Set `DRY_RUN=0` in `odin.env` to start trading.
 
