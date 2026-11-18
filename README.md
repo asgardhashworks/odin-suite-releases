@@ -1,7 +1,9 @@
 # ODIN Suite
 
-**Your mining farm, run like a data center.**ODIN Suite: enterprise-grade control for Bitcoin mining farms.
-Unified supervision, automated hashrate procurement, and secure mobile oversight in one Windows platform. ODIN Suite keeps every miner online, enforces your capital limits on every NiceHash order, and puts live farm telemetry in your pocket. Deployed the same way for a home rig or a 1,000-unit site.
+**Your mining farm, run like a data center.** ODIN Suite: enterprise-grade control for Bitcoin mining farms.
+Unified supervision, automated hashrate procurement and secure mobile oversight in one Windows platform. ODIN Suite keeps every miner online, enforces your capital limits on every NiceHash order, and puts live farm telemetry in your pocket. It deploys the same way for a home rig or a 1,000-unit site.
+
+Engineered in Rust. Every component is written in Rust and compiled to native machine code, the same language trusted for high-performance infrastructure. Each program is a single self-contained executable, with no runtime to install and no garbage-collector pauses. Rust’s strict, memory-safe design rules out entire classes of crashes and leaks before the software ships. The result runs around the clock on a light footprint, polls hundreds of units in parallel, and reacts to the order book every two seconds.
 
 | | What it does |
 | --- | --- |
