@@ -10,7 +10,7 @@
 | **FREKI** | Optional: build notes for a 0% developer-fee CPU miner. |
 
 <p align="center">
-  <img src="huginn-odin.png" width="260" alt="HUGINN trading tab">
+  <img src="huginn-odin_1.png" width="260" alt="HUGINN trading tab">
   <img src="huginn-console.png" width="260" alt="HUGINN farm console">
   <img src="huginn-cards.png" width="260" alt="HUGINN farm cards">
 </p>
