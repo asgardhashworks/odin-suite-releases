@@ -18,6 +18,10 @@
 </p>
 <p align="center"><sub>Screenshots use sample data.</sub></p>
 
+## Markets
+
+NiceHash today, plus **Braiins Hashpower** in watch mode: ODIN learns that market alongside NiceHash, compares them fees included, and tells you where new money earns more. Switch any market on, off or live while ODIN runs with `odin --market braiins watch`. See `docs/MARKETS.md` in the download.
+
 ## Supported hardware
 
 | Type | How SLEIPNIR talks to it | Restarts it? |
@@ -32,12 +36,12 @@ All units are polled at the same time, so a farm of hundreds of units still refr
 ## Quick start (Linux x86_64)
 
 ```bash
-tar -xzf odin-suite-v1.3.0-linux-x64.tar.gz && cd odin-suite
+tar -xzf odin-suite-v1.4.0-linux-x64.tar.gz && cd odin-suite
 sudo ./install.sh          # verifies checksums, creates the odin service account and systemd services
 sudo journalctl -u odin -f -o cat
 ```
 
-See the [Linux Deployment Guide](ODIN_Suite_Linux_Deployment_Guide.pdf) (also `docs/LINUX.md` in the download) for the file layout, sandboxing and network list.
+See the [Linux Deployment Guide](ODIN_Suite_Linux_Deployment_Guide.pdf) for the file layout, sandboxing and network list.
 
 ## Quick start (Windows 10/11)
 
@@ -92,8 +96,6 @@ Every 2 seconds ODIN reads the public order book. Every decision is re-derived f
 Every option is listed in `docs/CONFIGURATION.md` inside the download. The phone app is covered in `docs/HUGINN.md`.
 
 ## Enterprise
-
-Commercial farms and hosting sites get Linux and Windows deployment, offline licences, the hash-chained audit ledger, and a 30-day paid pilot credited toward the licence.
 
 - [Enterprise Brief (PDF)](ODIN_Suite_Enterprise_Brief.pdf)
 - [Architecture & Security Whitepaper (PDF)](ODIN_Suite_Architecture_Security_Whitepaper.pdf)

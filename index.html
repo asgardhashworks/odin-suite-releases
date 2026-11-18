@@ -307,6 +307,17 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
 .clip { position: relative; aspect-ratio: 16 / 9; background: #000; border: 1px solid var(--line); overflow: hidden; }
 .clip video { width: 100%; height: 100%; object-fit: cover; display: block; }
 .clip .lbl { position: absolute; left: 8px; top: 8px; font: 500 10px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--amber); background: rgba(7,8,9,.8); padding: 5px 7px; border: 1px solid var(--gold-lo); }
+/* markets */
+.mkts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: stretch; }
+.mkt { background: var(--panel); border: 1px solid var(--line); padding: 20px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.mkt.on { border-color: var(--gold-lo); box-shadow: inset 0 2px 0 var(--amber); }
+.mkt .top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.mkt .top h3 { font-size: 18px; }
+.mkt p { color: var(--dim); font-size: 14px; }
+.state { font: 700 11px/1 var(--mono); letter-spacing: .14em; padding: 5px 8px; border: 1px solid currentColor; }
+.state.live { color: var(--ok); } .state.watch { color: var(--amber); } .state.soon { color: var(--dim); }
+@media (max-width: 960px) { .mkts { grid-template-columns: minmax(0, 1fr); } }
+
 /* enterprise */
 .ent { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 28px; align-items: start; }
 .ent-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border: 1px solid var(--line); }
@@ -389,7 +400,7 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
     <nav aria-label="Sections">
       <a href="#film">Film</a>
       <a href="#engine">Engine</a>
-      <a href="#modules">Modules</a>
+      <a href="#markets">Markets</a>
       <a href="#enterprise">Enterprise</a>
       <a href="#plans">Plans</a>
       <a href="#order">Order</a>
@@ -445,7 +456,7 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
         <video id="filmVid" src="media/odin-commercial.mp4" poster="media/odin-commercial-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="ODIN Suite commercial: the order book, the learning engine, SLEIPNIR and HUGINN"></video>
       </div>
       <div class="film-bar">
-        <span class="eyebrow"><b class="rec">REC</b> ODIN Suite · 43 s · live footage from the running engine</span>
+        <span class="eyebrow"><b class="rec">REC</b> ODIN Suite · 62 s · live footage and real algorithms</span>
         <div class="film-ctl">
           <button class="btn small solid" type="button" id="soundBtn" aria-pressed="false">▶ Sound on</button>
           <a class="btn small" href="https://youtu.be/AAvMzb12SpA" target="_blank" rel="noopener">Watch on YouTube</a>
@@ -455,8 +466,8 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
   </section>
 
   <div class="ticker" aria-hidden="true"><div class="ticker-in">
-    <span><b>01</b>Live hashvalue</span><span><b>02</b>Delay-aware calibration</span><span><b>03</b>Retarget forecast <span class="nc" style="padding:0">± σ</span></span><span><b>04</b>Budget pacing · Lagrangian</span><span><b>05</b>Spend into the dip</span><span><b>06</b>CUSUM change-points</span><span><b>07</b>Partial-fill curve · isotonic</span><span><b>08</b>Walk-forward tuning</span>
-    <span><b>01</b>Live hashvalue</span><span><b>02</b>Delay-aware calibration</span><span><b>03</b>Retarget forecast <span class="nc" style="padding:0">± σ</span></span><span><b>04</b>Budget pacing · Lagrangian</span><span><b>05</b>Spend into the dip</span><span><b>06</b>CUSUM change-points</span><span><b>07</b>Partial-fill curve · isotonic</span><span><b>08</b>Walk-forward tuning</span>
+    <span><b>01</b>Live hashvalue</span><span><b>02</b>Delay-aware calibration</span><span><b>03</b>Retarget forecast <span class="nc" style="padding:0">± σ</span></span><span><b>04</b>Budget pacing · Lagrangian</span><span><b>05</b>Spend into the dip</span><span><b>06</b>CUSUM change-points</span><span><b>07</b>Partial-fill curve · isotonic</span><span><b>08</b>Walk-forward tuning</span><span><b>◆</b>NiceHash · Braiins · hot switch</span>
+    <span><b>01</b>Live hashvalue</span><span><b>02</b>Delay-aware calibration</span><span><b>03</b>Retarget forecast <span class="nc" style="padding:0">± σ</span></span><span><b>04</b>Budget pacing · Lagrangian</span><span><b>05</b>Spend into the dip</span><span><b>06</b>CUSUM change-points</span><span><b>07</b>Partial-fill curve · isotonic</span><span><b>08</b>Walk-forward tuning</span><span><b>◆</b>NiceHash · Braiins · hot switch</span>
   </div></div>
 
   <section class="edge" id="edge">
@@ -509,6 +520,27 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
         <figure class="vz" style="margin:0"><div class="con-head"><span>Fill curve · isotonic</span><span class="sim">SIM</span></div><canvas id="vzFill" aria-label="Animated simulation: noisy fill observations with a monotone isotonic regression fit"></canvas><figcaption class="cap"><b>Learned, never assumed.</b> Noisy fill samples become a monotone curve: a higher bid never fills less.</figcaption></figure>
       </div>
       <p class="sample mono">Live simulations on synthetic data, running the same algorithms ODIN runs on your account.</p>
+    </div>
+  </section>
+
+  <section class="band" id="markets">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow"><b>// MARKETS</b> Multi-market · hot switch</div>
+        <h2>One engine. Every market.</h2>
+        <p class="lead">ODIN prices every hashrate market with the same income model, fees included, and keeps separate learning for each. Turn a market on, off or live while ODIN runs, and the change applies within one 2-second cycle. ODIN tells you where new money earns more, and never moves it for you.</p>
+      </div>
+      <div class="mkts">
+        <div class="mkt on"><div class="top"><h3>NiceHash</h3><span class="state live">LIVE</span></div><p>SHA256ASICBOOST order book, 3% buyer fee. The full engine: lock, park, pacing, dip speed.</p></div>
+        <div class="mkt on"><div class="top"><h3>Braiins Hashpower</h3><span class="state watch">WATCH</span></div><p>Spot order book in the same BTC/EH/day unit, 0% fee during its beta. ODIN learns its fill curve, dip hours and market shifts, and keeps a shadow P/L. Live bidding follows once Braiins API v2 access opens.</p></div>
+        <div class="mkt"><div class="top"><h3>Next markets</h3><span class="state soon">ROADMAP</span></div><p>MiningRigRentals (a rent-or-skip engine for fixed-term rentals) and more as their APIs allow. Each one plugs into the same learning core.</p></div>
+      </div>
+      <div class="clip" style="max-width:760px"><video data-auto src="media/clip-markets.mp4" poster="media/clip-markets.jpg" muted loop playsinline preload="none" aria-label="Switching Braiins Hashpower on while ODIN runs"></video><span class="lbl">Hot switch</span></div>
+      <div class="term"><span class="c"># switch markets while ODIN runs</span>
+odin --market                    <span class="c"># list modes</span>
+odin --market braiins watch      <span class="c"># start learning Braiins</span>
+odin --market nicehash watch     <span class="c"># pause NiceHash trading, orders untouched</span>
+odin --market nicehash live      <span class="c"># resume</span></div>
     </div>
   </section>
 
@@ -645,7 +677,7 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
             <div><h3>Published network list</h3><p>Outbound HTTPS to a short list of hosts. Nothing listens on the network; HUGINN uses loopback plus Tailscale.</p></div>
           </div>
           <div class="term"><span class="c"># deploy on Linux</span>
-tar -xzf odin-suite-v1.3.0-linux-x64.tar.gz &amp;&amp; cd odin-suite
+tar -xzf odin-suite-v1.4.0-linux-x64.tar.gz &amp;&amp; cd odin-suite
 sudo ./install.sh --license-file site.lic
 sudo journalctl -u odin -f -o cat
 odin --verify-audit odin_audit.jsonl   <span class="c"># AUDIT OK · hash chain intact</span></div>
