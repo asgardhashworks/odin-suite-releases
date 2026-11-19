@@ -28,7 +28,7 @@ ODIN Suite is an on-premises operations platform for Bitcoin mining capital. It 
 
 | Component | Role | Function |
 | --- | --- | --- |
-| **ODIN** | Execution engine | Re-prices every 2 seconds against live network economics. Eight self-calibrating models decide price, size and timing; a profit guard parks capital whenever the market trades above break-even. |
+| **ODIN** | Multi-venue execution engine | Re-prices every 2 seconds against live network economics. Eight self-calibrating models decide price, size and timing; a profit guard parks capital whenever the market trades above break-even. |
 | **SLEIPNIR** | Fleet supervision | Concurrent polling of GPUs, CPUs and ASICs from one rig to industrial sites. Automatic recovery; thermal and power alerting down to hotspot, VRAM and chip level. |
 | **HUGINN** | Operator telemetry | Read-only mobile console over a private Tailscale link. It cannot place, modify or cancel anything, by design. |
 
@@ -48,8 +48,8 @@ ODIN Suite is an on-premises operations platform for Bitcoin mining capital. It 
 
 The execution console is a single screen: KPI strip, income model, order planner, learning engine, market router, risk limits, fleet status and the live order book.
 
-<p align="center"><img src="assets/console-engine.png" alt="ODIN v13.16 console: KPI strip, profit and forecast, order planner, treasury, learning engine, markets, risk and protection" width="100%"></p>
-<p align="center"><img src="assets/console-orderbook.png" alt="ODIN v13.16 console: SLEIPNIR fleet, live NiceHash order book, decision and positions" width="100%"></p>
+<p align="center"><img src="assets/console-engine.png" alt="ODIN v13.17 console: KPI strip, profit and forecast, order planner, treasury, learning engine, markets, risk and protection" width="100%"></p>
+<p align="center"><img src="assets/console-orderbook.png" alt="ODIN v13.17 console: SLEIPNIR fleet, live NiceHash order book, decision and positions" width="100%"></p>
 <p align="center"><sub>ODIN v13.16 on Windows Terminal. Sample data; order identifiers masked.</sub></p>
 
 <img src="assets/h04.png" alt="04 Markets" width="100%">
