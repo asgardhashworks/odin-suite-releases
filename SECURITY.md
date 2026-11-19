@@ -44,6 +44,8 @@ Out of scope: third-party services (NiceHash, Braiins, MiningRigRentals, Clore.a
 ## Security design summary
 
 - Credentials never leave the host and are only sent to the market APIs they belong to. Withdrawal permission is never required.
+- Secrets at rest: on Windows, every API key, secret, password and alert token in `odin.env` is sealed with DPAPI (current-user scope, application entropy) on first start and stored as `dpapi:<hex>`; a copy of the file is useless on another account or PC. On Linux the file is restricted to its owner (mode 0600).
+- HUGINN's remote link runs over Tailscale (WireGuard: Curve25519, ChaCha20-Poly1305) and is read-only by design.
 - No listening network ports; HUGINN binds to loopback.
 - Linux services run as a no-login account inside a hardened `systemd` sandbox.
 - Every decision is written to a SHA-256 hash-chained audit ledger, verifiable with `odin --verify-audit`.

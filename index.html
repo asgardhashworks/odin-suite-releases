@@ -233,7 +233,39 @@ section.band > .wrap { padding-block: 80px; display: grid; gap: 40px; }
 
 /* safety */
 .safety { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border: 1px solid var(--line); }
-.safe { padding: 24px; display: grid; gap: 8px; border-bottom: 1px solid var(--line); min-width: 0; }
+/* security doctrine: cryptographic seals */
+.operator { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 26px; align-items: start; margin: 0 0 22px; padding: 28px 30px; border: 1px solid var(--line); border-left: 3px solid var(--amber); background: linear-gradient(90deg, rgba(216,170,69,.09), transparent 60%), var(--panel); }
+.op-mark svg { width: 96px; height: 96px; fill: none; stroke: var(--amber); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 10px rgba(216,170,69,.45)); }
+.op-eyebrow { font: 700 12px/1 var(--mono); letter-spacing: .14em; color: var(--amber); text-transform: uppercase; margin-bottom: 10px; }
+.operator h3 { font-size: 24px; margin-bottom: 10px; }
+.operator p { color: var(--dim); font-size: 15.5px; max-width: 72ch; text-wrap: pretty; }
+.operator p b { color: var(--fg); }
+.op-rules { list-style: none; margin: 16px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.op-rules li { color: var(--dim); font-size: 14px; padding: 14px 16px; border: 1px solid var(--line); background: rgba(0,0,0,.25); text-wrap: pretty; }
+.op-rules li b { display: block; color: var(--amber); font: 700 13px/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 6px; }
+@media (max-width: 960px) { .op-rules { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 620px) { .operator { grid-template-columns: minmax(0, 1fr); padding: 22px 18px; gap: 14px; } .op-mark svg { width: 64px; height: 64px; } }
+.gold-text { background: linear-gradient(180deg, #ffe7a3, #d8aa45 60%, #9c7426); -webkit-background-clip: text; background-clip: text; color: transparent; }
+#safety { background: radial-gradient(80% 60% at 50% 0%, rgba(216,170,69,.10), transparent 70%); }
+.vault { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin: 6px 0 18px; }
+.seal { position: relative; overflow: hidden; display: grid; gap: 6px; align-content: start; padding: 22px 20px 20px; border: 1px solid var(--amber); background: linear-gradient(180deg, #17140c, #0d0e10 70%); box-shadow: inset 0 0 0 1px rgba(216,170,69,.12), 0 0 24px rgba(216,170,69,.08); min-width: 0; }
+.seal::after { content: ""; position: absolute; inset: -40% auto -40% -60%; width: 40%; transform: skewX(-20deg); background: linear-gradient(90deg, transparent, rgba(255,215,120,.16), transparent); animation: sealShine 6s ease-in-out infinite; }
+.seal:nth-child(2)::after { animation-delay: 1.5s; } .seal:nth-child(3)::after { animation-delay: 3s; } .seal:nth-child(4)::after { animation-delay: 4.5s; }
+.seal svg { width: 30px; height: 30px; fill: none; stroke: var(--amber); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 6px rgba(216,170,69,.5)); margin-bottom: 4px; }
+.seal b { font: 700 26px/1.05 var(--display); letter-spacing: .02em; background: linear-gradient(180deg, #ffe7a3, #d8aa45 60%, #9c7426); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.seal > span { font: 700 11px/1.2 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--amber); }
+.seal p { color: var(--dim); font-size: 14px; margin-top: 4px; }
+.seal:hover { box-shadow: inset 0 0 0 1px rgba(216,170,69,.3), 0 0 36px rgba(216,170,69,.22); }
+@keyframes sealShine { 0%, 60% { left: -60%; } 100% { left: 130%; } }
+.zeros { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--line); margin-bottom: 22px; }
+.zeros div { display: grid; justify-items: center; gap: 4px; padding: 16px 8px; border-right: 1px solid var(--line); text-align: center; }
+.zeros div:last-child { border-right: 0; }
+.zeros b { font: 700 34px/1 var(--display); color: #00ff46; text-shadow: 0 0 16px rgba(0,255,70,.45); }
+.zeros span { font: 600 11px/1.3 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--dim); }
+@media (max-width: 960px) { .vault { grid-template-columns: repeat(2, minmax(0, 1fr)); } .zeros { grid-template-columns: repeat(2, minmax(0, 1fr)); } .zeros div:nth-child(2) { border-right: 0; } .zeros div:nth-child(-n+2) { border-bottom: 1px solid var(--line); } }
+@media (max-width: 520px) { .vault { grid-template-columns: minmax(0, 1fr); } .seal b { font-size: 24px; } }
+@media (prefers-reduced-motion: reduce) { .seal::after { display: none; } }
+.safe { padding: 24px; display: grid; gap: 8px; align-content: start; border-bottom: 1px solid var(--line); min-width: 0; }
 .safe:nth-child(odd) { border-right: 1px solid var(--line); }
 .safe:nth-last-child(-n+2) { border-bottom: 0; }
 .safe h3 { font-size: 16px; }
@@ -413,7 +445,7 @@ section[id], [id].band { scroll-margin-top: 110px; }
 .livebar-in { display: flex; width: max-content; animation: tick 46s linear infinite; }
 .livebar span { font: 500 11.5px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--dim); padding: 9px 20px; white-space: nowrap; }
 .livebar span b { color: var(--fg); font-weight: 600; margin-left: 6px; } .livebar span i { font-style: normal; margin-left: 6px; }
-.livebar .lv { color: #2fe07a; } .livebar .up { color: #2fe07a; } .livebar .dn { color: #ff5a6a; } .livebar .g { color: var(--amber); }
+.livebar .lv { color: #2fe07a; } .livebar .up { color: #2fe07a; } .livebar .dn { color: #ff5a6a; } .livebar .g { color: var(--amber); } .livebar .g.on { font-weight: 700; color: #00ff46; text-shadow: 0 0 8px rgba(0,255,70,.55); }
 @media (prefers-reduced-motion: reduce) { .livebar-in { animation: none; } }
 
 /* traffic counter (footer) */
@@ -442,6 +474,33 @@ footer .hits img { display: block; height: 20px; width: auto; }
 @keyframes hotRow { 0% { background: #008700; } 50% { background: #875f00; } }
 @keyframes hotBorder { 0% { border-color: #00ff46; } 50% { border-color: #ffd700; } }
 @media (prefers-reduced-motion: reduce) { .hotdash, .hotdash * { animation: none !important; } }
+/* ignition: calm until scrolled into view, then the window opens with a bang, holds, cools, repeats */
+.hotdash { position: relative; }
+.hotdash.armed:not(.lit) { animation: none; border-color: #3a3326; box-shadow: none; }
+.hotdash.armed:not(.lit) .rule { animation: none; background: #3a3326; }
+.hotdash.armed:not(.lit) .ban { animation: none; background: #1a1a1a; color: #55595c; }
+.hotdash.armed:not(.lit) .f { animation: none; background: transparent; color: #c9cdcf; }
+.hotdash.armed:not(.lit) .up { color: #77797b; }
+.hotdash.armed:not(.lit) .row.p, .hotdash.armed:not(.lit) .row.l { animation: none; background: transparent; color: #c9cdcf; font-weight: 500; }
+.hotdash.armed:not(.lit) .row .tag { animation: none; background: transparent; color: #77797b; }
+.hotdash.armed:not(.lit) .row .bar { background: #2a2e31; }
+.hotdash.lit { animation: hotBorder .5s steps(1) infinite, hotGlow 1s ease-in-out infinite; }
+.hotdash.lit .rule, .hotdash.lit .f, .hotdash.lit .row .tag { animation-duration: .5s; }
+.hotdash.lit .row.p { animation: rowIn .35s ease-out .25s backwards, hotRow .5s steps(1) .6s infinite; }
+.hotdash.lit .row.p + .row.p { animation-delay: .45s, .8s; }
+.hotdash.lit .row.l { animation: rowIn .35s ease-out .65s backwards, lockPulse 1s ease-in-out 1s infinite; }
+.hotdash.lit .ban { animation: banSlam .45s cubic-bezier(.2,1.6,.4,1) backwards, hotBg .5s steps(1) .45s infinite; transform-origin: center; }
+.hotdash.lit .up { animation: upPop .6s ease-in-out infinite; display: inline-block; }
+.hotdash .flash { position: absolute; inset: 0; pointer-events: none; opacity: 0; z-index: 2; background: radial-gradient(circle at 50% 30%, rgba(255,215,0,.55), rgba(0,255,70,.18) 45%, transparent 70%); }
+.hotdash.lit .flash { animation: flashBurst .9s ease-out; }
+.hotdash.lit.shake { animation: shake .4s linear, hotBorder .5s steps(1) infinite, hotGlow 1s ease-in-out infinite; }
+@keyframes hotGlow { 0%,100% { box-shadow: 0 0 18px rgba(0,255,70,.35), inset 0 0 18px rgba(0,255,70,.08); } 50% { box-shadow: 0 0 46px rgba(255,215,0,.6), inset 0 0 28px rgba(255,215,0,.12); } }
+@keyframes banSlam { 0% { transform: scale(1.35); opacity: 0; filter: brightness(2.2); } 60% { opacity: 1; } 100% { transform: scale(1); filter: brightness(1); } }
+@keyframes rowIn { 0% { opacity: 0; transform: translateX(-14px); filter: brightness(2); } 100% { opacity: 1; transform: none; filter: none; } }
+@keyframes lockPulse { 0%,100% { box-shadow: 0 0 0 rgba(0,255,70,0); } 50% { box-shadow: 0 0 22px rgba(0,255,70,.7); } }
+@keyframes upPop { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-2px); text-shadow: 0 0 10px #00ffaf; } }
+@keyframes flashBurst { 0% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes shake { 0%,100% { transform: none; } 20% { transform: translate(-3px,1px); } 40% { transform: translate(3px,-1px); } 60% { transform: translate(-2px,0); } 80% { transform: translate(2px,1px); } }
 .hot-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 22px; }
 .hot-steps .step { background: var(--panel); border: 1px solid var(--line); padding: 20px; display: grid; gap: 8px; align-content: start; min-width: 0; }
 .hot-steps .step .n { font: 700 12px/1 var(--mono); letter-spacing: .14em; color: var(--amber); }
@@ -522,7 +581,7 @@ footer .hits img { display: block; height: 20px; width: auto; }
 </style>
 
 <div class="livebar" aria-label="Live market data"><div class="livebar-in" id="livebarIn">
-  <span class="lv">● LIVE MARKETS</span><span>BTC<b id="lbBtc">—</b></span><span>Next difficulty<b id="lbDiff">—</b></span><span>Hashprice<b id="lbHp">—</b></span><span>PEARL<b id="lbPrl">—</b><i id="lbPrlCh"></i></span><span class="g">◆ NiceHash · live</span><span class="g">◆ Braiins · watch</span><span class="g">◆ MiningRigRentals · watch</span><span class="g">◆ Clore GPU spot · live</span><span>Engineered in Rust · Windows · Ubuntu · Debian</span>
+  <span class="lv">● LIVE MARKETS</span><span>BTC<b id="lbBtc">—</b></span><span>Next difficulty<b id="lbDiff">—</b></span><span>Hashprice<b id="lbHp">—</b></span><span>PEARL<b id="lbPrl">—</b><i id="lbPrlCh"></i></span><span class="g on">◆ NiceHash · ● live</span><span class="g">◆ Braiins · watch</span><span class="g">◆ MiningRigRentals · watch</span><span class="g on">◆ Clore GPU spot · ● live</span><span>Engineered in Rust · Windows · Ubuntu · Debian</span>
 </div></div>
 <header class="top">
   <div class="wrap nav">
@@ -608,8 +667,8 @@ footer .hits img { display: block; height: 20px; width: auto; }
   </section>
 
   <div class="ticker" aria-hidden="true"><div class="ticker-in">
-    <span><b>01</b>Live hashvalue</span><span><b>02</b>Delay-aware calibration</span><span><b>03</b>Retarget forecast <span class="nc" style="padding:0">± σ</span></span><span><b>04</b>Budget pacing · Lagrangian</span><span><b>05</b>Spend into the dip</span><span><b>06</b>CUSUM change-points</span><span><b>07</b>Partial-fill curve · isotonic</span><span><b>08</b>Walk-forward tuning</span><span><b>09</b>Priced to win · auction bids</span><span><b>10</b>GPU valuation · every coin</span><span><b>◆</b>NiceHash · Braiins · MiningRigRentals · Clore.ai · hot switch</span><span><b>◆</b>Rent-or-skip · rigs ≥ 7 PH/s</span><span><b>🔥</b>Hot windows · phone + e-mail alerts</span><span><b>◆</b>Clore order guard · auto re-bid · auto-stop</span>
-    <span><b>01</b>Live hashvalue</span><span><b>02</b>Delay-aware calibration</span><span><b>03</b>Retarget forecast <span class="nc" style="padding:0">± σ</span></span><span><b>04</b>Budget pacing · Lagrangian</span><span><b>05</b>Spend into the dip</span><span><b>06</b>CUSUM change-points</span><span><b>07</b>Partial-fill curve · isotonic</span><span><b>08</b>Walk-forward tuning</span><span><b>09</b>Priced to win · auction bids</span><span><b>10</b>GPU valuation · every coin</span><span><b>◆</b>NiceHash · Braiins · MiningRigRentals · Clore.ai · hot switch</span><span><b>◆</b>Rent-or-skip · rigs ≥ 7 PH/s</span><span><b>🔥</b>Hot windows · phone + e-mail alerts</span><span><b>◆</b>Clore order guard · auto re-bid · auto-stop</span>
+    <span><b>01</b>Live hashvalue</span><span><b>02</b>Delay-aware calibration</span><span><b>03</b>Retarget forecast <span class="nc" style="padding:0">± σ</span></span><span><b>04</b>Budget pacing · Lagrangian</span><span><b>05</b>Spend into the dip</span><span><b>06</b>CUSUM change-points</span><span><b>07</b>Partial-fill curve · isotonic</span><span><b>08</b>Walk-forward tuning</span><span><b>09</b>Priced to win · auction bids</span><span><b>10</b>GPU valuation · every coin</span><span><b>◆</b>NiceHash · Braiins · MiningRigRentals · Clore.ai · hot switch</span><span><b>◆</b>Rent-or-skip · rigs ≥ 7 PH/s</span><span><b>🔥</b>Hot windows · phone + e-mail alerts</span><span><b>🔒</b>DPAPI · Ed25519 · SHA-256 · WireGuard · zero custody</span><span><b>◆</b>Clore order guard · auto re-bid · auto-stop</span>
+    <span><b>01</b>Live hashvalue</span><span><b>02</b>Delay-aware calibration</span><span><b>03</b>Retarget forecast <span class="nc" style="padding:0">± σ</span></span><span><b>04</b>Budget pacing · Lagrangian</span><span><b>05</b>Spend into the dip</span><span><b>06</b>CUSUM change-points</span><span><b>07</b>Partial-fill curve · isotonic</span><span><b>08</b>Walk-forward tuning</span><span><b>09</b>Priced to win · auction bids</span><span><b>10</b>GPU valuation · every coin</span><span><b>◆</b>NiceHash · Braiins · MiningRigRentals · Clore.ai · hot switch</span><span><b>◆</b>Rent-or-skip · rigs ≥ 7 PH/s</span><span><b>🔥</b>Hot windows · phone + e-mail alerts</span><span><b>🔒</b>DPAPI · Ed25519 · SHA-256 · WireGuard · zero custody</span><span><b>◆</b>Clore order guard · auto re-bid · auto-stop</span>
   </div></div>
 
   <section class="edge" id="edge">
@@ -715,7 +774,7 @@ odin --market nicehash live      <span class="c"># resume</span></div>
         <p class="lead">The moment any market turns profitable, and stays that way for a full minute, ODIN's dashboard flashes green and gold, the payout lights up and every profitable price level glows. Your phone and inbox get one alert per window, and each alert says who acts: <b>ODIN is on it</b> where it can trade, <b>Act now</b> with a direct link where you have to.</p>
       </div>
       <div class="hot-grid">
-        <div class="hotdash" role="img" aria-label="ODIN dashboard during a hot window: banner, flashing payout, profitable rows glowing">
+        <div class="hotdash" role="img" aria-label="ODIN dashboard during a hot window: banner, flashing payout, profitable rows glowing"><span class="flash"></span>
           <div class="rule"></div>
           <div><b>◆ ODIN · MULTI-VENUE EXECUTION ENGINE v13.17</b></div>
           <div class="rule"></div>
@@ -755,7 +814,7 @@ odin --market nicehash live      <span class="c"># resume</span></div>
           <div class="clip"><video data-auto src="media/clip-orderbook.mp4" poster="media/clip-orderbook.jpg" muted loop playsinline preload="none" aria-label="ODIN reading the order book"></video><span class="lbl">Live · order book</span></div>
           <span class="code">ODIN · EXECUTION</span>
           <h3>Multi-venue execution engine</h3>
-          <p>Prices every connected market every 2 seconds and commits capital only while the verified margin is positive: NiceHash SHA-256 live, three more venues in watch.</p>
+          <p>Prices every connected market every 2 seconds and commits capital only while the verified margin is positive: NiceHash SHA-256 and Clore GPU spot live, Braiins and MRR in watch.</p>
           <ul>
             <li>Learns which levels hold, and when dips come</li>
             <li>Parks above break-even; speeds up in dips</li>
@@ -848,11 +907,37 @@ odin --market nicehash live      <span class="c"># resume</span></div>
   <section class="band" id="safety">
     <div class="wrap">
       <div class="sec-head">
-        <div class="eyebrow"><b>// 05</b> Security</div>
-        <h2>Your keys never leave your machine.</h2>
+        <div class="eyebrow"><b>// 05</b> Security doctrine</div>
+        <h2>Zero trust. Zero inbound. <span class="gold-text">Zero custody.</span></h2>
+        <p class="lead">Security is the foundation, not an add-on. ODIN runs inside your perimeter, signs and chains what matters with proven cryptography, and is built so that even a stolen copy can't move your money.</p>
+      </div>
+      <div class="vault" aria-label="Cryptography ODIN Suite is built on">
+        <div class="seal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg><b>Ed25519</b><span>Signed licences</span><p>Elliptic-curve signatures, verified offline. A forged or altered licence is rejected on the spot.</p></div>
+        <div class="seal"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="9" width="7" height="6" rx="2"/><rect x="14" y="9" width="7" height="6" rx="2"/><path d="M10 12h4"/></svg><b>SHA-256</b><span>Hash-chained ledger</span><p>Every decision links to the one before it. Change one byte and <span class="mono">--verify-audit</span> shows where.</p></div>
+        <div class="seal"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14v3"/></svg><b>WireGuard</b><span>Encrypted phone link</span><p>HUGINN rides Tailscale: Curve25519 key exchange and ChaCha20-Poly1305 end to end. Nothing is exposed to the internet.</p></div>
+        <div class="seal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/><circle cx="12" cy="12" r="3.5"/></svg><b>Rust</b><span>Memory-safe core</span><p>Compiled, memory-safe, no garbage collector. A whole class of buffer-overflow attacks is ruled out by design.</p></div>
+      </div>
+      <div class="zeros">
+        <div><b>0</b><span>inbound ports</span></div>
+        <div><b>0</b><span>withdrawal rights</span></div>
+        <div><b>0</b><span>keys in the cloud</span></div>
+        <div><b>100%</b><span>on your hardware</span></div>
+      </div>
+      <div class="operator">
+        <div class="op-mark" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M32 4 8 12v18c0 15 10.2 26.6 24 30 13.8-3.4 24-15 24-30V12L32 4Z"/><path d="M32 18v28M24 26h16M22 38c3 4 6 6 10 6s7-2 10-6"/></svg></div>
+        <div class="op-body">
+          <div class="op-eyebrow">// Built by an operator</div>
+          <h3>Military discipline. Verifiable cryptography.</h3>
+          <p>ODIN Suite is engineered by <b>Steve Chancellor</b>, a former <b>U.S. Navy Operations Specialist</b>, <b>Search and Rescue swimmer</b> and <b>VBSS</b> (Visit, Board, Search and Seizure) team member. Those jobs run on three rules, and so does every line of ODIN:</p>
+          <ul class="op-rules">
+            <li><b>Own the picture.</b> An Operations Specialist builds the tactical picture before anyone moves. ODIN reads every market every 2 seconds before it commits a sat.</li>
+            <li><b>Verify, then trust.</b> A boarding team searches before it clears a ship. ODIN reconciles every order against what your pool actually credited.</li>
+            <li><b>No one left behind.</b> A rescue swimmer never takes a risk the mission can't afford. Kill switches, spend caps and auto-stops protect your capital first.</li>
+          </ul>
+        </div>
       </div>
       <div class="safety">
-        <div class="safe"><h3>Local secrets</h3><p>API keys live in one settings file that only your Windows account can read. ODIN talks to each marketplace directly.</p></div>
+        <div class="safe"><h3>Keys encrypted at rest</h3><p>The first time ODIN starts, every API key, secret and password in its settings file is sealed with Windows DPAPI, bound to your Windows account. Copy the file to another PC and it is useless. On Linux the file is locked to its owner.</p></div>
         <div class="safe"><h3>No withdrawals</h3><p>Use marketplace keys with withdrawals turned off. ODIN never needs to move coins out of your accounts.</p></div>
         <div class="safe"><h3>Watch-only first</h3><p>Every install starts in watch-only mode. Nothing trades until you switch it on yourself.</p></div>
         <div class="safe"><h3>Verified builds</h3><p>Programs are built by GitHub Actions. Each release ships SHA256 checksums; the Linux installer refuses a mismatch.</p></div>
@@ -1208,5 +1293,22 @@ odin --verify-audit odin_audit.jsonl   <span class="c"># AUDIT OK · hash chain 
     var t = j.ticker; if (!t) return; var ch = parseFloat(String(t.price_change_percent).replace('%', ''));
     set('lbPrl', '$' + fmt(t.last, 3)); set('lbPrlCh', (ch >= 0 ? '▲ +' : '▼ ') + fmt(ch, 1) + '%', ch >= 0 ? 'up' : 'dn');
   }).catch(function () {});
+})();
+</script>
+
+<script>
+/* hot window demo: calm, then ignite when in view, hold 9 s, cool 2.5 s, repeat */
+(function(){
+  var d = document.querySelector('.hotdash'); if (!d || !('IntersectionObserver' in window)) return;
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  d.classList.add('armed');
+  var t = null, vis = false;
+  function ignite(){ d.classList.add('lit','shake'); setTimeout(function(){ d.classList.remove('shake'); }, 420); t = setTimeout(cool, 9000); }
+  function cool(){ d.classList.remove('lit'); t = setTimeout(function(){ t = null; if (vis) ignite(); }, 2500); }
+  new IntersectionObserver(function(es){ es.forEach(function(e){
+    vis = e.isIntersecting && e.intersectionRatio > .45;
+    if (vis && !d.classList.contains('lit') && !t) t = setTimeout(function(){ t = null; ignite(); }, 900);
+    if (!vis){ clearTimeout(t); t = null; d.classList.remove('lit'); }
+  }); }, { threshold: [0, .45, .8] }).observe(d);
 })();
 </script>

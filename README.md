@@ -104,6 +104,7 @@ Ten models, one decision every 2 seconds.
 | Least privilege | Linux services run as a no-login account with `ProtectSystem=strict`, `NoNewPrivileges`, `MemoryDenyWriteExecute` and an empty capability set. |
 | Network exposure | Outbound HTTPS to a short published host list. No listening ports; HUGINN binds to loopback and is published only through Tailscale. |
 | Audit trail | Every decision is appended to `odin_audit.jsonl` as a SHA-256 hash chain. `odin --verify-audit` detects any edited, deleted or reordered entry; the JSON lines feed Loki, Splunk or Elastic. |
+| Secrets at rest | API keys, secrets and passwords sealed with Windows DPAPI on first start, bound to the operator's account; owner-only file on Linux. |
 | Licensing | Ed25519-signed offline licence files, machine-bound or site-wide, verified locally. Air-gapped sites never contact a licence server. |
 | Supply chain | Binaries are built by GitHub Actions from tagged source. Every release ships `SHA256SUMS.txt`; the Linux installer refuses a mismatch. |
 
@@ -167,6 +168,10 @@ Enterprise structures (annual site licence, base plus performance, perpetual bin
 **Procurement:** e-mail [schancellor007@gmail.com](mailto:schancellor007@gmail.com?subject=ODIN%20Suite%20licence) with the tier and site size. Licences are paid in Bitcoin; the key is issued by e-mail after one confirmation and activated with `odin --activate KEY` or in the installer.
 
 ---
+
+## Built by an operator
+
+ODIN Suite is engineered by **Steve Chancellor**, a former **U.S. Navy Operations Specialist**, **Search and Rescue swimmer** and **VBSS** (Visit, Board, Search and Seizure) team member. It runs on the same three rules: **own the picture** (read every market before committing a sat), **verify, then trust** (reconcile every order against what the pool credited) and **protect the mission** (kill switches, spend caps and auto-stops come first).
 
 <sub>ODIN Suite is proprietary software licensed under the ODIN Suite End-User License Agreement (`LICENSE`, included in every release). Source code is not public. Trading hashrate involves risk of loss; ODIN Suite is infrastructure software and not financial advice. Not affiliated with NiceHash, Braiins, MiningRigRentals, Clore.ai, Kryptex, Bitmain, MicroBT, Canaan or the Bitaxe project.</sub>
 
