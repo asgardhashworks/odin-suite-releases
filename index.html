@@ -209,7 +209,8 @@ section.band > .wrap { padding-block: 80px; display: grid; gap: 40px; }
 /* phones */
 .phones { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
 .phone { margin: 0; display: grid; gap: 12px; min-width: 0; }
-.phone .frame { border: 1px solid var(--line); background: #000; padding: 8px; aspect-ratio: 9 / 16; max-width: 100%; overflow: hidden; }
+.phone .frame { border: 1px solid var(--gold-lo); border-radius: 26px; background: linear-gradient(145deg, #2b2b2b, #0d0d0d 40%, #1a1a1a); padding: 9px; aspect-ratio: 9 / 18; max-width: 100%; overflow: hidden; box-shadow: 0 0 0 1px #000, 0 24px 60px rgba(0,0,0,.7), 0 0 40px rgba(216,170,69,.14); }
+.phone .frame img { border-radius: 18px; }
 .phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
 .phone figcaption { font: 500 12px/1.4 var(--mono); color: var(--dim); letter-spacing: .06em; text-transform: uppercase; }
 .phone figcaption b { color: var(--fg); font-weight: 500; }
@@ -307,7 +308,7 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
 .nc { text-transform: none; }
 /* footage in module cards */
 .clip { position: relative; aspect-ratio: 16 / 9; background: #000; border: 1px solid var(--line); overflow: hidden; }
-.clip video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.clip video, .clip img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .clip .lbl { position: absolute; left: 8px; top: 8px; font: 500 10px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--amber); background: rgba(7,8,9,.8); padding: 5px 7px; border: 1px solid var(--gold-lo); }
 /* markets */
 .mkts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: start; }
@@ -399,6 +400,14 @@ section[id], [id].band { scroll-margin-top: 110px; }
   h2 { font-size: clamp(28px, 8vw, 36px); line-height: 1.08; }
   .eyebrow { line-height: 1.6; }
 }
+
+/* live market bar (very top) */
+.livebar { position: relative; z-index: 6; overflow: hidden; background: linear-gradient(90deg, #120e05, #0b0a08 50%, #120e05); border-bottom: 1px solid var(--gold-lo); -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); }
+.livebar-in { display: flex; width: max-content; animation: tick 46s linear infinite; }
+.livebar span { font: 500 11.5px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--dim); padding: 9px 20px; white-space: nowrap; }
+.livebar span b { color: var(--fg); font-weight: 600; margin-left: 6px; } .livebar span i { font-style: normal; margin-left: 6px; }
+.livebar .lv { color: #2fe07a; } .livebar .up { color: #2fe07a; } .livebar .dn { color: #ff5a6a; } .livebar .g { color: var(--amber); }
+@media (prefers-reduced-motion: reduce) { .livebar-in { animation: none; } }
 
 /* traffic counter (footer) */
 footer .hits { display: inline-flex; align-items: center; gap: 10px; margin-left: auto; }
@@ -505,6 +514,9 @@ footer .hits img { display: block; height: 20px; width: auto; }
 }
 </style>
 
+<div class="livebar" aria-label="Live market data"><div class="livebar-in" id="livebarIn">
+  <span class="lv">● LIVE MARKETS</span><span>BTC<b id="lbBtc">—</b></span><span>Next difficulty<b id="lbDiff">—</b></span><span>Hashprice<b id="lbHp">—</b></span><span>PEARL<b id="lbPrl">—</b><i id="lbPrlCh"></i></span><span class="g">◆ NiceHash · live</span><span class="g">◆ Braiins · watch</span><span class="g">◆ MiningRigRentals · watch</span><span class="g">◆ Clore GPU spot · watch</span><span>Engineered in Rust · Windows · Ubuntu · Debian</span>
+</div></div>
 <header class="top">
   <div class="wrap nav">
     <a class="brand" href="#top" aria-label="ODIN Suite home">
@@ -735,7 +747,7 @@ odin --market nicehash live      <span class="c"># resume</span></div>
           </ul>
         </article>
         <article class="mod">
-          <div class="clip"><video data-auto src="media/clip-sleipnir.mp4" poster="media/clip-sleipnir.jpg" muted loop playsinline preload="none" aria-label="SLEIPNIR supervising miners"></video><span class="lbl">Live · fleet</span></div>
+          <div class="clip"><img src="media/card-sleipnir.jpg" alt="SLEIPNIR fleet console: every miner supervised, with hashrate, temperatures and restarts" loading="lazy"><span class="lbl">Live · fleet</span></div>
           <span class="code">SLEIPNIR · SUPERVISION</span>
           <h3>Miner supervisor</h3>
           <p>Starts your miners at boot, restarts any that crash, freeze or slow down, and alerts you before hardware cooks.</p>
@@ -747,7 +759,7 @@ odin --market nicehash live      <span class="c"># resume</span></div>
           </ul>
         </article>
         <article class="mod">
-          <div class="clip"><video data-auto src="media/clip-huginn.mp4" poster="media/clip-huginn.jpg" muted loop playsinline preload="none" aria-label="HUGINN phone dashboard"></video><span class="lbl">Live · phone</span></div>
+          <div class="clip"><img src="media/card-huginn.jpg" alt="HUGINN phone dashboard showing verified profit and loss, the order and the profit window" loading="lazy"><span class="lbl">Live · phone</span></div>
           <span class="code">HUGINN · RECON</span>
           <h3>Phone dashboard</h3>
           <p>Trading and farm status on your phone over a private Tailscale link. Read-only by design.</p>
@@ -785,9 +797,9 @@ odin --market nicehash live      <span class="c"># resume</span></div>
         <h2>The whole farm in your pocket.</h2>
       </div>
       <div class="phones">
-        <figure class="phone"><div class="frame"><img src="huginn-odin_1.png" alt="HUGINN trading tab showing ODIN's order and decision" loading="lazy"></div><figcaption><b>Trading</b> · order, lock and profit guard</figcaption></figure>
-        <figure class="phone"><div class="frame"><img src="huginn-console.png" alt="HUGINN farm tab in console view" loading="lazy"></div><figcaption><b>Farm console</b> · every unit, one line each</figcaption></figure>
-        <figure class="phone"><div class="frame"><img src="huginn-cards.png" alt="HUGINN farm tab in card view" loading="lazy"></div><figcaption><b>Farm cards</b> · temps, power, shares</figcaption></figure>
+        <figure class="phone"><div class="frame"><img src="media/huginn-odin-gold.jpg" alt="HUGINN trading tab showing ODIN's order and decision" loading="lazy"></div><figcaption><b>Trading</b> · order, lock and profit guard</figcaption></figure>
+        <figure class="phone"><div class="frame"><img src="media/huginn-console-gold.jpg" alt="HUGINN farm tab in console view" loading="lazy"></div><figcaption><b>Farm console</b> · every unit, one line each</figcaption></figure>
+        <figure class="phone"><div class="frame"><img src="media/huginn-cards-gold.jpg" alt="HUGINN farm tab in card view" loading="lazy"></div><figcaption><b>Farm cards</b> · temps, power, shares</figcaption></figure>
       </div>
       <p class="sample mono">Screenshots use sample data.</p>
     </div>
@@ -1148,5 +1160,34 @@ odin --verify-audit odin_audit.jsonl   <span class="c"># AUDIT OK · hash chain 
   for (var i = 0; i < 120; i++) { if (A) cusumStep(); if (B) dipStep(); if (Cv) fillStep(); }
   if (A) cusumDraw(); if (B) dipDraw(); if (Cv) fillDraw();
   if (!still) setInterval(frame, 90);
+})();
+</script>
+
+<script>
+/* live market bar: public APIs fetched by the visitor's browser; the bar still reads well if any are blocked */
+(function () {
+  var inner = document.getElementById('livebarIn'); if (!inner) return;
+  inner.innerHTML += inner.innerHTML; // second copy for a seamless loop
+  var seen = {};
+  inner.querySelectorAll('[id^="lb"]').forEach(function (e) { if (seen[e.id]) { e.setAttribute('data-dup', e.id); e.removeAttribute('id'); } else seen[e.id] = 1; });
+  function set(id, txt, cls) { document.querySelectorAll('#' + id + ', [data-dup="' + id + '"]').forEach(function (e) { e.textContent = txt; if (cls) e.className = cls; }); }
+  var fmt = function (n, d) { return Number(n).toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d }); };
+  var get = function (u) { return fetch(u).then(function (r) { if (!r.ok) throw r.status; return r.json(); }); };
+  get('https://mempool.space/api/v1/prices').then(function (p) {
+    if (!p.USD) return; set('lbBtc', '$' + fmt(p.USD, 0));
+    return Promise.all([get('https://mempool.space/api/v1/mining/hashrate/3d'), get('https://mempool.space/api/v1/mining/reward-stats/144')]).then(function (a) {
+      var d = a[0].currentDifficulty, reward = Number(a[1].totalReward) / 1e8 / 144;
+      var btcPerPhDay = 86400 * reward * 1e15 / (d * 4294967296);
+      set('lbHp', '$' + fmt(btcPerPhDay * p.USD, 2) + ' / PH / day');
+    });
+  }).catch(function () {});
+  get('https://mempool.space/api/v1/difficulty-adjustment').then(function (j) {
+    var d = j.difficultyChange, days = (j.remainingTime || 0) / 86400000;
+    set('lbDiff', (d >= 0 ? '+' : '') + fmt(d, 1) + '% in ' + fmt(days, 1) + ' d', d >= 0 ? 'dn' : 'up');
+  }).catch(function () {});
+  get('https://safetrade.com/api/v2/peatio/public/markets/pearlusdt/tickers').then(function (j) {
+    var t = j.ticker; if (!t) return; var ch = parseFloat(String(t.price_change_percent).replace('%', ''));
+    set('lbPrl', '$' + fmt(t.last, 3)); set('lbPrlCh', (ch >= 0 ? '▲ +' : '▼ ') + fmt(ch, 1) + '%', ch >= 0 ? 'up' : 'dn');
+  }).catch(function () {});
 })();
 </script>

@@ -1,53 +1,34 @@
 <p align="center">
-  <img src="asgard-avatar.png" width="104" alt="Asgard Hashworks">
-</p>
-
-<h1 align="center">ODIN Suite</h1>
-
-<p align="center">
-  <b>Quantitative hashrate execution and fleet supervision platform</b><br>
-  Engineered in Rust by Asgard Hashworks · Windows 10/11 · Ubuntu 22.04+ · Debian 12+
+  <img src="assets/banner.png" alt="ODIN Suite by Asgard Hashworks: hashrate execution, fleet supervision, verified performance" width="100%">
 </p>
 
 <p align="center">
-  <a href="https://github.com/asgardhashworks/odin-suite-releases/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/asgardhashworks/odin-suite-releases?style=flat-square&label=release&color=d8aa45&labelColor=111315"></a>
-  <img alt="Platforms" src="https://img.shields.io/badge/platforms-Windows%20%7C%20Ubuntu%20%7C%20Debian-d8aa45?style=flat-square&labelColor=111315">
-  <img alt="Language" src="https://img.shields.io/badge/engineered%20in-Rust-d8aa45?style=flat-square&labelColor=111315">
-  <img alt="License" src="https://img.shields.io/badge/license-proprietary-555?style=flat-square&labelColor=111315">
-  <img alt="Repository views (today / total)" src="https://hits.sh/github.com/asgardhashworks/odin-suite-releases.svg?view=today-total&label=views&color=d8aa45&labelColor=111315&style=flat-square">
+  <a href="https://github.com/asgardhashworks/odin-suite-releases/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/asgardhashworks/odin-suite-releases?style=for-the-badge&label=release&color=d8aa45&labelColor=0b0b0b"></a>
+  <img alt="Platforms" src="https://img.shields.io/badge/Windows%20%C2%B7%20Ubuntu%20%C2%B7%20Debian-supported-d8aa45?style=for-the-badge&labelColor=0b0b0b">
+  <img alt="Engineered in Rust" src="https://img.shields.io/badge/engineered%20in-Rust-d8aa45?style=for-the-badge&labelColor=0b0b0b">
+  <img alt="Repository views" src="https://hits.sh/github.com/asgardhashworks/odin-suite-releases.svg?view=today-total&label=views&color=d8aa45&labelColor=0b0b0b&style=for-the-badge">
 </p>
 
 <p align="center">
-  <a href="https://asgardhashworks.github.io/odin-suite-releases/"><b>Website</b></a> ·
-  <a href="https://github.com/asgardhashworks/odin-suite-releases/releases/latest"><b>Download</b></a> ·
-  <a href="ODIN_Suite_Enterprise_Brief.pdf"><b>Enterprise Brief</b></a> ·
-  <a href="ODIN_Suite_Architecture_Security_Whitepaper.pdf"><b>Security Whitepaper</b></a> ·
-  <a href="ODIN_Suite_Linux_Deployment_Guide.pdf"><b>Linux Runbook</b></a>
+  <a href="https://asgardhashworks.github.io/odin-suite-releases/"><b>WEBSITE</b></a> &nbsp;·&nbsp;
+  <a href="https://github.com/asgardhashworks/odin-suite-releases/releases/latest"><b>DOWNLOAD</b></a> &nbsp;·&nbsp;
+  <a href="ODIN_Suite_Enterprise_Brief.pdf"><b>ENTERPRISE BRIEF</b></a> &nbsp;·&nbsp;
+  <a href="ODIN_Suite_Architecture_Security_Whitepaper.pdf"><b>SECURITY WHITEPAPER</b></a> &nbsp;·&nbsp;
+  <a href="ODIN_Suite_Linux_Deployment_Guide.pdf"><b>LINUX RUNBOOK</b></a> &nbsp;·&nbsp;
+  <a href="SECURITY.md"><b>SECURITY POLICY</b></a>
 </p>
 
----
+<img src="assets/h01.png" alt="01 Overview" width="100%">
 
-## Overview
+ODIN Suite is an on-premises operations platform for Bitcoin mining capital. It procures SHA-256 hashrate on open markets only when the price clears a verified margin, supervises the physical fleet behind it, and delivers read-only telemetry to the operator's phone. Every component runs inside the operator's own network: API credentials never leave it and no inbound ports are opened.
 
-ODIN Suite is an on-premises operations platform for Bitcoin mining capital. It procures SHA-256 hashrate on open markets only when the price clears a verified margin, supervises the physical fleet behind it, and delivers read-only telemetry to the operator's phone. Every component runs inside the operator's own network; API credentials never leave it and no inbound ports are opened.
-
-The platform is built for one disciplined rule: **capital is committed only when the mathematics justify it, and every outcome is verified against what the pool actually pays.**
+> **Operating doctrine.** Capital is committed only when the mathematics justify it, and every outcome is verified against what the pool actually pays.
 
 | Component | Role | Function |
 | --- | --- | --- |
 | **ODIN** | Execution engine | Re-prices every 2 seconds against live network economics. Eight self-calibrating models decide price, size and timing; a profit guard parks capital whenever the market trades above break-even. |
-| **SLEIPNIR** | Fleet supervision | Concurrent polling of GPUs, CPUs and ASICs from one rig to industrial sites. Automatic recovery of failed miners; thermal and power alerting down to hotspot, VRAM and chip level. |
+| **SLEIPNIR** | Fleet supervision | Concurrent polling of GPUs, CPUs and ASICs from one rig to industrial sites. Automatic recovery; thermal and power alerting down to hotspot, VRAM and chip level. |
 | **HUGINN** | Operator telemetry | Read-only mobile console over a private Tailscale link. It cannot place, modify or cancel anything, by design. |
-| **FREKI** | Optional | Build notes for a 0% developer-fee CPU miner. |
-
-<p align="center">
-  <img src="huginn-odin_1.png" width="250" alt="HUGINN: execution view">
-  <img src="huginn-console.png" width="250" alt="HUGINN: fleet console">
-  <img src="huginn-cards.png" width="250" alt="HUGINN: fleet cards">
-</p>
-<p align="center"><sub>HUGINN operator console. Screenshots use sample data.</sub></p>
-
-## Platform support
 
 | Operating system | Architecture | Service model | Status |
 | --- | --- | --- | --- |
@@ -55,9 +36,23 @@ The platform is built for one disciplined rule: **capital is committed only when
 | Ubuntu 22.04 LTS and later | x86_64 | Sandboxed `systemd` units, dedicated no-login service account | Supported |
 | Debian 12 and later | x86_64 | Sandboxed `systemd` units, dedicated no-login service account | Supported |
 
-## Market connectivity
+<p align="center"><img src="assets/website.png" alt="ODIN Suite website" width="100%"></p>
 
-One income model prices every venue, fees included. Each venue is switched between `off`, `watch` and `live` while the engine runs, and the change takes effect within one 2-second cycle.
+<img src="assets/h02.png" alt="02 Architecture" width="100%">
+
+<p align="center"><img src="assets/architecture.png" alt="Architecture: hashrate markets feed the ODIN execution engine, hashrate settles at the operator's pool, and verified P/L reconciles pool credits against market billing, all inside the operator's perimeter" width="100%"></p>
+
+<img src="assets/h03.png" alt="03 Live console" width="100%">
+
+The execution console is a single screen: KPI strip, income model, order planner, learning engine, market router, risk limits, fleet status and the live order book.
+
+<p align="center"><img src="assets/console-engine.png" alt="ODIN v13.15 console: KPI strip, profit and forecast, order planner, treasury, learning engine, markets, risk and protection" width="100%"></p>
+<p align="center"><img src="assets/console-orderbook.png" alt="ODIN v13.15 console: SLEIPNIR fleet, live NiceHash order book, decision and positions" width="100%"></p>
+<p align="center"><sub>ODIN v13.15 on Windows Terminal. Sample data; order identifiers masked.</sub></p>
+
+<img src="assets/h04.png" alt="04 Markets" width="100%">
+
+One income model prices every venue, fees included. Each venue switches between `off`, `watch` and `live` while the engine runs, and the change applies within one 2-second cycle. Profit windows on any venue raise one phone push and one e-mail per window, stating whether ODIN is executing or the operator must act.
 
 | Venue | Instrument | Mode | Notes |
 | --- | --- | --- | --- |
@@ -65,9 +60,7 @@ One income model prices every venue, fees included. Each venue is switched betwe
 | **Braiins Hashpower** | Spot bids, BTC/EH/day | Watch | Learns its own fill curve and keeps a shadow P/L. Live execution follows Braiins API v2 access. |
 | **MiningRigRentals** | Fixed-term rentals, SHA256 Asicboost and SHA-256 | Watch | Rent-or-skip engine: scores every rig ≥ 7 PH/s on delivered hashrate, post-retarget price and fundable hours. |
 
-Profit windows on any venue raise a single phone push and e-mail per window, stating whether ODIN is executing or the operator must act.
-
-## Quantitative engine
+<img src="assets/h05.png" alt="05 Quantitative engine" width="100%">
 
 | Model | Method |
 | --- | --- |
@@ -80,7 +73,9 @@ Profit windows on any venue raise a single phone push and e-mail per window, sta
 | Fill curve | Isotonic regression of served share versus distance from the clearing price. |
 | Walk-forward validation | `odin --optimize` replays recorded markets with no look-ahead; a setting is adopted only if it wins out of sample. |
 
-## Risk controls
+<img src="assets/h06.png" alt="06 Risk and security" width="100%">
+
+**Risk controls**
 
 - Hard price ceiling, step-limited raises and chase detection.
 - Daily spend and daily loss kill switches; a tripped switch survives restarts until cleared by the operator.
@@ -88,7 +83,7 @@ Profit windows on any venue raise a single phone push and e-mail per window, sta
 - Verified P/L: hashrate billed by the market is reconciled against what the pool credits.
 - Every installation starts in watch-only mode (`DRY_RUN=1`). Nothing trades until the operator enables it.
 
-## Security posture
+**Security posture**
 
 | Control | Implementation |
 | --- | --- |
@@ -99,9 +94,13 @@ Profit windows on any venue raise a single phone push and e-mail per window, sta
 | Licensing | Ed25519-signed offline licence files, machine-bound or site-wide, verified locally. Air-gapped sites never contact a licence server. |
 | Supply chain | Binaries are built by GitHub Actions from tagged source. Every release ships `SHA256SUMS.txt`; the Linux installer refuses a mismatch. |
 
-Vulnerability reports: see [SECURITY.md](SECURITY.md).
+Vulnerability reports: [SECURITY.md](SECURITY.md) · Support channels and response targets: [SUPPORT.md](SUPPORT.md)
 
-## Deployment
+<img src="assets/h07.png" alt="07 Operator telemetry" width="100%">
+
+<p align="center"><img src="assets/huginn.png" alt="HUGINN on a phone: execution view, fleet console, fleet cards and Clore GPU spot" width="100%"></p>
+
+<img src="assets/h08.png" alt="08 Deployment" width="100%">
 
 **Linux (Ubuntu 22.04+ / Debian 12+)**
 
@@ -120,7 +119,7 @@ The [Linux Deployment & Hardening Guide](ODIN_Suite_Linux_Deployment_Guide.pdf) 
 2. Run **`Install.bat`**. The wizard installs ODIN, SLEIPNIR and LibreHardwareMonitor; sets starting limits for the site size; registers the NiceHash key (withdrawals off) and pool; discovers GPUs, CPUs and ASICs; and configures push alerts, auto-start and optional Tailscale access.
 3. Operate in watch-only mode for at least one day, then set `DRY_RUN=0` in `C:\ODIN-Suite\odin\odin.env`.
 
-## Supported hardware
+**Supported hardware**
 
 | Class | Interface | Recovery |
 | --- | --- | --- |
@@ -129,7 +128,7 @@ The [Linux Deployment & Hardening Guide](ODIN_Suite_Linux_Deployment_Guide.pdf) 
 | Industrial ASICs: Antminer, Whatsminer, Avalon, Braiins OS, LuxOS | cgminer API, TCP 4028 | Monitor and alert; never power-cycled |
 | Compact ASICs: Bitaxe, NerdQAxe and other AxeOS devices | AxeOS HTTP API | Device restart call |
 
-## Documentation
+**Documentation**
 
 | Document | Audience |
 | --- | --- |
@@ -138,7 +137,7 @@ The [Linux Deployment & Hardening Guide](ODIN_Suite_Linux_Deployment_Guide.pdf) 
 | [Linux Deployment & Hardening Guide](ODIN_Suite_Linux_Deployment_Guide.pdf) · 3 pages | Site operations, systems administration |
 | `docs/CONFIGURATION.md`, `docs/MARKETS.md`, `docs/ENTERPRISE.md`, `docs/HUGINN.md` | Included in every release package |
 
-## Commercial licensing
+<img src="assets/h09.png" alt="09 Licensing" width="100%">
 
 ODIN Suite is free to install and evaluate. Live execution is enabled by an ODIN Pro licence, which includes all updates, patches and support.
 
@@ -154,12 +153,8 @@ Enterprise structures (annual site licence, base plus performance, perpetual bin
 
 **Procurement:** e-mail [schancellor007@gmail.com](mailto:schancellor007@gmail.com?subject=ODIN%20Suite%20licence) with the tier and site size. Licences are paid in Bitcoin; the key is issued by e-mail after one confirmation and activated with `odin --activate KEY` or in the installer.
 
-## Engagement
+---
 
-Remote deployment and tuning is available for any scale, from a single rig to an industrial site. See [SUPPORT.md](SUPPORT.md) for channels and response targets.
+<sub>ODIN Suite is proprietary software licensed under the ODIN Suite End-User License Agreement (`LICENSE`, included in every release). Source code is not public. Trading hashrate involves risk of loss; ODIN Suite is infrastructure software and not financial advice. Not affiliated with NiceHash, Braiins, MiningRigRentals, Kryptex, Bitmain, MicroBT, Canaan or the Bitaxe project.</sub>
 
-## Legal
-
-ODIN Suite is proprietary software licensed under the ODIN Suite End-User License Agreement (`LICENSE`, included in every release). Source code is not public. Trading hashrate involves risk of loss; ODIN Suite is infrastructure software and not financial advice. Not affiliated with NiceHash, Braiins, MiningRigRentals, Kryptex, Bitmain, MicroBT, Canaan or the Bitaxe project.
-
-<p align="center"><sub>© 2026 Asgard Hashworks · Oklahoma, USA</sub></p>
+<p align="center"><sub><b>ASGARD HASHWORKS</b> · Oklahoma, USA · © 2026</sub></p>
