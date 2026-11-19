@@ -522,7 +522,7 @@ footer .hits img { display: block; height: 20px; width: auto; }
 </style>
 
 <div class="livebar" aria-label="Live market data"><div class="livebar-in" id="livebarIn">
-  <span class="lv">● LIVE MARKETS</span><span>BTC<b id="lbBtc">—</b></span><span>Next difficulty<b id="lbDiff">—</b></span><span>Hashprice<b id="lbHp">—</b></span><span>PEARL<b id="lbPrl">—</b><i id="lbPrlCh"></i></span><span class="g">◆ NiceHash · live</span><span class="g">◆ Braiins · watch</span><span class="g">◆ MiningRigRentals · watch</span><span class="g">◆ Clore GPU spot · watch + auto re-bid</span><span>Engineered in Rust · Windows · Ubuntu · Debian</span>
+  <span class="lv">● LIVE MARKETS</span><span>BTC<b id="lbBtc">—</b></span><span>Next difficulty<b id="lbDiff">—</b></span><span>Hashprice<b id="lbHp">—</b></span><span>PEARL<b id="lbPrl">—</b><i id="lbPrlCh"></i></span><span class="g">◆ NiceHash · live</span><span class="g">◆ Braiins · watch</span><span class="g">◆ MiningRigRentals · watch</span><span class="g">◆ Clore GPU spot · live</span><span>Engineered in Rust · Windows · Ubuntu · Debian</span>
 </div></div>
 <header class="top">
   <div class="wrap nav">
@@ -561,7 +561,7 @@ footer .hits img { display: block; height: 20px; width: auto; }
         <a class="ven lv" href="#markets"><i></i>NiceHash<span>LIVE</span></a>
         <a class="ven" href="#markets"><i></i>Braiins<span>WATCH</span></a>
         <a class="ven" href="#markets"><i></i>MiningRigRentals<span>WATCH</span></a>
-        <a class="ven" href="#markets"><i></i>Clore.ai<span>WATCH</span></a>
+        <a class="ven lv" href="#markets"><i></i>Clore.ai<span>LIVE</span></a>
       </div>
       <div class="facts"><span>Free to install</span><span>Keys stay on your machine</span><span>Starts in watch-only mode</span><span>Windows · Ubuntu · Debian</span></div>
     </div>
@@ -681,7 +681,7 @@ footer .hits img { display: block; height: 20px; width: auto; }
           <div class="ftile on lv"><div class="t">NiceHash <span class="state live">LIVE</span></div><p>Order book · bids every 2 s · 3% fee</p></div>
           <div class="ftile on"><div class="t">Braiins <span class="state watch">WATCH</span></div><p>Spot bids · 0% fee beta · live with API v2</p></div>
           <div class="ftile on"><div class="t">MiningRigRentals <span class="state watch">WATCH</span></div><p>Rent-or-skip · rigs ≥ 7 PH/s · Asicboost + SHA‑256</p></div>
-          <div class="ftile on"><div class="t">Clore.ai <span class="state watch">WATCH + GUARD</span></div><p>GPU spot rentals · Pearl or any Kryptex coin · paid in BTC · auto re-bid to your ceiling</p></div>
+          <div class="ftile on lv"><div class="t">Clore.ai <span class="state live">LIVE</span></div><p>GPU spot · live bids · auto re-bid to your ceiling · paid in BTC</p></div>
         </div>
         <svg class="wire" viewBox="0 0 110 344" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40 C 60 40, 50 172, 110 172"/><path d="M0 126 C 60 126, 50 172, 110 172"/><path d="M0 218 C 60 218, 50 172, 110 172"/><path d="M0 304 C 60 304, 50 172, 110 172"/></svg>
         <div class="down" aria-hidden="true">▼</div>
@@ -694,7 +694,7 @@ footer .hits img { display: block; height: 20px; width: auto; }
         <div class="mkt on"><div class="top"><h3>NiceHash</h3><span class="state live">LIVE</span></div><p>SHA256ASICBOOST order book, 3% buyer fee. The full engine: lock, park, pacing, dip speed.</p></div>
         <div class="mkt on"><div class="top"><h3>Braiins Hashpower</h3><span class="state watch">WATCH</span></div><p>Spot order book in the same BTC/EH/day unit, 0% fee during its beta. ODIN learns its fill curve, dip hours and market shifts, and keeps a shadow P/L. Live bidding follows once Braiins API v2 access opens.</p></div>
         <div class="mkt on"><div class="top"><h3>MiningRigRentals</h3><span class="state watch">WATCH</span></div><p>Fixed-term rentals, so ODIN runs a <b>rent-or-skip</b> engine instead of bidding. It reads MRR's SHA256 Asicboost and SHA-256 markets and scores every rig of 7 PH/s or more on delivered hashrate, its price after the next retarget and how many hours your balance can fund. A shadow P/L tracks every rental it would have taken until live renting is validated.</p></div>
-        <div class="mkt on"><div class="top"><h3>Clore.ai GPU spot</h3><span class="state watch">WATCH</span></div><p>Rents GPUs by the minute to mine on <b>your</b> pool. ODIN values every bitcoin-payable card at what Kryptex pays for it right now, on Pearl, any coin you choose or <b>AUTO</b>, net of pool, renter and creation fees and host power limits. It then reads each server's live bids and prices it at the bid that would actually <b>win</b>. Only servers that still clear your margin and reliability rules raise a <b>hot order</b> alert, with a one-tap link and the sats per day.</p><p><b>Order manager · live.</b> Once you rent, ODIN guards the order: outbid by another renter, it re-bids 1% over the rival within seconds, up to a <b>ceiling</b> worked out from what the cards actually earn, your margin rule and an absolute sats-per-day cap. While winning it steps the bid back down toward the rival, and if a running rental turns unprofitable for ten minutes it stops it. Every move is logged and pushed to your phone.</p></div>
+        <div class="mkt on"><div class="top"><h3>Clore.ai GPU spot</h3><span class="state live">LIVE</span></div><p>GPUs rented by the minute, mining on <b>your</b> pool. ODIN values every bitcoin-payable card at live Kryptex rates (Pearl, any coin or <b>AUTO</b>) net of every fee, prices it at the bid that would actually <b>win</b>, and raises a one-tap <b>hot order</b> when it clears your rules.</p><p>Once you rent, ODIN <b>guards the order live</b>: outbid, it re-bids 1% over the rival within seconds, up to a <b>ceiling</b> set by what the cards earn and your sats-per-day cap. Winning, it steps back down. Unprofitable for ten minutes, it stops.</p></div>
       </div>
       <div class="clip" style="max-width:760px"><video data-auto src="media/clip-markets-v4.mp4" poster="media/clip-markets-v4.jpg" muted loop playsinline preload="none" aria-label="Switching Braiins Hashpower, MiningRigRentals and Clore.ai on while ODIN runs"></video><span class="lbl">Hot switch</span></div>
       <div class="term"><span class="c"># switch markets while ODIN runs</span>
