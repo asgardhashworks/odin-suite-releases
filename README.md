@@ -59,7 +59,7 @@ Each venue connects through an adapter that translates its native instrument (or
 | Coverage | Algorithms and coins | Status |
 | --- | --- | --- |
 | SHA-256 hashrate | SHA256AsicBoost, SHA-256 | Live execution (NiceHash); watch (Braiins Hashpower, MiningRigRentals) |
-| GPU compute | Pearl or any coin Kryptex prices per GPU model; `AUTO` picks each card's best coin | Watch, with hot-order alerts (Clore.ai) |
+| GPU compute | Pearl or any coin Kryptex prices per GPU model; `AUTO` picks each card's best coin | Watch, hot-order alerts and live order guard (Clore.ai) |
 | Further algorithms | Scrypt, KawPow, kHeavyHash and others on NiceHash | Roadmap: same adapters, coin-revenue income model |
 
 | Venue | Instrument | Mode | Notes |
@@ -67,7 +67,7 @@ Each venue connects through an adapter that translates its native instrument (or
 | **NiceHash** | SHA256ASICBOOST order book | **Live** | Full execution: lock, park, budget pacing, dip sizing, kill switches. |
 | **Braiins Hashpower** | Spot bids, BTC/EH/day | Watch | Learns its own fill curve and keeps a shadow P/L. Live execution follows Braiins API v2 access. |
 | **MiningRigRentals** | Fixed-term rentals, SHA256 Asicboost and SHA-256 | Watch | Rent-or-skip engine: scores every rig ≥ 7 PH/s on delivered hashrate, post-retarget price and fundable hours. |
-| **Clore.ai** | GPU spot rentals, paid in BTC | Watch | Values every bitcoin-payable GPU at live Kryptex rates (Pearl, any coin, or each card's best), net of pool, renter and creation fees, start-up time and host power limits, then re-prices each candidate at the bid that would win its live auction. Hot-order alerts carry a direct server link, the winning bid and sats per day. |
+| **Clore.ai** | GPU spot rentals, paid in BTC | Watch | Values every bitcoin-payable GPU at live Kryptex rates (Pearl, any coin, or each card's best), net of pool, renter and creation fees, start-up time and host power limits, then re-prices each candidate at the bid that would win its live auction. Hot-order alerts carry a direct server link, the winning bid and sats per day. Rented orders are guarded: ODIN re-bids 1% over any rival up to a profit ceiling and an absolute sats/day cap, steps back down while winning, and stops a rental that runs unprofitable for 10 minutes. |
 
 <img src="assets/h05.png" alt="05 Quantitative engine" width="100%">
 
