@@ -22,13 +22,13 @@
 
 <img src="assets/h01.png" alt="01 Overview" width="100%">
 
-ODIN Suite is an on-premises operations platform for Bitcoin mining capital. It procures SHA-256 hashrate and GPU spot capacity on open markets only when the price clears a verified margin, supervises the physical fleet behind it, and delivers read-only telemetry to the operator's phone. Every component runs inside the operator's own network: API credentials never leave it and no inbound ports are opened.
+ODIN Suite is an on-premises execution platform for mining capital. Its engine, ODIN, connects to multiple compute marketplaces, normalises every venue's pricing into one unit of account (cost per day of verified output, fees and rival bids included), and commits capital only when the price clears a verified margin. The suite also supervises the physical fleet behind it and delivers read-only telemetry to the operator's phone. Every component runs inside the operator's own network: API credentials never leave it and no inbound ports are opened.
 
 > **Operating doctrine.** Capital is committed only when the mathematics justify it, and every outcome is verified against what the pool actually pays.
 
 | Component | Role | Function |
 | --- | --- | --- |
-| **ODIN** | Multi-venue execution engine | Re-prices every 2 seconds against live network economics. Eight self-calibrating models decide price, size and timing; a profit guard parks capital whenever the market trades above break-even. |
+| **ODIN** | Multi-venue execution engine | One income model, one risk layer and one audit trail across every connected venue. Re-prices every 2 seconds against live network economics; self-calibrating models decide price, size and timing; a profit guard parks capital whenever a market trades above break-even. |
 | **SLEIPNIR** | Fleet supervision | Concurrent polling of GPUs, CPUs and ASICs from one rig to industrial sites. Automatic recovery; thermal and power alerting down to hotspot, VRAM and chip level. |
 | **HUGINN** | Operator telemetry | Read-only mobile console over a private Tailscale link. It cannot place, modify or cancel anything, by design. |
 
@@ -50,20 +50,28 @@ The execution console is a single screen: KPI strip, income model, order planner
 
 <p align="center"><img src="assets/console-engine.png" alt="ODIN v13.17 console: KPI strip, profit and forecast, order planner, treasury, learning engine, markets, risk and protection" width="100%"></p>
 <p align="center"><img src="assets/console-orderbook.png" alt="ODIN v13.17 console: SLEIPNIR fleet, live NiceHash order book, decision and positions" width="100%"></p>
-<p align="center"><sub>ODIN v13.16 on Windows Terminal. Sample data; order identifiers masked.</sub></p>
+<p align="center"><sub>ODIN v13.17 on Windows Terminal. Sample data; order identifiers masked.</sub></p>
 
 <img src="assets/h04.png" alt="04 Markets" width="100%">
 
-One income model prices every venue, fees included. Each venue switches between `off`, `watch` and `live` while the engine runs, and the change applies within one 2-second cycle. Profit windows on any venue raise one phone push and one e-mail per window, stating whether ODIN is executing or the operator must act.
+Each venue connects through an adapter that translates its native instrument (order book, fixed-term rental or spot auction) into the engine's common cost model. Venues switch between `off`, `watch` and `live` while the engine runs; the change applies within one 2-second cycle. Profit windows on any venue raise one phone push and one e-mail per window, with a direct link to the instrument, stating whether ODIN is executing or the operator must act.
+
+| Coverage | Algorithms and coins | Status |
+| --- | --- | --- |
+| SHA-256 hashrate | SHA256AsicBoost, SHA-256 | Live execution (NiceHash); watch (Braiins Hashpower, MiningRigRentals) |
+| GPU compute | Pearl or any coin Kryptex prices per GPU model; `AUTO` picks each card's best coin | Watch, with hot-order alerts (Clore.ai) |
+| Further algorithms | Scrypt, KawPow, kHeavyHash and others on NiceHash | Roadmap: same adapters, coin-revenue income model |
 
 | Venue | Instrument | Mode | Notes |
 | --- | --- | --- | --- |
 | **NiceHash** | SHA256ASICBOOST order book | **Live** | Full execution: lock, park, budget pacing, dip sizing, kill switches. |
 | **Braiins Hashpower** | Spot bids, BTC/EH/day | Watch | Learns its own fill curve and keeps a shadow P/L. Live execution follows Braiins API v2 access. |
 | **MiningRigRentals** | Fixed-term rentals, SHA256 Asicboost and SHA-256 | Watch | Rent-or-skip engine: scores every rig ≥ 7 PH/s on delivered hashrate, post-retarget price and fundable hours. |
-| **Clore.ai** | GPU spot rentals, paid in BTC | Watch | Values every bitcoin-payable GPU at live Kryptex rates (Pearl, any coin, or each card's best), net of pool, renter and creation fees, start-up time and host power limits. Hot-order alerts give the server, spot bid and sats per day. |
+| **Clore.ai** | GPU spot rentals, paid in BTC | Watch | Values every bitcoin-payable GPU at live Kryptex rates (Pearl, any coin, or each card's best), net of pool, renter and creation fees, start-up time and host power limits, then re-prices each candidate at the bid that would win its live auction. Hot-order alerts carry a direct server link, the winning bid and sats per day. |
 
 <img src="assets/h05.png" alt="05 Quantitative engine" width="100%">
+
+Ten models, one decision every 2 seconds.
 
 | Model | Method |
 | --- | --- |
@@ -74,6 +82,8 @@ One income model prices every venue, fees included. Each venue switches between 
 | Dip sizing | Order speed scales with margin only once it clears the model's own error band. |
 | Change-point detection | Two-sided CUSUM on the clearing price; stale history is down-weighted on a regime shift. |
 | Fill curve | Isotonic regression of served share versus distance from the clearing price. |
+| Competitive bid pricing | Auction venues are valued at the best rival bid plus the venue's minimum increment, never at the listed floor; unverified prices cannot raise an alert. |
+| GPU valuation | Each rented card is valued per coin from measured hashrate and power, derated for host power limits, net of pool and venue fees. |
 | Walk-forward validation | `odin --optimize` replays recorded markets with no look-ahead; a setting is adopted only if it wins out of sample. |
 
 <img src="assets/h06.png" alt="06 Risk and security" width="100%">
@@ -158,6 +168,6 @@ Enterprise structures (annual site licence, base plus performance, perpetual bin
 
 ---
 
-<sub>ODIN Suite is proprietary software licensed under the ODIN Suite End-User License Agreement (`LICENSE`, included in every release). Source code is not public. Trading hashrate involves risk of loss; ODIN Suite is infrastructure software and not financial advice. Not affiliated with NiceHash, Braiins, MiningRigRentals, Kryptex, Bitmain, MicroBT, Canaan or the Bitaxe project.</sub>
+<sub>ODIN Suite is proprietary software licensed under the ODIN Suite End-User License Agreement (`LICENSE`, included in every release). Source code is not public. Trading hashrate involves risk of loss; ODIN Suite is infrastructure software and not financial advice. Not affiliated with NiceHash, Braiins, MiningRigRentals, Clore.ai, Kryptex, Bitmain, MicroBT, Canaan or the Bitaxe project.</sub>
 
 <p align="center"><sub><b>ASGARD HASHWORKS</b> · Oklahoma, USA · © 2026</sub></p>

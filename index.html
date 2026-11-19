@@ -13,7 +13,7 @@
 <meta property="og:image" content="https://asgardhashworks.github.io/odin-suite-releases/asgard-avatar.png">
 <meta property="og:url" content="https://asgardhashworks.github.io/odin-suite-releases/">
 <meta name="description" content="ODIN Suite by Asgard Hashworks: a self-learning multi-venue execution engine for hashrate on NiceHash, Braiins Hashpower and MiningRigRentals, plus Clore.ai GPU spot rentals, miner supervision and a read-only phone dashboard. Windows and Linux.">
-<meta property="og:video" content="https://asgardhashworks.github.io/odin-suite-releases/media/odin-commercial-v8.mp4">
+<meta property="og:video" content="https://asgardhashworks.github.io/odin-suite-releases/media/odin-commercial-v9.mp4">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
@@ -291,7 +291,7 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
 .ticker span b { color: var(--amber); font-weight: 500; margin-right: 8px; }
 @keyframes tick { to { transform: translateX(-50%); } }
 /* engine section */
-.models { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--line); }
+.models { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border: 1px solid var(--line); }
 .model { padding: 20px 18px; display: grid; gap: 8px; align-content: start; min-width: 0; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); position: relative; }
 .model:nth-child(4n) { border-right: 0; }
 .model:nth-last-child(-n+4) { border-bottom: 0; }
@@ -545,7 +545,7 @@ footer .hits img { display: block; height: 20px; width: auto; }
     <div>
       <div class="eyebrow"><b>// OPS</b> Multi-venue execution engine · Rust · Windows · Ubuntu · Debian</div>
       <h1>Run your mining farm like an <em>operations center</em>.</h1>
-      <p class="lead">ODIN Suite buys hashrate with a quantitative engine that adapts to the live market: NiceHash today, with Braiins Hashpower, MiningRigRentals and Clore.ai GPU spot rentals priced by the same model. It re-prices every 2 seconds, checks its own math against what your pool actually pays, and spends hardest where the margin is widest. It also supervises every miner you own, and the whole operation fits on your phone. Same software for one GPU in a spare room or a warehouse of ASICs.</p>
+      <p class="lead">ODIN Suite is a multi-venue execution engine for mining capital. It prices SHA-256 hashrate and rented GPU compute on four marketplaces (NiceHash, Braiins Hashpower, MiningRigRentals and Clore.ai) in one unit of account, and commits capital only where the margin clears your rules. It re-prices every 2 seconds, values every rival bid before it counts a deal, checks its own math against what your pool actually pays, and spends hardest where the margin is widest. It also supervises every miner you own, and the whole operation fits on your phone. Same software for one GPU in a spare room or a warehouse of ASICs.</p>
       <div class="cta">
         <a class="btn solid" href="https://github.com/asgardhashworks/odin-suite-releases/releases/latest" target="_blank" rel="noopener">Download free</a>
         <a class="btn" href="#plans">See plans</a>
@@ -588,7 +588,7 @@ footer .hits img { display: block; height: 20px; width: auto; }
   <section class="film" id="film" aria-label="ODIN Suite film">
     <div class="wrap">
       <div class="film-frame">
-        <video id="filmVid" src="media/odin-commercial-v8.mp4" poster="media/odin-commercial-v8.jpg" autoplay muted loop playsinline preload="metadata" aria-label="ODIN Suite commercial: the order book, the learning engine, NiceHash, Braiins and MiningRigRentals, SLEIPNIR and HUGINN"></video>
+        <video id="filmVid" src="media/odin-commercial-v9.mp4" poster="media/odin-commercial-v9.jpg" autoplay muted loop playsinline preload="metadata" aria-label="ODIN Suite commercial: the order book, the learning engine, NiceHash, Braiins and MiningRigRentals, SLEIPNIR and HUGINN"></video>
       </div>
       <div class="film-bar">
         <span class="eyebrow"><b class="rec">REC</b> ODIN Suite · 68 s · live footage, real algorithms, sound on for the voice</span>
@@ -636,7 +636,7 @@ footer .hits img { display: block; height: 20px; width: auto; }
     <div class="wrap">
       <div class="sec-head">
         <div class="eyebrow"><b>// 00</b> The engine</div>
-        <h2>Eight models. One decision every 2 seconds.</h2>
+        <h2>Ten models. One decision every 2 seconds.</h2>
         <p class="lead">Every number ODIN can measure, it measures on your own account: the pool's payout delay, the price cut NiceHash accepts, the fill rate at each price, the dip hours, and the regime the market is in. Every number it has to estimate carries its uncertainty into the decision.</p>
       </div>
       <div class="models">
@@ -648,6 +648,8 @@ footer .hits img { display: block; height: 20px; width: auto; }
         <div class="model"><span class="k">06 · CUSUM</span><h3>Change-point alarm</h3><div class="eq">S⁺ = max(0, S⁺ + z − k) &gt; h</div><p>Detects when the market jumps to a new level and down-weights stale history immediately.</p></div>
         <div class="model"><span class="k">07 · FILL CURVE</span><h3>How much really fills</h3><div class="eq">q(gap) = isotonic( served / limit )</div><p>Learns the share of each order served at each distance from the clearing price.</p></div>
         <div class="model"><span class="k">08 · VALIDATION</span><h3>Walk-forward tuning</h3><div class="eq">replay · no look-ahead · 2 halves</div><p>Replays your own recorded market, and adopts a setting only if it wins out of sample.</p></div>
+        <div class="model"><span class="k">09 · AUCTION</span><h3>Priced to win</h3><div class="eq">p* = max(floor, (1+ε)·max bids)</div><p>Auction venues are valued at the bid that would actually win, never the listed floor. Unverified prices can't raise an alert.</p></div>
+        <div class="model"><span class="k">10 · GPU VALUE</span><h3>Every card, every coin</h3><div class="eq">v = maxₖ rₖ · min(1, PL/W) · (1−fee)</div><p>Each rented card valued per coin from measured hashrate and power, derated for host power limits.</p></div>
       </div>
       <div class="viz">
         <figure class="vz" style="margin:0"><div class="con-head"><span>CUSUM · change-points</span><span class="sim">SIM</span></div><canvas id="vzCusum" aria-label="Animated simulation: clearing price with a CUSUM detector flagging a level shift"></canvas><figcaption class="cap"><b>Market shift detected.</b> When the clearing price settles at a new level, ODIN discounts the old fill history.</figcaption></figure>
@@ -661,9 +663,9 @@ footer .hits img { display: block; height: 20px; width: auto; }
   <section class="band" id="markets">
     <div class="wrap">
       <div class="sec-head">
-        <div class="eyebrow"><b>// MARKETS</b> Multi-market · hot switch</div>
+        <div class="eyebrow"><b>// MARKETS</b> Venue-neutral · algorithm-agnostic · hot switch</div>
         <h2>One engine. Every market.</h2>
-        <p class="lead">ODIN prices every hashrate market with the same income model, fees included, and keeps separate learning for each. Turn a market on, off or live while ODIN runs, and the change applies within one 2-second cycle. ODIN tells you where new money earns more, and never moves it for you. More venues plug into the same learning core as their APIs allow.</p>
+        <p class="lead">Every venue plugs into the same core: one income model, one risk layer, one audit trail. ODIN converts each market's pricing, whether a SHA-256 order book, a fixed-term rental or a GPU spot auction, into what it really costs per day of verified output, fees and rival bids included, and keeps separate learning for each. SHA-256 hashrate is live today; rented GPUs are valued on Pearl or any coin Kryptex prices; further algorithms plug into the same adapters as their data allows. Turn a market off, watch or live while ODIN runs; the change applies within one 2-second cycle. ODIN tells you where new money earns more, and never moves it for you.</p>
       </div>
       <div class="flow" role="img" aria-label="NiceHash, Braiins Hashpower, MiningRigRentals and Clore.ai feed one ODIN engine, which sends the hashrate to your own pool">
         <div class="flow-ven">
@@ -683,7 +685,7 @@ footer .hits img { display: block; height: 20px; width: auto; }
         <div class="mkt on"><div class="top"><h3>NiceHash</h3><span class="state live">LIVE</span></div><p>SHA256ASICBOOST order book, 3% buyer fee. The full engine: lock, park, pacing, dip speed.</p></div>
         <div class="mkt on"><div class="top"><h3>Braiins Hashpower</h3><span class="state watch">WATCH</span></div><p>Spot order book in the same BTC/EH/day unit, 0% fee during its beta. ODIN learns its fill curve, dip hours and market shifts, and keeps a shadow P/L. Live bidding follows once Braiins API v2 access opens.</p></div>
         <div class="mkt on"><div class="top"><h3>MiningRigRentals</h3><span class="state watch">WATCH</span></div><p>Fixed-term rentals, so ODIN runs a <b>rent-or-skip</b> engine instead of bidding. It reads both of MRR's Bitcoin markets, SHA256 Asicboost (the large one, about 64 EH/s listed) and SHA-256, and scores every rig on delivered hashrate (measured, or MRR's RPI for idle rigs), its price after the next retarget, and how many hours your balance can fund. It only considers rigs of 7 PH/s or more, because in our own test rentals those were the ones that delivered in full. ODIN keeps a shadow P/L of every rental it would have taken, and live renting follows once that engine has been validated.</p></div>
-        <div class="mkt on"><div class="top"><h3>Clore.ai GPU spot</h3><span class="state watch">WATCH</span></div><p>Rents other people's GPUs by the minute to mine on <b>your</b> pool. ODIN reads every bitcoin-payable server on the Clore marketplace, values each card at what Kryptex pays for it right now, on Pearl or whichever coin you choose (or <b>AUTO</b>: each card's best coin), and nets out the 3% pool fee, Clore's renter and creation fees, start-up time and any host power limit. A server only counts when it clears your margin and reliability rules. When one does, you get a <b>hot order</b> alert with the server, the spot bid to place and the sats per day. Shadow P/L is kept until live renting is proven.</p></div>
+        <div class="mkt on"><div class="top"><h3>Clore.ai GPU spot</h3><span class="state watch">WATCH</span></div><p>Rents other people's GPUs by the minute to mine on <b>your</b> pool. ODIN reads every bitcoin-payable server on the Clore marketplace, values each card at what Kryptex pays for it right now, on Pearl or whichever coin you choose (or <b>AUTO</b>: each card's best coin), and nets out the 3% pool fee, Clore's renter and creation fees, start-up time and any host power limit. Then it reads that server's live bid book and re-values it at the bid that would actually <b>win</b> it, because the listed price is only the host's floor. A server only counts when it still clears your margin and reliability rules at that price. When one does, you get a <b>hot order</b> alert with a one-tap link to the server, the winning bid and the sats per day. Shadow P/L is kept until live renting is proven.</p></div>
       </div>
       <div class="clip" style="max-width:760px"><video data-auto src="media/clip-markets-v4.mp4" poster="media/clip-markets-v4.jpg" muted loop playsinline preload="none" aria-label="Switching Braiins Hashpower, MiningRigRentals and Clore.ai on while ODIN runs"></video><span class="lbl">Hot switch</span></div>
       <div class="term"><span class="c"># switch markets while ODIN runs</span>
@@ -726,7 +728,7 @@ odin --market nicehash live      <span class="c"># resume</span></div>
         <div class="step"><span class="n">03 · TELLS YOU WHO ACTS</span><h3>Phone push + e-mail</h3>
           <div class="alert on"><b>HOT WINDOW · ODIN IS ON IT</b>NiceHash 0.4402 under max 0.4579 · buying the dip itself</div>
           <div class="alert act"><b>HOT WINDOW · ACT NOW</b>MRR Asicboost 7.0 PH/s for 3h · expected profit · rent link included</div>
-          <div class="alert act"><b>HOT ORDER · ACT NOW</b>Clore #112743 · RTX 3090 · spot bid $1.60/day (2,510 sats) · earns $3.10 at Kryptex · +50% net</div>
+          <div class="alert act"><b>HOT ORDER · ACT NOW</b>Clore #122345 · 2× RTX 3090 · no rival bids · win at $2.50/GPU/day (7,845 sats) · earns $3.15 · +19% net</div>
         </div>
       </div>
     </div>
@@ -742,13 +744,14 @@ odin --market nicehash live      <span class="c"># resume</span></div>
       <div class="mods">
         <article class="mod">
           <div class="clip"><video data-auto src="media/clip-orderbook.mp4" poster="media/clip-orderbook.jpg" muted loop playsinline preload="none" aria-label="ODIN reading the order book"></video><span class="lbl">Live · order book</span></div>
-          <span class="code">ODIN · TRADING</span>
+          <span class="code">ODIN · EXECUTION</span>
           <h3>Multi-venue execution engine</h3>
-          <p>Reads the live NiceHash order book every 2 seconds and buys SHA256 hashrate only while the margin is positive.</p>
+          <p>Prices every connected market every 2 seconds and commits capital only while the verified margin is positive: NiceHash SHA-256 live, three more venues in watch.</p>
           <ul>
             <li>Learns which levels hold, and when dips come</li>
             <li>Parks above break-even; speeds up in dips</li>
             <li>Daily spend and loss kill switches</li>
+            <li>Rival bids priced in before any deal counts</li>
             <li>Verified P/L with Kryptex pools</li>
           </ul>
         </article>

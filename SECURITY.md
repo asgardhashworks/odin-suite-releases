@@ -39,7 +39,7 @@ Reporters acting in good faith will be credited in the release notes unless they
 
 In scope: the ODIN Suite binaries and installers published on this repository's Releases page, including their handling of credentials, the audit ledger, licence verification and network behaviour.
 
-Out of scope: third-party services (NiceHash, Braiins, MiningRigRentals, pools, Tailscale), miner software, and denial-of-service against a host the reporter does not own.
+Out of scope: third-party services (NiceHash, Braiins, MiningRigRentals, Clore.ai, Kryptex and other pools, Tailscale), miner software, and denial-of-service against a host the reporter does not own.
 
 ## Security design summary
 
