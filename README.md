@@ -18,9 +18,11 @@
   <a href="SECURITY.md"><b>SECURITY POLICY</b></a>
 </p>
 
+<p align="center"><img src="assets/btc-mark.png" alt="Hash in, sats out: SHA-256 and GPU spot, verified at the pool" width="440"></p>
+
 <img src="assets/h01.png" alt="01 Overview" width="100%">
 
-ODIN Suite is an on-premises operations platform for Bitcoin mining capital. It procures SHA-256 hashrate on open markets only when the price clears a verified margin, supervises the physical fleet behind it, and delivers read-only telemetry to the operator's phone. Every component runs inside the operator's own network: API credentials never leave it and no inbound ports are opened.
+ODIN Suite is an on-premises operations platform for Bitcoin mining capital. It procures SHA-256 hashrate and GPU spot capacity on open markets only when the price clears a verified margin, supervises the physical fleet behind it, and delivers read-only telemetry to the operator's phone. Every component runs inside the operator's own network: API credentials never leave it and no inbound ports are opened.
 
 > **Operating doctrine.** Capital is committed only when the mathematics justify it, and every outcome is verified against what the pool actually pays.
 
@@ -46,9 +48,9 @@ ODIN Suite is an on-premises operations platform for Bitcoin mining capital. It 
 
 The execution console is a single screen: KPI strip, income model, order planner, learning engine, market router, risk limits, fleet status and the live order book.
 
-<p align="center"><img src="assets/console-engine.png" alt="ODIN v13.15 console: KPI strip, profit and forecast, order planner, treasury, learning engine, markets, risk and protection" width="100%"></p>
-<p align="center"><img src="assets/console-orderbook.png" alt="ODIN v13.15 console: SLEIPNIR fleet, live NiceHash order book, decision and positions" width="100%"></p>
-<p align="center"><sub>ODIN v13.15 on Windows Terminal. Sample data; order identifiers masked.</sub></p>
+<p align="center"><img src="assets/console-engine.png" alt="ODIN v13.16 console: KPI strip, profit and forecast, order planner, treasury, learning engine, markets, risk and protection" width="100%"></p>
+<p align="center"><img src="assets/console-orderbook.png" alt="ODIN v13.16 console: SLEIPNIR fleet, live NiceHash order book, decision and positions" width="100%"></p>
+<p align="center"><sub>ODIN v13.16 on Windows Terminal. Sample data; order identifiers masked.</sub></p>
 
 <img src="assets/h04.png" alt="04 Markets" width="100%">
 
@@ -59,6 +61,7 @@ One income model prices every venue, fees included. Each venue switches between 
 | **NiceHash** | SHA256ASICBOOST order book | **Live** | Full execution: lock, park, budget pacing, dip sizing, kill switches. |
 | **Braiins Hashpower** | Spot bids, BTC/EH/day | Watch | Learns its own fill curve and keeps a shadow P/L. Live execution follows Braiins API v2 access. |
 | **MiningRigRentals** | Fixed-term rentals, SHA256 Asicboost and SHA-256 | Watch | Rent-or-skip engine: scores every rig ≥ 7 PH/s on delivered hashrate, post-retarget price and fundable hours. |
+| **Clore.ai** | GPU spot rentals, paid in BTC | Watch | Values every bitcoin-payable GPU at live Kryptex rates (Pearl, any coin, or each card's best), net of pool, renter and creation fees, start-up time and host power limits. Hot-order alerts give the server, spot bid and sats per day. |
 
 <img src="assets/h05.png" alt="05 Quantitative engine" width="100%">
 
