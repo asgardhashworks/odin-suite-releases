@@ -1,0 +1,45 @@
+name: Defect report
+description: Report a reproducible defect in a published ODIN Suite release.
+title: "[Defect] "
+labels: ["defect", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for the report. **Remove API keys, wallet addresses and licence contents before submitting.**
+        Security problems must be reported privately: see SECURITY.md.
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      options: [ODIN (execution engine), SLEIPNIR (fleet supervision), HUGINN (mobile telemetry), Installer, Documentation]
+    validations: { required: true }
+  - type: input
+    id: version
+    attributes: { label: Version, description: "Output of `odin --version`", placeholder: "1.4.0" }
+    validations: { required: true }
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options: [Windows 11, Windows 10, Ubuntu 22.04+, Debian 12+, Other]
+    validations: { required: true }
+  - type: dropdown
+    id: mode
+    attributes: { label: Mode, options: [Watch-only (DRY_RUN=1), Live] }
+  - type: textarea
+    id: what
+    attributes: { label: What happened, description: Observed behaviour versus expected behaviour. }
+    validations: { required: true }
+  - type: textarea
+    id: steps
+    attributes: { label: Steps to reproduce }
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log lines
+      description: Last 50 lines of odin_events.log or `journalctl -u odin -n 50`, with secrets removed.
+      render: text
+  - type: dropdown
+    id: audit
+    attributes: { label: "`odin --verify-audit` result", options: [AUDIT OK, Failed, Not run] }

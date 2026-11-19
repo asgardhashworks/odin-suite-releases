@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability (private)
+    url: https://github.com/asgardhashworks/odin-suite-releases/blob/main/SECURITY.md
+    about: Report security issues privately by e-mail. Never open a public issue for a vulnerability.
+  - name: Enterprise evaluation, pilot or site licence
+    url: mailto:schancellor007@gmail.com?subject=ODIN%20Suite%20enterprise
+    about: Commercial enquiries, 30-day pilots, offline licences and response-time agreements.
+  - name: Licence purchase or upgrade
+    url: mailto:schancellor007@gmail.com?subject=ODIN%20Suite%20licence
+    about: Pro Home, Pro Farm, Pro Business and Enterprise tiers.

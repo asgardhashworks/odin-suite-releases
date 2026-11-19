@@ -400,6 +400,12 @@ section[id], [id].band { scroll-margin-top: 110px; }
   .eyebrow { line-height: 1.6; }
 }
 
+/* traffic counter (footer) */
+footer .hits { display: inline-flex; align-items: center; gap: 10px; margin-left: auto; }
+footer .hits .hl { font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
+footer .hits img { display: block; height: 20px; width: auto; }
+@media (max-width: 720px) { footer .hits { margin-left: 0; width: 100%; } }
+
 /* hot windows */
 .hot-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 22px; align-items: stretch; }
 .hotdash { background: #0a0b0c; border: 2px solid #00ff46; padding: 16px 18px; font: 500 13px/1.75 var(--mono); color: #c9cdcf; overflow: hidden; min-width: 0; animation: hotBorder 2s steps(1) infinite; }
@@ -524,7 +530,7 @@ section[id], [id].band { scroll-margin-top: 110px; }
   <div class="hero-coin coin-wrap" aria-hidden="true"><img class="coin" src="media/btc-coin.png" alt="" width="118" height="118"></div>
   <div class="wrap hero">
     <div>
-      <div class="eyebrow"><b>// OPS</b> Self-learning hashrate engine · Rust · Windows · Linux</div>
+      <div class="eyebrow"><b>// OPS</b> Quantitative hashrate engine · Rust · Windows · Ubuntu · Debian</div>
       <h1>Run your mining farm like an <em>operations center</em>.</h1>
       <p class="lead">ODIN Suite buys hashrate with a quantitative engine that adapts to the live market: NiceHash today, with Braiins Hashpower and MiningRigRentals priced by the same model. It re-prices every 2 seconds, checks its own math against what your pool actually pays, and spends hardest where the margin is widest. It also supervises every miner you own, and the whole operation fits on your phone. Same software for one GPU in a spare room or a warehouse of ASICs.</p>
       <div class="cta">
@@ -536,7 +542,7 @@ section[id], [id].band { scroll-margin-top: 110px; }
         <a class="ven" href="#markets"><i></i>Braiins<span>WATCH</span></a>
         <a class="ven" href="#markets"><i></i>MiningRigRentals<span>WATCH</span></a>
       </div>
-      <div class="facts"><span>Free to install</span><span>Keys stay on your machine</span><span>Starts in watch-only mode</span><span>Windows and Linux</span></div>
+      <div class="facts"><span>Free to install</span><span>Keys stay on your machine</span><span>Starts in watch-only mode</span><span>Windows · Ubuntu · Debian</span></div>
     </div>
 
     <div class="console" role="img" aria-label="Sample ODIN order book: price levels with pass or fail status and the locked level highlighted">
@@ -932,7 +938,7 @@ odin --verify-audit odin_audit.jsonl   <span class="c"># AUDIT OK · hash chain 
       <div class="final-l">
       <svg class="emblem" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="ge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6dc8c"/><stop offset=".5" stop-color="#d8aa45"/><stop offset="1" stop-color="#8a6418"/></linearGradient></defs><rect x="1" y="1" width="62" height="62" fill="#0d0f10" stroke="url(#ge)" stroke-width="1.5"/><g fill="url(#ge)"><path d="M24 8h7l-6 48h-7z"/><path d="M40 8h7l-6 48h-7z"/><rect x="9" y="21" width="47" height="7"/><rect x="7" y="36" width="47" height="7"/></g></svg>
       <div class="sec-head">
-        <div class="eyebrow"><b>// DEPLOY</b> Windows 10/11 · Linux x86_64</div>
+        <div class="eyebrow"><b>// DEPLOY</b> Windows 10/11 · Ubuntu 22.04+ · Debian 12+</div>
         <h2>Start in watch-only mode today.</h2>
       </div>
       </div>
@@ -943,8 +949,9 @@ odin --verify-audit odin_audit.jsonl   <span class="c"># AUDIT OK · hash chain 
 
 <footer>
   <div class="wrap">
-    <div class="row"><span>© 2026 Asgard Hashworks</span><a href="https://github.com/asgardhashworks/odin-suite-releases" target="_blank" rel="noopener">Releases</a><span>Oklahoma, USA</span></div>
-    <p class="fine">Trading hashrate can lose money. Prices, difficulty and coin values move, and past results don't predict future ones. ODIN Suite is software, not financial advice; you set every limit. Not affiliated with NiceHash, Kryptex, Bitmain, MicroBT, Canaan or the Bitaxe project.</p>
+    <div class="row"><span>© 2026 Asgard Hashworks</span><a href="https://github.com/asgardhashworks/odin-suite-releases" target="_blank" rel="noopener">Releases</a><span>Oklahoma, USA</span>
+      <span class="hits" title="Page views today / all time"><span class="hl">Site traffic</span><img src="https://hits.sh/asgardhashworks.github.io/odin-suite-releases.svg?view=today-total&amp;label=views%20today%20%2F%20total&amp;color=d8aa45&amp;labelColor=111315&amp;style=flat-square" alt="Page views today and all time" height="20" loading="lazy" referrerpolicy="no-referrer"></span></div>
+    <p class="fine">Trading hashrate can lose money. Prices, difficulty and coin values move, and past results don't predict future ones. ODIN Suite is software, not financial advice; you set every limit. Not affiliated with NiceHash, Braiins, MiningRigRentals, Kryptex, Bitmain, MicroBT, Canaan or the Bitaxe project. The view counter is provided by hits.sh.</p>
   </div>
 </footer>
 
