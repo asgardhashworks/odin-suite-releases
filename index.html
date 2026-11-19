@@ -1,3 +1,9 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0c0d">
 <title>ODIN Suite</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="icon" type="image/png" href="asgard-avatar.png">
@@ -355,6 +361,45 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
   .flow .down { display: block; text-align: center; color: var(--amber); font: 700 20px/1 var(--mono); padding: 6px 0; animation: blink 1.6s ease-in-out infinite; }
 }
 
+/* ---------- phone layout ---------- */
+html { -webkit-text-size-adjust: 100%; }
+section[id], [id].band { scroll-margin-top: 110px; }
+@media (max-width: 720px) {
+  /* section menu stays, as a swipeable second row */
+  .nav { flex-wrap: wrap; height: auto; padding-top: 10px; gap: 6px 16px; }
+  .nav .btn { margin-left: auto; }
+  .nav nav { display: flex; order: 3; width: 100%; margin: 0; gap: 18px; overflow-x: auto; padding: 4px 0 10px; scrollbar-width: none; -webkit-overflow-scrolling: touch; font-size: 12px;
+             mask-image: linear-gradient(90deg, #000 85%, transparent); -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); }
+  .nav nav::-webkit-scrollbar { display: none; }
+  .nav nav a { white-space: nowrap; padding: 6px 0; }
+  .hero-coin { display: none; }
+  /* hero order book: drop the columns a phone can't fit */
+  .console table th:nth-child(3), .console table td:nth-child(3), .console table th:nth-child(5), .console table td:nth-child(5) { display: none; }
+  .console { font-size: 12px; }
+  /* time scale becomes a list */
+  .ruler { overflow: visible; }
+  .ruler-in { min-width: 0; grid-template-columns: minmax(0, 1fr); row-gap: 8px; }
+  .ruler-in .tick { display: none; }
+  .ruler-in .span { grid-column: 1 / -1 !important; grid-row: auto !important; white-space: normal; justify-content: space-between; }
+  .ruler-in .span::after { content: attr(data-r); font-weight: 500; opacity: .8; text-transform: none; letter-spacing: .02em; }
+  /* tables: one card per row */
+  .tbl.stack table, .tbl.stack tbody, .tbl.stack tr, .tbl.stack td { display: block; width: auto; min-width: 0; }
+  .tbl.stack { overflow: visible; }
+  .tbl.stack td { white-space: normal; overflow-wrap: anywhere; }
+  .tbl.stack thead { display: none; }
+  .tbl.stack tr { padding: 14px 16px; border-bottom: 1px solid var(--line); }
+  .tbl.stack td { padding: 3px 0 !important; border: 0 !important; }
+  .tbl.stack td[data-l]::before { content: attr(data-l); display: block; font: 500 10.5px/1.6 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--dim); margin-top: 6px; }
+  /* commands: comments go on their own line instead of running off-screen */
+  .term { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 12px; }
+  .term .c { display: block; padding-left: 2ch; margin-bottom: 4px; }
+  .term > .c:first-child { padding-left: 0; }
+  /* comfortable reading */
+  .lead, .sec-head p { font-size: 16px; line-height: 1.65; }
+  h2 { font-size: clamp(28px, 8vw, 36px); line-height: 1.08; }
+  .eyebrow { line-height: 1.6; }
+}
+
 /* hot windows */
 .hot-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 22px; align-items: stretch; }
 .hotdash { background: #0a0b0c; border: 2px solid #00ff46; padding: 16px 18px; font: 500 13px/1.75 var(--mono); color: #c9cdcf; overflow: hidden; min-width: 0; animation: hotBorder 2s steps(1) infinite; }
@@ -436,8 +481,6 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
   .order { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 720px) {
-  .nav nav { display: none; }
-  .nav .btn { margin-left: auto; }
   .mods { grid-template-columns: minmax(0, 1fr); }
   .mod + .mod { border-left: 0; border-top: 1px solid var(--line); }
   .phones { grid-template-columns: minmax(0, 1fr); max-width: 320px; }
@@ -447,6 +490,7 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
   section.band > .wrap { padding-block: 56px; }
 }
 @media (max-width: 480px) {
+  .console table th:nth-child(2), .console table td:nth-child(2) { display: none; }
   .seq { grid-template-columns: minmax(0, 1fr); }
   .plans { grid-template-columns: minmax(0, 1fr); }
   .plan:nth-child(odd) { border-right: 0; }
@@ -553,10 +597,10 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
         <div class="scale-title"><span class="eyebrow">Where each market lives · time scale</span><span class="eyebrow">log scale</span></div>
         <div class="ruler"><div class="ruler-in">
           <div class="tick"><b>ns</b>10⁻⁹ s</div><div class="tick"><b>µs</b>10⁻⁶ s</div><div class="tick"><b>ms</b>10⁻³ s</div><div class="tick"><b>s</b>1 s</div><div class="tick"><b>min</b>60 s</div><div class="tick"><b>h</b>3,600 s</div>
-          <div class="span hft">Stock-exchange HFT</div>
-          <div class="span nh" style="grid-row:3">NiceHash order book moves</div>
-          <div class="span odin" style="grid-row:4">◆ ODIN · every 2 s</div>
-          <div class="span deliv" style="grid-row:3">Hashrate delivered</div>
+          <div class="span hft" data-r="ns – µs">Stock-exchange HFT</div>
+          <div class="span nh" style="grid-row:3" data-r="seconds – minutes">NiceHash order book moves</div>
+          <div class="span odin" style="grid-row:4" data-r="2 s">◆ ODIN · every 2 s</div>
+          <div class="span deliv" style="grid-row:3" data-r="hours">Hashrate delivered</div>
         </div></div>
       </div>
 
@@ -749,14 +793,14 @@ odin --market nicehash live      <span class="c"># resume</span></div>
         <div class="eyebrow"><b>// 04</b> Supported hardware</div>
         <h2>GPUs, CPUs and ASICs, small to industrial.</h2>
       </div>
-      <div class="tbl">
+      <div class="tbl stack">
         <table>
           <thead><tr><th>Type</th><th>How SLEIPNIR connects</th><th>Restarts</th></tr></thead>
           <tbody>
-            <tr><td>NVIDIA, AMD and Intel Arc GPUs</td><td class="muted">SRBMiner-Multi or SpinelMiner API, plus LibreHardwareMonitor and HWiNFO sensors (RTX 50 hotspot)</td><td><span class="tag ok">Yes</span></td></tr>
-            <tr><td>CPUs</td><td class="muted">XMRig API, plus sensors</td><td><span class="tag ok">Yes</span></td></tr>
-            <tr><td>Large ASICs: Antminer, Whatsminer, Avalon, Braiins OS, LuxOS</td><td class="muted">cgminer API on TCP 4028</td><td><span class="tag watch">Watch + alert</span></td></tr>
-            <tr><td>Small ASICs: Bitaxe, NerdQAxe, other AxeOS</td><td class="muted">AxeOS HTTP API</td><td><span class="tag ok">Yes</span></td></tr>
+            <tr><td>NVIDIA, AMD and Intel Arc GPUs</td><td class="muted" data-l="How SLEIPNIR connects">SRBMiner-Multi or SpinelMiner API, plus LibreHardwareMonitor and HWiNFO sensors (RTX 50 hotspot)</td><td data-l="Restarts"><span class="tag ok">Yes</span></td></tr>
+            <tr><td>CPUs</td><td class="muted" data-l="How SLEIPNIR connects">XMRig API, plus sensors</td><td data-l="Restarts"><span class="tag ok">Yes</span></td></tr>
+            <tr><td>Large ASICs: Antminer, Whatsminer, Avalon, Braiins OS, LuxOS</td><td class="muted" data-l="How SLEIPNIR connects">cgminer API on TCP 4028</td><td data-l="Restarts"><span class="tag watch">Watch + alert</span></td></tr>
+            <tr><td>Small ASICs: Bitaxe, NerdQAxe, other AxeOS</td><td class="muted" data-l="How SLEIPNIR connects">AxeOS HTTP API</td><td data-l="Restarts"><span class="tag ok">Yes</span></td></tr>
           </tbody>
         </table>
       </div>
