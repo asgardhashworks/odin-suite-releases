@@ -85,6 +85,24 @@ Each venue connects through an adapter that translates its native instrument (or
 | **MiningRigRentals** | Fixed-term rentals, SHA256 Asicboost and SHA-256 | **Live** | Rent-or-skip engine: scores every rig ≥ 7 PH/s on delivered hashrate, post-retarget price and fundable hours, then rents inside hard caps on rentals and sats per day. Signed API v2 (HMAC); the key carries no withdraw permission. |
 | **Clore.ai** | GPU spot rentals, paid in BTC | **Live** | Values every bitcoin-payable GPU at live Kryptex rates (Pearl, any coin, or each card's best), net of pool, renter and creation fees, start-up time and host power limits, then re-prices each candidate at the bid that would win its live auction. Hot-order alerts carry a direct server link, the winning bid and sats per day. Rented orders are guarded: ODIN re-bids 1% over any rival up to a profit ceiling and an absolute sats/day cap, steps back down while winning, and stops a rental that runs unprofitable for 10 minutes. |
 
+<h2 align="center">◆ NEW · OUTBOUND: your hashrate, sold only when it pays more</h2>
+
+<p align="center">
+  <img src="assets/outbound-you.jpg" alt="HUGINN OUTBOUND tab, live: pool vs NiceHash seller price" width="31%">&nbsp;
+  <img src="assets/outbound-t2.jpg" alt="HUGINN OUTBOUND Tier 2 view priced at a 4% pool fee" width="31%">&nbsp;
+  <img src="assets/outbound-gpu.jpg" alt="HUGINN OUTBOUND GPUs: hosting on Clore vs mining, per model" width="31%">
+</p>
+
+ODIN prices every venue from the buyer's side. **OUTBOUND** turns the same models around for operators who own their machines. Every minute it compares what your pool pays (after its fee) with what buyers pay right now on **NiceHash** (clearing price, 2% seller fee) and **MiningRigRentals** (median rented price, 3% fee), less a 1% switching cost. For GPUs it compares hosting each model on **Clore.ai** (after its host fee) with mining on it.
+
+| | What it does |
+| --- | --- |
+| **Shadow · live in HUGINN today** | Measures and sells nothing. Shows how often selling would have beaten the pool and what that was worth per PH/s per day. **Tier 1 / 2 / 3** views reprice the pool side at the fee each class of operator pays. |
+| **Routing · built per customer** | Built live with you: your pool connected (Foundry, Luxor, F2Pool, AntPool, ViaBTC, Braiins, OCEAN, …), one relay so miners are pointed once, seller accounts in your name with list-and-price keys only, caps per machine and site, SLEIPNIR heat cut-offs, a kill switch, and every switch in the hash-chained audit ledger. A 72-hour shadow run on your own numbers comes first. |
+| **Venues** | NiceHash and MiningRigRentals (SHA-256), Clore.ai (GPU hosting). Braiins Hashpower is buy-only, so there is nothing to sell into. Vast.ai is next for GPUs. |
+
+<sub>Live capture from our own rig, 20 Nov 2026 07:55 CST: pool 45,642 vs NiceHash seller 43,865 sats per PH/s per day, so the pool wins by 4.9% and OUTBOUND says so. On Clore an RTX 5090 hosted for $10.40/day against $7.31 mining Pearl. <a href="https://asgardhashworks.github.io/odin-suite-releases/#outbound">Talk to us about your fleet →</a></sub>
+
 <img src="assets/h05.png" alt="05 Quantitative engine" width="100%">
 
 Eighteen models, one decision every 2 seconds. Every model reports a statistic that can be checked, and `odin --quant-report` replays recorded order books through the whole desk so anyone with the recordings can reproduce the numbers.

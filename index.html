@@ -648,6 +648,34 @@ footer .hits img { display: block; height: 20px; width: auto; }
   .plan:last-child { border-bottom: 0; }
   .cta .btn { flex: 1 1 100%; }
 }
+
+/* OUTBOUND (new feature) */
+.newpill { display:inline-block; font:800 9.5px/1 var(--mono); letter-spacing:.14em; color:#1a1100; background:linear-gradient(180deg,#fff1a8,#ffd75e 45%,#d8aa45); padding:3px 6px; border-radius:4px; margin-left:6px; vertical-align:2px; box-shadow:0 0 12px rgba(255,215,94,.45); }
+.ob-flag { display:inline-flex; align-items:center; gap:10px; margin-top:16px; padding:8px 14px 8px 8px; border:1px solid var(--gold-lo); background:linear-gradient(90deg,rgba(216,170,69,.16),rgba(216,170,69,.03)); font:600 13px/1.3 var(--mono); color:var(--gold-hi); text-decoration:none; letter-spacing:.03em; }
+.ob-flag:hover { border-color:var(--gold-hi); }
+#outbound { position:relative; background:radial-gradient(90% 60% at 80% 0%, rgba(216,170,69,.10), transparent 60%), linear-gradient(180deg, rgba(216,170,69,.04), transparent 40%); border-top:1px solid var(--gold-lo); border-bottom:1px solid var(--gold-lo); }
+.ob-status { display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; }
+.ob-status span { font:700 11.5px/1 var(--mono); letter-spacing:.12em; padding:9px 12px; border:1px solid var(--line); color:var(--dim); }
+.ob-status span b { color:var(--fg); font-weight:700; }
+.ob-status .live { border-color:rgba(61,220,132,.5); color:#3ddc84; } .ob-status .live b { color:#3ddc84; }
+.ob-status .build { border-color:var(--gold-lo); color:var(--gold-hi); } .ob-status .build b { color:var(--gold-hi); }
+.ob-grid { display:grid; grid-template-columns: minmax(0,1.15fr) minmax(0,1fr); gap:40px; align-items:start; margin-top:34px; }
+.ob-phones { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+.ob-seq { display:grid; gap:22px; }
+.ob-build { margin-top:34px; border:1px solid var(--gold-lo); background:linear-gradient(180deg,#0f1214,#0a0c0d); box-shadow:0 0 60px rgba(216,170,69,.08); padding:26px; }
+.ob-build h3 { font-size:22px; } .ob-build h3 em { font-style:normal; color:var(--gold-hi); }
+.ob-build > p { color:var(--dim); margin-top:8px; max-width:780px; }
+.ob-list { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; background:rgba(216,170,69,.22); margin-top:20px; border:1px solid rgba(216,170,69,.22); }
+.ob-list div { background:#0b0d0e; padding:16px; }
+.ob-list b { display:block; font:700 12px/1.2 var(--mono); letter-spacing:.1em; color:var(--gold-hi); margin-bottom:6px; text-transform:uppercase; }
+.ob-list p { color:var(--dim); font-size:14px; }
+.ob-tiers { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin-top:20px; }
+.ob-tiers div { border:1px solid var(--line); padding:16px; }
+.ob-tiers b { font:800 12px/1 var(--mono); letter-spacing:.16em; color:var(--gold-hi); }
+.ob-tiers h4 { margin:8px 0 6px; font-size:15px; } .ob-tiers p { color:var(--dim); font-size:13.5px; }
+.ob-build .cta { margin-top:22px; }
+@media (max-width: 960px) { .ob-grid { grid-template-columns:minmax(0,1fr); } .ob-list, .ob-tiers { grid-template-columns:minmax(0,1fr); } }
+@media (max-width: 720px) { .ob-phones { grid-template-columns:minmax(0,1fr); max-width:300px; } }
 </style>
 
 <div class="livebar" aria-label="Live market data"><div class="livebar-in" id="livebarIn">
@@ -664,6 +692,7 @@ footer .hits img { display: block; height: 20px; width: auto; }
       <a href="#engine">Engine</a>
       <a href="#markets">Markets</a>
       <a href="#hot">Hot windows</a>
+      <a href="#outbound">Outbound<span class="newpill">NEW</span></a>
       <a href="#enterprise">Enterprise</a>
       <a href="#plans">Plans</a>
       <a href="#order">Order</a>
@@ -699,6 +728,7 @@ footer .hits img { display: block; height: 20px; width: auto; }
         <a class="ven lv" href="#markets"><i></i>MiningRigRentals<span>LIVE</span></a>
         <a class="ven lv" href="#markets"><i></i>Clore.ai<span>LIVE</span></a>
       </div>
+      <a class="ob-flag" href="#outbound"><span class="newpill" style="margin:0">NEW</span>OUTBOUND · would selling your hashrate beat your pool? Measured live, built for your fleet →</a>
       <div class="facts"><span>Free to install</span><span>Keys stay on your machine</span><span>Starts in watch-only mode</span><span>Windows · Ubuntu · Debian</span></div>
     </div>
 
@@ -907,6 +937,50 @@ odin --market nicehash live      <span class="c"># resume</span></div>
     </div>
   </section>
 
+
+  <section class="band" id="outbound">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow"><b>// NEW · OUTBOUND</b> For operators who own their machines</div>
+        <h2>Your hashrate, sold <span class="gold-text">only when it pays more.</span></h2>
+        <p class="lead">ODIN already prices every venue from the buyer's side. OUTBOUND turns the same models around. Every minute it measures what your pool pays against what buyers on NiceHash, MiningRigRentals and Clore.ai are paying right now, after every fee and a switching cost. When renting out beats the pool, you see it, how often, and what it would have been worth per PH/s.</p>
+        <p class="lead" style="margin-top:12px">Today it runs in <b>shadow mode</b> inside HUGINN: it measures and sells nothing. For your fleet, we build the routing <b>live, on your pool and your venues</b>, and prove it on your own numbers before a single machine is switched.</p>
+        <div class="ob-status"><span class="live"><b>SHADOW</b> · LIVE IN HUGINN TODAY</span><span class="build">◆ <b>ROUTING</b> · BUILT PER CUSTOMER</span><span><b>NO CUSTODY</b> · PAYOUTS GO TO YOUR WALLET</span></div>
+      </div>
+      <div class="ob-grid">
+        <div class="ob-phones">
+          <figure class="phone"><div class="frame"><img src="media/huginn-outbound-you.jpg" alt="HUGINN OUTBOUND tab, live: pool pays 45,642 sats per PH/s per day, NiceHash sellers would get 43,865, so the pool wins by 4.9%" loading="lazy"></div><figcaption><b>Selling vs pool</b> · every minute</figcaption></figure>
+          <figure class="phone"><div class="frame"><img src="media/huginn-outbound-t2.jpg" alt="HUGINN OUTBOUND Tier 2 view: mid-market farms, pool side priced at a 4% fee, with F2Pool, AntPool, ViaBTC, SpiderPool and SECPOOL" loading="lazy"></div><figcaption><b>Tier 1 · 2 · 3</b> · your pool's fee</figcaption></figure>
+          <figure class="phone"><div class="frame"><img src="media/huginn-outbound-gpu.jpg" alt="HUGINN OUTBOUND GPU card: hosting on Clore vs mining, per model, with your own GPUs tagged" loading="lazy"></div><figcaption><b>GPUs</b> · host on Clore vs mine</figcaption></figure>
+        </div>
+        <div class="ob-seq">
+          <div class="step"><span class="n">01 · MEASURES</span><h3>Pool vs every buyer, every minute</h3><p>Your pool's payout after its fee, against the NiceHash clearing price after the 2% seller fee and the median price renters are paying on MiningRigRentals after its 3%. A 1% switching cost is charged against selling, so a win is a real win.</p></div>
+          <div class="step"><span class="n">02 · BY TIER</span><h3>Priced at your pool's fee</h3><p>Tier 1, 2 and 3 views reprice the pool side at the fee each kind of operator actually pays, from negotiated institutional FPPS to list PPS+ and zero-fee pools. The answer changes with the fee, and OUTBOUND shows you yours.</p></div>
+          <div class="step"><span class="n">03 · GPUS TOO</span><h3>Host it or mine it</h3><p>For each GPU model, what renters pay on Clore.ai after its host fee, against what that card earns mining. Live this morning: an RTX 5090 hosted for <b>$10.40</b> a day against <b>$7.31</b> mining Pearl, while our own RTX 5070 Ti earns more mining.</p></div>
+        </div>
+      </div>
+      <p class="sample mono">Live capture from our own rig · 20 Nov 2026, 07:55 CST · real numbers, nothing staged: pool 45,642 vs NiceHash seller 43,865 sats per PH/s per day. Right now the pool wins by 4.9%, and OUTBOUND says so.</p>
+      <div class="ob-build">
+        <h3>Built <em>live</em> for your fleet.</h3>
+        <p>Outbound routing isn't a checkbox. Every operator has a different pool contract, fleet and set of venues, so we build it with you, on your infrastructure, in stages you approve.</p>
+        <div class="ob-list">
+          <div><b>Your pool, connected</b><p>Foundry, Luxor, F2Pool, AntPool, ViaBTC, Braiins, OCEAN and others: your real fee and payout model, read from your account, so the comparison is your money.</p></div>
+          <div><b>One relay, no reconfiguring</b><p>Miners point at a relay once. ODIN tells it where the hashrate goes: your pool, or a buyer, while the higher price lasts.</p></div>
+          <div><b>Your seller accounts</b><p>Opened and verified by you. ODIN gets keys that list and price, never withdraw. Payouts land in your wallet.</p></div>
+          <div><b>Hard limits</b><p>Caps per machine and per site, heat cut-offs from SLEIPNIR and a kill switch that sends everything back to the pool.</p></div>
+          <div><b>Every switch audited</b><p>Each switch, price and payout goes into the same hash-chained ledger as every other ODIN decision.</p></div>
+          <div><b>Shadow first</b><p>A 72-hour shadow run on your own pool numbers comes first. You see what routing would have earned before anything is switched.</p></div>
+        </div>
+        <div class="ob-tiers">
+          <div><b>TIER 1</b><h4>Institutional · 1+ EH/s</h4><p>Negotiated FPPS, SOC 2 and KYC/AML. Selling wins less often, but each 1% is worth the most at this scale.</p></div>
+          <div><b>TIER 2</b><h4>Commercial · 10 PH/s – 1 EH/s</h4><p>List FPPS and PPS+ fees mean selling wins more often. The sweet spot: big enough to matter, no in-house quant desk.</p></div>
+          <div><b>TIER 3</b><h4>Hosted &amp; retail · under 10 PH/s</h4><p>Low-fee pools and small fleets. SLEIPNIR and HUGINN fleet supervision first; routing when it pays.</p></div>
+        </div>
+        <div class="cta"><a class="btn solid" href="#order">Talk to us about your fleet</a><a class="btn" href="https://github.com/asgardhashworks/odin-suite-releases/releases/latest" target="_blank" rel="noopener">Try the shadow view free</a></div>
+      </div>
+    </div>
+  </section>
+
   <section class="band" id="modules">
     <div class="wrap">
       <div class="sec-head">
@@ -1065,6 +1139,7 @@ odin --market nicehash live      <span class="c"># resume</span></div>
           <div class="ent-cards">
             <div><h3>Linux x86_64</h3><p>Ubuntu 22.04+ and Debian 12+. Sandboxed systemd services, a no-login service account and root-only keys.</p></div>
             <div><h3>Offline licences</h3><p>Signed <span class="mono">.lic</span> files: machine-bound or site-wide, with optional expiry. No licence server needed.</p></div>
+            <div><h3>Outbound routing <span class="newpill">NEW</span></h3><p>Sell your hashrate when buyers pay more than your pool. Shadow-measured first, then built live on your pool, venues and limits.</p></div>
             <div><h3>Audit ledger</h3><p>Hash-chained JSON lines for every decision. Feed it to Loki, Splunk or Elastic.</p></div>
             <div><h3>Published network list</h3><p>Outbound HTTPS to a short list of hosts. Nothing listens on the network; HUGINN uses loopback plus Tailscale.</p></div>
           </div>
