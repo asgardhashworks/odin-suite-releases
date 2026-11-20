@@ -39,6 +39,46 @@ Reporters acting in good faith will be credited in the release notes unless they
 
 In scope: the ODIN Suite binaries and installers published on this repository's Releases page, including their handling of credentials, the audit ledger, licence verification and network behaviour.
 
+
+## Outbound network allowlist
+
+ODIN and SLEIPNIR open **no inbound ports** (HUGINN listens only on the operator's Tailscale address). Every outbound connection goes to one of these hosts, over TLS on port 443 unless noted, and only for the venues the operator turns on:
+
+| Host | Used for | When |
+|---|---|---|
+| `api2.nicehash.com` | NiceHash order book, orders, account balance | NiceHash venue on |
+| `hashpower.braiins.com` | Braiins Hashpower order book | Braiins venue on |
+| `www.miningrigrentals.com` | MRR rig listings | MRR venue on |
+| `api.clore.ai` | Clore marketplace, bid books, your orders, bids, rentals | Clore venue on |
+| `pool.kryptex.com` | Pool credits (verified P/L), GPU earnings, worker hashrate | always |
+| `mempool.space` | Difficulty, block rewards, BTC price | always |
+| `safetrade.com` | PRL price | Clore venue on |
+| `api.exchange.coinbase.com` | BTC price (SLEIPNIR) | SLEIPNIR |
+| `ntfy.sh` | Phone push alerts | only if `ODIN_NTFY_TOPIC` is set |
+| `smtp.gmail.com` (port 465/587) | E-mail alerts | only if Gmail alerts are configured |
+| operator-supplied URL | Webhook alerts | only if `ODIN_WEBHOOK_URL` is set |
+| Tailscale (UDP 41641) | HUGINN phone link | only if HUGINN is enabled |
+
+There is no telemetry, update check or licence server: licences are verified offline.
+
+## Audit ledger
+
+Every decision and action (bids, raises, parks, kill-switch trips, rentals, re-bids, stops, daily verified P/L) is appended to `odin_audit.jsonl`, one record per line. Each record carries `seq`, `ts`, `event_type`, `prev_hash` and `hash`, where `hash` is SHA-256 over the record without `hash`, serialized exactly as Python's `json.dumps(record, sort_keys=True, separators=(",", ":"))` (non-ASCII escaped, amounts as integer sats or decimal strings). The first record's `prev_hash` is 64 zeros.
+
+- `odin --verify-audit [file]` re-checks the whole chain and names the first broken line (exit code 2 on failure).
+- The chain can be verified independently with any SHA-256 tool. Removing, inserting, reordering or editing any record breaks it.
+- An incomplete last line left by an abrupt stop (power loss, `kill -9`) is moved to `odin_audit.torn` on restart and recorded as a `RECOVERY` event; the chain continues from the last complete record.
+- For off-box integrity, ship `odin_audit.jsonl` to an append-only log store (SIEM).
+
+## Secrets at rest, by platform
+
+- **Windows:** API keys, secrets, passwords and alert tokens in `odin.env` are sealed with DPAPI (current-user scope, application entropy) on first start.
+- **Linux:** `odin.env` is restricted to its owner (mode 0600). Run ODIN under a dedicated no-login service user on an encrypted volume. Hardware-backed storage (TPM, kernel keyring) is not used yet.
+
+## Release integrity
+
+Release archives are built by GitHub Actions and published with SHA-256 checksums (`SHA256SUMS.txt`). Builds are not yet bit-for-bit reproducible; enterprise customers can review source under NDA.
+
 Out of scope: third-party services (NiceHash, Braiins, MiningRigRentals, Clore.ai, Kryptex and other pools, Tailscale), miner software, and denial-of-service against a host the reporter does not own.
 
 ## Security design summary
