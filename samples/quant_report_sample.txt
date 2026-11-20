@@ -1,0 +1,31 @@
+ODIN QUANT REPORT · 8061 order-book snapshots over 71.9 h · files: odin_book_20261117.jsonl, odin_book_20261118.jsonl, odin_book_20261119.jsonl, odin_book_20261120.jsonl
+
+1  BAYESIAN ONLINE CHANGE-POINTS (Adams & MacKay 2007, Student-t predictive)
+   414 ten-minute samples · 9 confirmed regime changes (posterior > 90%, new level held 20+ min) · CUSUM alarms on the same data: 22
+     11-17 10:32 UTC  P = 0.96  level shift +0.0021 (2 h after vs 2 h before)
+     11-17 14:17 UTC  P = 0.95  level shift +0.0036 (2 h after vs 2 h before)
+     11-17 16:48 UTC  P = 0.97  level shift -0.0030 (2 h after vs 2 h before)
+     11-17 18:41 UTC  P = 0.97  level shift +0.0038 (2 h after vs 2 h before)
+     11-17 20:53 UTC  P = 1.00  level shift -0.0060 (2 h after vs 2 h before)
+     11-17 23:39 UTC  P = 0.94  level shift +0.0041 (2 h after vs 2 h before)
+     11-18 03:36 UTC  P = 0.98  level shift -0.0157 (2 h after vs 2 h before)
+     11-18 09:15 UTC  P = 0.92  level shift +0.0223 (2 h after vs 2 h before)
+     11-20 03:28 UTC  P = 0.94  level shift -0.0144 (2 h after vs 2 h before)
+   now: current regime 1.5 h old (MAP) · P(confirmed change in the last 80 min) 0.0% · regime level 0.4357
+
+2  ORNSTEIN-UHLENBECK MEAN REVERSION, two time scales (exact AR(1) MLE, Dickey-Fuller test)
+   fast (10-min, last 24 h): mean 0.4564 · sd 0.0109 · half-life 13 min · DF t = -5.74 (random walk rejected at 5%)
+   slow (hourly, up to 7 d) : mean 0.4566 · sd 0.0091 · half-life 3.0 h · DF t = -2.64 (not significant)
+   renewal-reward optimum: no dip depth repays the 1000-sat order fee on fast noise - short dips revert in minutes. Deep dips that last are regime changes (section 1), and only those get dip orders.
+   expected time from 1 sd below back to the mean: 17 min
+
+3  CONFORMALISED QUANTILE FORECAST, 30 min ahead (Koenker-Bassett + CQR + adaptive conformal)
+   80% band: realised coverage 81.0% over 364 forecasts · pinball skill vs random walk +7.6%
+   latest: 0.4479 [0.4371 .. 0.4579]
+
+4  KALMAN-FILTERED DELIVERY (local-level model, innovation-adaptive noise)
+   8 hourly observations (payout lag 0 h) · delivery 0.873 ± 0.092 · NIS 0.78 (ideal 1.0) · 90% conformal band warming up
+
+5  RIVALS AND WAR STEPS (Clore): see odin_clore_intel.json - posterior ceilings and Thompson arms are learned live.
+
+6  OVERFITTING: run  odin --optimize  - every candidate setting is checked by CSCV before it can be adopted.

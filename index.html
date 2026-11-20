@@ -13,7 +13,7 @@
 <meta property="og:image" content="https://asgardhashworks.github.io/odin-suite-releases/asgard-avatar.png">
 <meta property="og:url" content="https://asgardhashworks.github.io/odin-suite-releases/">
 <meta name="description" content="ODIN Suite by Asgard Hashworks: a self-learning multi-venue execution engine for hashrate on NiceHash, Braiins Hashpower and MiningRigRentals, plus Clore.ai GPU spot rentals, miner supervision and a read-only phone dashboard. Windows and Linux.">
-<meta property="og:video" content="https://asgardhashworks.github.io/odin-suite-releases/media/odin-commercial-v11.mp4">
+<meta property="og:video" content="https://asgardhashworks.github.io/odin-suite-releases/media/odin-commercial-v12.mp4">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
@@ -643,7 +643,7 @@ footer .hits img { display: block; height: 20px; width: auto; }
       <p class="lead" style="margin-top:12px">Every forecast earns its error bar in public. It runs inside your perimeter, hash-chains every decision, and never holds a withdrawal key.</p>
       <div class="proof" aria-label="Measured on live NiceHash data">
         <div class="pf"><b data-to="81" data-suf="%">81%</b><span>realised coverage<br>of an 80% band</span></div>
-        <div class="pf"><b data-to="7.7" data-pre="+" data-suf="%" data-dp="1">+7.7%</b><span>forecast skill<br>vs random walk</span></div>
+        <div class="pf"><b data-to="7.6" data-pre="+" data-suf="%" data-dp="1">+7.6%</b><span>forecast skill<br>vs random walk</span></div>
         <div class="pf"><b data-to="13" data-suf=" min">13 min</b><span>reversion half-life<br>DF t = −5.7</span></div>
         <div class="pf"><b data-to="9">9</b><span>regime shifts<br>confirmed in 72 h</span></div>
         <small>Measured by <code>odin --quant-report</code> on 72 h of live NiceHash SHA256AsicBoost order books, 17–20 Nov 2026.</small>
@@ -690,10 +690,10 @@ footer .hits img { display: block; height: 20px; width: auto; }
   <section class="film" id="film" aria-label="ODIN Suite film">
     <div class="wrap">
       <div class="film-frame">
-        <video id="filmVid" src="media/odin-commercial-v11.mp4" poster="media/odin-commercial-v11.jpg" autoplay muted loop playsinline preload="metadata" aria-label="ODIN Suite commercial: the order book, the learning engine, NiceHash, Braiins and MiningRigRentals, SLEIPNIR and HUGINN"></video>
+        <video id="filmVid" src="media/odin-commercial-v12.mp4" poster="media/odin-commercial-v12.jpg" autoplay muted loop playsinline preload="metadata" aria-label="ODIN Suite commercial: real NiceHash data, eighteen live models, four venues, the security doctrine and the PEAK profit window"></video>
       </div>
       <div class="film-bar">
-        <span class="eyebrow"><b class="rec">REC</b> ODIN Suite · 68 s · live footage, real algorithms, sound on for the voice</span>
+        <span class="eyebrow"><b class="rec">REC</b> ODIN Suite · 65 s · real NiceHash data, real algorithms, sound on for the voice</span>
         <div class="film-ctl">
           <button class="btn small solid" type="button" id="soundBtn" aria-pressed="false">▶ Sound on</button>
           <a class="btn small" href="https://youtu.be/AAvMzb12SpA" target="_blank" rel="noopener">Watch on YouTube</a>
@@ -759,7 +759,7 @@ footer .hits img { display: block; height: 20px; width: auto; }
         <div class="model"><span class="k">11 · REGIME <i>● LIVE</i></span><h3>Bayesian change-points</h3><div class="eq">P(rₜ|x₁:ₜ) ∝ Σ P(xₜ|r)·P(r|rₜ₋₁)</div><p>The full posterior over how long the current market regime has lasted. A Student-t predictive means one spike cannot fool it; a new level that holds cannot hide from it.</p><div class="ref">Adams &amp; MacKay, 2007</div><div class="meas">9 confirmed shifts in 72 h · CUSUM fired 22×</div></div>
         <div class="model"><span class="k">12 · DELIVERY <i>● LIVE</i></span><h3>Kalman-filtered pool credit</h3><div class="eq">x̂ ← x̂ + K(z − x̂) · K = P/(P+R)</div><p>What your pool really pays, tracked as a hidden state with its own error bar. Noise is learned from the innovations, and the filter's consistency is chi-square tested.</p><div class="ref">Kalman, 1960 · Mehra, 1970</div><div class="meas">NIS 0.78 (ideal 1.0)</div></div>
         <div class="model"><span class="k">13 · CONFORMAL <i>● LIVE</i></span><h3>Error bars with a guarantee</h3><div class="eq">αₜ₊₁ = αₜ + γ(α − errₜ)</div><p>Distribution-free intervals whose coverage holds for any sequence, even after the market shifts. A dip boost needs the 90% lower bound of its margin to clear, not just the estimate.</p><div class="ref">Gibbs &amp; Candès, 2021</div><div class="meas">coverage measured, every forecast</div></div>
-        <div class="model"><span class="k">14 · FORECAST <i>● LIVE</i></span><h3>Quantile regression, online</h3><div class="eq">min Σ ρτ(y − xᵀβ) · CQR</div><p>The clearing price 30 minutes ahead as a full 10–50–90 distribution, learned online, conformalised, and scored against a random walk on every single forecast.</p><div class="ref">Koenker &amp; Bassett, 1978 · Romano et al., 2019</div><div class="meas">81% coverage of 80% · +7.7% skill</div></div>
+        <div class="model"><span class="k">14 · FORECAST <i>● LIVE</i></span><h3>Quantile regression, online</h3><div class="eq">min Σ ρτ(y − xᵀβ) · CQR</div><p>The clearing price 30 minutes ahead as a full 10–50–90 distribution, learned online, conformalised, and scored against a random walk on every single forecast.</p><div class="ref">Koenker &amp; Bassett, 1978 · Romano et al., 2019</div><div class="meas">81% coverage of 80% · +7.6% skill</div></div>
         <div class="model"><span class="k">15 · REVERSION <i>● LIVE</i></span><h3>Exact first-passage times</h3><div class="eq">T = θ⁻¹∫ √(2π)·exp(u²/2)·Φ(u) du</div><p>Ornstein–Uhlenbeck on two time scales separates noise that snaps back in minutes from a regime worth an order. A dip classed as transient noise never gets a paid dip order.</p><div class="ref">Uhlenbeck &amp; Ornstein, 1930 · Bertram, 2010</div><div class="meas">half-life 13 min · DF t −5.7</div></div>
         <div class="model"><span class="k">16 · RIVALS <i>● LIVE</i></span><h3>Posterior on a bot's ceiling</h3><div class="eq">Ŝ(x) = Πᵢ (1 − dᵢ/nᵢ)</div><p>Every rival bot's ceiling is bracketed from where it walked away, and estimated by product-limit survival for the ones still fighting. ODIN declines wars it is going to lose.</p><div class="ref">Kaplan &amp; Meier, 1958</div><div class="meas">learns from every Clore war</div></div>
         <div class="model"><span class="k">17 · WAR GAME <i>● LIVE</i></span><h3>Thompson-sampled bids</h3><div class="eq">θₐ ~ Beta(αₐ, βₐ) · argmax θₐ·h(a)</div><p>Learns which jump size actually wins against each market's bots, weighed against the profit headroom it leaves. Discounted so it re-learns when a bot changes behaviour.</p><div class="ref">Thompson, 1933 · Russo et al., 2018</div><div class="meas">every war move scored</div></div>
