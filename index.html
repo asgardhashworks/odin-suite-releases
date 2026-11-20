@@ -1460,7 +1460,7 @@ odin --verify-audit odin_audit.jsonl   <span class="c"># AUDIT OK · hash chain 
   inner.querySelectorAll('[id^="lb"]').forEach(function (e) { if (seen[e.id]) { e.setAttribute('data-dup', e.id); e.removeAttribute('id'); } else seen[e.id] = 1; });
   function set(id, txt, cls) { document.querySelectorAll('#' + id + ', [data-dup="' + id + '"]').forEach(function (e) { e.textContent = txt; if (cls) e.className = cls; }); }
   var fmt = function (n, d) { return Number(n).toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d }); };
-  var get = function (u) { return fetch(u).then(function (r) { if (!r.ok) throw r.status; return r.json(); }); };
+  var get = function (u) { return fetch(u, { cache: 'no-store' }).then(function (r) { if (!r.ok) throw r.status; return r.json(); }); };
   // live prices: refreshed every 15 s; the price turns green with ▲ after an up-tick and red with ▼ after a down-tick
   var last = {}, dir = {};
   function live(id, v, txt) {
@@ -1472,24 +1472,26 @@ odin --verify-audit odin_audit.jsonl   <span class="c"># AUDIT OK · hash chain 
       if (moved) { e.classList.remove('fl'); void e.offsetWidth; e.classList.add('fl'); }
     });
   }
-  var hpDone = false;
+  // BTC: the same source as SLEIPNIR, Coinbase's live last trade and its rolling 24 h open; mempool.space only as a fallback
+  var hpAt = 0;
+  function hashprice(usd) {
+    if (Date.now() - hpAt < 600000) return; hpAt = Date.now();
+    Promise.all([get('https://mempool.space/api/v1/mining/hashrate/3d'), get('https://mempool.space/api/v1/mining/reward-stats/144')]).then(function (a) {
+      var d = a[0].currentDifficulty, reward = Number(a[1].totalReward) / 1e8 / 144;
+      set('lbHp', '$' + fmt(86400 * reward * 1e15 / (d * 4294967296) * usd, 2) + ' / PH / day');
+    }).catch(function () { hpAt = 0; });
+  }
   function btc() {
-    get('https://mempool.space/api/v1/prices').then(function (p) {
-      if (!p.USD) return; live('lbBtc', p.USD, '$' + fmt(p.USD, 0));
-      if (hpDone) return; hpDone = true;
-      return Promise.all([get('https://mempool.space/api/v1/mining/hashrate/3d'), get('https://mempool.space/api/v1/mining/reward-stats/144')]).then(function (a) {
-        var d = a[0].currentDifficulty, reward = Number(a[1].totalReward) / 1e8 / 144;
-        var btcPerPhDay = 86400 * reward * 1e15 / (d * 4294967296);
-        set('lbHp', '$' + fmt(btcPerPhDay * p.USD, 2) + ' / PH / day');
-      });
-    }).catch(function () { hpDone = false; });
     get('https://api.exchange.coinbase.com/products/BTC-USD/stats').then(function (j) {
-      var o = parseFloat(j.open), l = parseFloat(j.last); if (!(o > 0 && l > 0)) return;
-      var ch = (l / o - 1) * 100; set('lbBtcCh', (ch >= 0 ? '▲ +' : '▼ ') + fmt(Math.abs(ch), 1) + '% 24h', ch >= 0 ? 'up' : 'dn');
-    }).catch(function () {});
+      var l = parseFloat(j.last), o = parseFloat(j.open); if (!(l > 0)) throw 0;
+      live('lbBtc', l, '$' + fmt(l, 0)); hashprice(l);
+      if (o > 0) { var ch = (l / o - 1) * 100; set('lbBtcCh', (ch >= 0 ? '▲ +' : '▼ ') + fmt(Math.abs(ch), 1) + '% 24h', ch >= 0 ? 'up' : 'dn'); }
+    }).catch(function () {
+      get('https://mempool.space/api/v1/prices').then(function (p) { if (p.USD) { live('lbBtc', p.USD, '$' + fmt(p.USD, 0)); hashprice(p.USD); } }).catch(function () {});
+    });
   }
   function prl() {
-    get('https://safetrade.com/api/v2/peatio/public/markets/pearlusdt/tickers').then(function (j) {
+    get('https://safetrade.com/api/v2/peatio/public/markets/pearlusdt/tickers?_=' + Date.now()).then(function (j) {
       var t = j.ticker; if (!t) return; var v = parseFloat(t.last), ch = parseFloat(String(t.price_change_percent).replace('%', ''));
       live('lbPrl', v, '$' + fmt(Math.floor(v * 100) / 100, 2));
       set('lbPrlCh', (ch >= 0 ? '▲ +' : '▼ ') + fmt(Math.abs(ch), 1) + '% 24h', ch >= 0 ? 'up' : 'dn');
