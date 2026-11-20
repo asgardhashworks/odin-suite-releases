@@ -48,7 +48,7 @@ ODIN and SLEIPNIR open **no inbound ports** (HUGINN listens only on the operator
 |---|---|---|
 | `api2.nicehash.com` | NiceHash order book, orders, account balance | NiceHash venue on |
 | `hashpower.braiins.com` | Braiins Hashpower order book | Braiins venue on |
-| `www.miningrigrentals.com` | MRR rig listings | MRR venue on |
+| `www.miningrigrentals.com` | MRR rig listings, rentals and balance (signed API v2, no withdraw permission) | MRR venue on |
 | `api.clore.ai` | Clore marketplace, bid books, your orders, bids, rentals | Clore venue on |
 | `pool.kryptex.com` | Pool credits (verified P/L), GPU earnings, worker hashrate | always |
 | `mempool.space` | Difficulty, block rewards, BTC price | always |
@@ -63,8 +63,9 @@ There is no telemetry, update check or licence server: licences are verified off
 
 ## Audit ledger
 
-Every decision and action (bids, raises, parks, kill-switch trips, rentals, re-bids, stops, daily verified P/L) is appended to `odin_audit.jsonl`, one record per line. Each record carries `seq`, `ts`, `event_type`, `prev_hash` and `hash`, where `hash` is SHA-256 over the record without `hash`, serialized exactly as Python's `json.dumps(record, sort_keys=True, separators=(",", ":"))` (non-ASCII escaped, amounts as integer sats or decimal strings). The first record's `prev_hash` is 64 zeros.
+Every decision and action on every venue (bids, raises, parks, kill-switch trips, Clore rentals, re-bids, holds, releases and share-check stops, Braiins and MRR signals) is appended to `odin_audit.jsonl`, tagged with its venue, one record per line. Each record carries `seq`, `ts`, `event_type`, `prev_hash` and `hash`, where `hash` is SHA-256 over the record without `hash`, serialized exactly as Python's `json.dumps(record, sort_keys=True, separators=(",", ":"))` (non-ASCII escaped, amounts as integer sats or decimal strings). The first record's `prev_hash` is 64 zeros.
 
+- At 00:00 UTC each live venue closes its books into the chain as a `LEDGER_DAY` record (integer sats): NiceHash charges vs Kryptex credits, and Clore charges (Clore's own per-order spend counters) vs Kryptex credits for the Clore worker (pool-measured hashrate × Kryptex's pay rate after fee).
 - `odin --verify-audit [file]` re-checks the whole chain and names the first broken line (exit code 2 on failure).
 - The chain can be verified independently with any SHA-256 tool. Removing, inserting, reordering or editing any record breaks it.
 - An incomplete last line left by an abrupt stop (power loss, `kill -9`) is moved to `odin_audit.torn` on restart and recorded as a `RECOVERY` event; the chain continues from the last complete record.
