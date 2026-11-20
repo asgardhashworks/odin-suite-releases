@@ -515,6 +515,9 @@ section[id], [id].band { scroll-margin-top: 110px; }
 .livebar-in { display: flex; width: max-content; animation: tick 46s linear infinite; }
 .livebar span { font: 500 11.5px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--dim); padding: 9px 20px; white-space: nowrap; }
 .livebar span b { color: var(--fg); font-weight: 600; margin-left: 6px; } .livebar span i { font-style: normal; margin-left: 6px; }
+.livebar span b.up { color: #2fe07a; } .livebar span b.dn { color: #ff5a6a; }
+.livebar span b.fl { animation: lbflash 1.2s ease-out; }
+@keyframes lbflash { 0% { text-shadow: 0 0 12px currentColor; } 100% { text-shadow: none; } }
 .livebar .lv { color: #2fe07a; } .livebar .up { color: #2fe07a; } .livebar .dn { color: #ff5a6a; } .livebar .g { color: var(--amber); } .livebar .g.on { font-weight: 700; color: #00ff46; text-shadow: 0 0 8px rgba(0,255,70,.55); }
 @media (prefers-reduced-motion: reduce) { .livebar-in { animation: none; } }
 
@@ -679,7 +682,7 @@ footer .hits img { display: block; height: 20px; width: auto; }
 </style>
 
 <div class="livebar" aria-label="Live market data"><div class="livebar-in" id="livebarIn">
-  <span class="lv">● LIVE MARKETS</span><span>BTC<b id="lbBtc">—</b></span><span>Next difficulty<b id="lbDiff">—</b></span><span>Hashprice<b id="lbHp">—</b></span><span>PEARL<b id="lbPrl">—</b><i id="lbPrlCh"></i></span><span class="g on">◆ NiceHash · ● live</span><span class="g">◆ Braiins · watch</span><span class="g on">◆ MiningRigRentals · ● live</span><span class="g on">◆ Clore GPU spot · ● live</span><span>Engineered in Rust · Windows · Ubuntu · Debian</span>
+  <span class="lv">● LIVE MARKETS</span><span>BTC<b id="lbBtc">—</b><i id="lbBtcCh"></i></span><span>Next difficulty<b id="lbDiff">—</b></span><span>Hashprice<b id="lbHp">—</b></span><span>PEARL<b id="lbPrl">—</b><i id="lbPrlCh"></i></span><span class="g on">◆ NiceHash · ● live</span><span class="g">◆ Braiins · watch</span><span class="g on">◆ MiningRigRentals · ● live</span><span class="g on">◆ Clore GPU spot · ● live</span><span>Engineered in Rust · Windows · Ubuntu · Debian</span>
 </div></div>
 <header class="top">
   <div class="wrap nav">
@@ -956,7 +959,7 @@ odin --market nicehash live      <span class="c"># resume</span></div>
         <div class="ob-seq">
           <div class="step"><span class="n">01 · MEASURES</span><h3>Pool vs every buyer, every minute</h3><p>Your pool's payout after its fee, against the NiceHash clearing price after the 2% seller fee and the median price renters are paying on MiningRigRentals after its 3%. A 1% switching cost is charged against selling, so a win is a real win.</p></div>
           <div class="step"><span class="n">02 · BY TIER</span><h3>Priced at your pool's fee</h3><p>Tier 1, 2 and 3 views reprice the pool side at the fee each kind of operator actually pays, from negotiated institutional FPPS to list PPS+ and zero-fee pools. The answer changes with the fee, and OUTBOUND shows you yours.</p></div>
-          <div class="step"><span class="n">03 · GPUS TOO</span><h3>Host it or mine it</h3><p>For each GPU model, what renters pay on <b>Clore.ai</b> and <b>Vast.ai</b> after their cuts, against what that card earns mining. Data-centre parts show their AI rental rate. Live this morning: an RTX 5090 hosted on Vast.ai for <b>$10.56</b> a day against <b>$7.42</b> mining Pearl; an H100 SXM rents for <b>$29.28</b> a day.</p></div>
+          <div class="step"><span class="n">03 · GPUS TOO</span><h3>Host it or mine it</h3><p>For each GPU model, what renters pay on <b>Clore.ai</b> and <b>Vast.ai</b> after their cuts, against what that card earns mining. Data-centre parts (B300, GB300, B200, H200, H100, A100) show their AI rental rate. Live this morning: an RTX 5090 hosted on Vast.ai for <b>$10.56</b> a day against <b>$7.42</b> mining Pearl; an H100 SXM rents for <b>$29.28</b> a day and a B300 for <b>$189</b>. In the Tier 1 and Tier 2 views the card shows data-centre GPUs only.</p></div>
         </div>
       </div>
       <p class="sample mono">Live capture from our own rig · 20 Nov 2026, 09:00 CST · real numbers, nothing staged: pool 45,648 vs NiceHash seller 42,444 sats per PH/s per day, so right now the pool wins and OUTBOUND says so. On the GPU side, Vast.ai and Clore.ai hosting beat mining Pearl for most current cards.</p>
@@ -1458,21 +1461,44 @@ odin --verify-audit odin_audit.jsonl   <span class="c"># AUDIT OK · hash chain 
   function set(id, txt, cls) { document.querySelectorAll('#' + id + ', [data-dup="' + id + '"]').forEach(function (e) { e.textContent = txt; if (cls) e.className = cls; }); }
   var fmt = function (n, d) { return Number(n).toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d }); };
   var get = function (u) { return fetch(u).then(function (r) { if (!r.ok) throw r.status; return r.json(); }); };
-  get('https://mempool.space/api/v1/prices').then(function (p) {
-    if (!p.USD) return; set('lbBtc', '$' + fmt(p.USD, 0));
-    return Promise.all([get('https://mempool.space/api/v1/mining/hashrate/3d'), get('https://mempool.space/api/v1/mining/reward-stats/144')]).then(function (a) {
-      var d = a[0].currentDifficulty, reward = Number(a[1].totalReward) / 1e8 / 144;
-      var btcPerPhDay = 86400 * reward * 1e15 / (d * 4294967296);
-      set('lbHp', '$' + fmt(btcPerPhDay * p.USD, 2) + ' / PH / day');
+  // live prices: refreshed every 15 s; the price turns green with ▲ after an up-tick and red with ▼ after a down-tick
+  var last = {}, dir = {};
+  function live(id, v, txt) {
+    if (last[id] != null && v !== last[id]) dir[id] = v > last[id] ? 1 : -1;
+    var d = dir[id] || 0, moved = last[id] != null && v !== last[id]; last[id] = v;
+    document.querySelectorAll('#' + id + ', [data-dup="' + id + '"]').forEach(function (e) {
+      e.textContent = (d > 0 ? '▲ ' : d < 0 ? '▼ ' : '') + txt;
+      e.className = d > 0 ? 'up' : d < 0 ? 'dn' : '';
+      if (moved) { e.classList.remove('fl'); void e.offsetWidth; e.classList.add('fl'); }
     });
-  }).catch(function () {});
+  }
+  var hpDone = false;
+  function btc() {
+    get('https://mempool.space/api/v1/prices').then(function (p) {
+      if (!p.USD) return; live('lbBtc', p.USD, '$' + fmt(p.USD, 0));
+      if (hpDone) return; hpDone = true;
+      return Promise.all([get('https://mempool.space/api/v1/mining/hashrate/3d'), get('https://mempool.space/api/v1/mining/reward-stats/144')]).then(function (a) {
+        var d = a[0].currentDifficulty, reward = Number(a[1].totalReward) / 1e8 / 144;
+        var btcPerPhDay = 86400 * reward * 1e15 / (d * 4294967296);
+        set('lbHp', '$' + fmt(btcPerPhDay * p.USD, 2) + ' / PH / day');
+      });
+    }).catch(function () { hpDone = false; });
+    get('https://api.exchange.coinbase.com/products/BTC-USD/stats').then(function (j) {
+      var o = parseFloat(j.open), l = parseFloat(j.last); if (!(o > 0 && l > 0)) return;
+      var ch = (l / o - 1) * 100; set('lbBtcCh', (ch >= 0 ? '▲ +' : '▼ ') + fmt(Math.abs(ch), 1) + '% 24h', ch >= 0 ? 'up' : 'dn');
+    }).catch(function () {});
+  }
+  function prl() {
+    get('https://safetrade.com/api/v2/peatio/public/markets/pearlusdt/tickers').then(function (j) {
+      var t = j.ticker; if (!t) return; var v = parseFloat(t.last), ch = parseFloat(String(t.price_change_percent).replace('%', ''));
+      live('lbPrl', v, '$' + fmt(Math.floor(v * 100) / 100, 2));
+      set('lbPrlCh', (ch >= 0 ? '▲ +' : '▼ ') + fmt(Math.abs(ch), 1) + '% 24h', ch >= 0 ? 'up' : 'dn');
+    }).catch(function () {});
+  }
+  btc(); prl(); setInterval(function () { if (!document.hidden) { btc(); prl(); } }, 15000);
   get('https://mempool.space/api/v1/difficulty-adjustment').then(function (j) {
     var d = j.difficultyChange, days = (j.remainingTime || 0) / 86400000;
     set('lbDiff', (d >= 0 ? '+' : '') + fmt(d, 1) + '% in ' + fmt(days, 1) + ' d', d >= 0 ? 'dn' : 'up');
-  }).catch(function () {});
-  get('https://safetrade.com/api/v2/peatio/public/markets/pearlusdt/tickers').then(function (j) {
-    var t = j.ticker; if (!t) return; var ch = parseFloat(String(t.price_change_percent).replace('%', ''));
-    set('lbPrl', '$' + fmt(t.last, 3)); set('lbPrlCh', (ch >= 0 ? '▲ +' : '▼ ') + fmt(ch, 1) + '%', ch >= 0 ? 'up' : 'dn');
   }).catch(function () {});
 })();
 </script>

@@ -93,7 +93,7 @@ Each venue connects through an adapter that translates its native instrument (or
   <img src="assets/outbound-gpu.jpg" alt="HUGINN OUTBOUND GPUs: hosting on Clore vs mining, per model" width="31%">
 </p>
 
-ODIN prices every venue from the buyer's side. **OUTBOUND** turns the same models around for operators who own their machines. Every minute it compares what your pool pays (after its fee) with what buyers pay right now on **NiceHash** (clearing price, 2% seller fee) and **MiningRigRentals** (median rented price, 3% fee), less a 1% switching cost. For GPUs it compares hosting each model on **Clore.ai** and **Vast.ai** (after their cuts) with mining on it, and shows the AI rental rate for data-centre parts (H100, H200, B200, A100).
+ODIN prices every venue from the buyer's side. **OUTBOUND** turns the same models around for operators who own their machines. Every minute it compares what your pool pays (after its fee) with what buyers pay right now on **NiceHash** (clearing price, 2% seller fee) and **MiningRigRentals** (median rented price, 3% fee), less a 1% switching cost. For GPUs it compares hosting each model on **Clore.ai** and **Vast.ai** (after their cuts) with mining on it, and shows the AI rental rate for data-centre parts (B300, GB300, GB200, B200, H200, H100, A100).
 
 | | What it does |
 | --- | --- |
@@ -101,7 +101,7 @@ ODIN prices every venue from the buyer's side. **OUTBOUND** turns the same model
 | **Routing · built per customer** | Built live with you: your pool connected (Foundry, Luxor, F2Pool, AntPool, ViaBTC, Braiins, OCEAN, …), one relay so miners are pointed once, seller accounts in your name with list-and-price keys only, caps per machine and site, SLEIPNIR heat cut-offs, a kill switch, and every switch in the hash-chained audit ledger. A 72-hour shadow run on your own numbers comes first. |
 | **Venues** | NiceHash and MiningRigRentals (SHA-256); Clore.ai and Vast.ai (GPU hosting). Braiins Hashpower is buy-only, so there is nothing to sell into. Vast.ai does not publish its host cut; OUTBOUND assumes 25% and prices from the cheapest quarter of live asks. |
 
-<sub>Live capture from our own rig, 20 Nov 2026 09:00 CST: pool 45,648 vs NiceHash seller 42,444 sats per PH/s per day, so the pool wins and OUTBOUND says so. On Vast.ai an RTX 5090 hosts for $10.56/day against $7.42 mining Pearl, and an H100 SXM rents for $29.28/day. <a href="https://asgardhashworks.github.io/odin-suite-releases/#outbound">Talk to us about your fleet →</a></sub>
+<sub>Live capture from our own rig, 20 Nov 2026 09:00 CST: pool 45,648 vs NiceHash seller 42,444 sats per PH/s per day, so the pool wins and OUTBOUND says so. On Vast.ai an RTX 5090 hosts for $10.56/day against $7.42 mining Pearl, an H100 SXM rents for $29.28/day and a B300 for $189/day. BTC and PRL prices on the site and in SLEIPNIR tick green on an up-move and red on a down-move. <a href="https://asgardhashworks.github.io/odin-suite-releases/#outbound">Talk to us about your fleet →</a></sub>
 
 <img src="assets/h05.png" alt="05 Quantitative engine" width="100%">
 
