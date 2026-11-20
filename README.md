@@ -100,7 +100,7 @@ Ten models, one decision every 2 seconds.
 
 | Control | Implementation |
 | --- | --- |
-| Key custody | Credentials stay on the host: owner-only on Windows; `root:root 0600` on Linux, injected by `systemd`. Withdrawal permission is never required and should remain disabled. |
+| Key custody | Credentials stay on the host, encrypted at rest: DPAPI on Windows, TPM2-sealed systemd credentials on Linux. Withdrawal permission is never required and should stay off. |
 | Least privilege | Linux services run as a no-login account with `ProtectSystem=strict`, `NoNewPrivileges`, `MemoryDenyWriteExecute` and an empty capability set. |
 | Network exposure | Outbound HTTPS to a short published host list. No listening ports; HUGINN binds to loopback and is published only through Tailscale. |
 | Audit trail | Every decision is appended to `odin_audit.jsonl` as a SHA-256 hash chain. `odin --verify-audit` detects any edited, deleted or reordered entry; the JSON lines feed Loki, Splunk or Elastic. |

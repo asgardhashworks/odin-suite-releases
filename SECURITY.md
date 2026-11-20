@@ -73,7 +73,7 @@ Every decision and action (bids, raises, parks, kill-switch trips, rentals, re-b
 ## Secrets at rest, by platform
 
 - **Windows:** API keys, secrets, passwords and alert tokens in `odin.env` are sealed with DPAPI (current-user scope, application entropy) on first start.
-- **Linux:** `odin.env` is restricted to its owner (mode 0600). Run ODIN under a dedicated no-login service user on an encrypted volume. Hardware-backed storage (TPM, kernel keyring) is not used yet.
+- **Linux:** secrets are encrypted with systemd encrypted credentials (`systemd-creds`), sealed to the machine's TPM2 chip plus host key (host key alone where no TPM exists). `deploy/linux/odin-seal-secrets.sh` moves them out of `odin.env`, proves each one decrypts, and wires `LoadCredentialEncrypted=` into `odin.service`; systemd decrypts them at start into a private in-memory directory only that service can read. Requires systemd 250+ (Ubuntu 22.04+, Debian 12+). Keep `/etc` on an encrypted volume.
 
 ## Release integrity
 

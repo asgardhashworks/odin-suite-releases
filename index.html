@@ -937,7 +937,7 @@ odin --market nicehash live      <span class="c"># resume</span></div>
         </div>
       </div>
       <div class="safety">
-        <div class="safe"><h3>Keys encrypted at rest</h3><p>The first time ODIN starts, every API key, secret and password in its settings file is sealed with Windows DPAPI, bound to your Windows account. Copy the file to another PC and it is useless. On Linux the file is locked to its owner.</p></div>
+        <div class="safe"><h3>Keys encrypted at rest</h3><p>Windows: every API key, secret and password is sealed with DPAPI to your account the first time ODIN starts. Linux: sealed to the machine's TPM2 chip with systemd encrypted credentials, and decrypted in memory for the ODIN service only. Copy the files to another machine and they are useless.</p></div>
         <div class="safe"><h3>No withdrawals</h3><p>Use marketplace keys with withdrawals turned off. ODIN never needs to move coins out of your accounts.</p></div>
         <div class="safe"><h3>Watch-only first</h3><p>Every install starts in watch-only mode. Nothing trades until you switch it on yourself.</p></div>
         <div class="safe"><h3>Verified builds</h3><p>Programs are built by GitHub Actions. Each release ships SHA256 checksums; the Linux installer refuses a mismatch.</p></div>
