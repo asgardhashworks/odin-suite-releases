@@ -943,23 +943,23 @@ odin --market nicehash live      <span class="c"># resume</span></div>
       <div class="sec-head">
         <div class="eyebrow"><b>// NEW · OUTBOUND</b> For operators who own their machines</div>
         <h2>Your hashrate, sold <span class="gold-text">only when it pays more.</span></h2>
-        <p class="lead">ODIN already prices every venue from the buyer's side. OUTBOUND turns the same models around. Every minute it measures what your pool pays against what buyers on NiceHash, MiningRigRentals and Clore.ai are paying right now, after every fee and a switching cost. When renting out beats the pool, you see it, how often, and what it would have been worth per PH/s.</p>
+        <p class="lead">ODIN already prices every venue from the buyer's side. OUTBOUND turns the same models around. Every minute it measures what your pool pays against what buyers on NiceHash and MiningRigRentals pay for hashrate, and what Clore.ai and Vast.ai renters pay for GPUs, right now, after every fee and a switching cost. When renting out beats the pool, you see it, how often, and what it would have been worth per PH/s.</p>
         <p class="lead" style="margin-top:12px">Today it runs in <b>shadow mode</b> inside HUGINN: it measures and sells nothing. For your fleet, we build the routing <b>live, on your pool and your venues</b>, and prove it on your own numbers before a single machine is switched.</p>
         <div class="ob-status"><span class="live"><b>SHADOW</b> · LIVE IN HUGINN TODAY</span><span class="build">◆ <b>ROUTING</b> · BUILT PER CUSTOMER</span><span><b>NO CUSTODY</b> · PAYOUTS GO TO YOUR WALLET</span></div>
       </div>
       <div class="ob-grid">
         <div class="ob-phones">
-          <figure class="phone"><div class="frame"><img src="media/huginn-outbound-you.jpg" alt="HUGINN OUTBOUND tab, live: pool pays 45,642 sats per PH/s per day, NiceHash sellers would get 43,865, so the pool wins by 4.9%" loading="lazy"></div><figcaption><b>Selling vs pool</b> · every minute</figcaption></figure>
+          <figure class="phone"><div class="frame"><img src="media/huginn-outbound-you.jpg" alt="HUGINN OUTBOUND tab, live: pool pays 45,648 sats per PH/s per day, NiceHash sellers would get 42,444, so the pool wins" loading="lazy"></div><figcaption><b>Selling vs pool</b> · every minute</figcaption></figure>
           <figure class="phone"><div class="frame"><img src="media/huginn-outbound-t2.jpg" alt="HUGINN OUTBOUND Tier 2 view: mid-market farms, pool side priced at a 4% fee, with F2Pool, AntPool, ViaBTC, SpiderPool and SECPOOL" loading="lazy"></div><figcaption><b>Tier 1 · 2 · 3</b> · your pool's fee</figcaption></figure>
-          <figure class="phone"><div class="frame"><img src="media/huginn-outbound-gpu.jpg" alt="HUGINN OUTBOUND GPU card: hosting on Clore vs mining, per model, with your own GPUs tagged" loading="lazy"></div><figcaption><b>GPUs</b> · host on Clore vs mine</figcaption></figure>
+          <figure class="phone"><div class="frame"><img src="media/huginn-outbound-gpu.jpg" alt="HUGINN OUTBOUND GPU card: hosting on Clore.ai and Vast.ai vs mining, per model, with your own GPUs tagged and AI rental rates for H100, H200, B200 and A100" loading="lazy"></div><figcaption><b>GPUs</b> · Clore · Vast.ai · mine</figcaption></figure>
         </div>
         <div class="ob-seq">
           <div class="step"><span class="n">01 · MEASURES</span><h3>Pool vs every buyer, every minute</h3><p>Your pool's payout after its fee, against the NiceHash clearing price after the 2% seller fee and the median price renters are paying on MiningRigRentals after its 3%. A 1% switching cost is charged against selling, so a win is a real win.</p></div>
           <div class="step"><span class="n">02 · BY TIER</span><h3>Priced at your pool's fee</h3><p>Tier 1, 2 and 3 views reprice the pool side at the fee each kind of operator actually pays, from negotiated institutional FPPS to list PPS+ and zero-fee pools. The answer changes with the fee, and OUTBOUND shows you yours.</p></div>
-          <div class="step"><span class="n">03 · GPUS TOO</span><h3>Host it or mine it</h3><p>For each GPU model, what renters pay on Clore.ai after its host fee, against what that card earns mining. Live this morning: an RTX 5090 hosted for <b>$10.40</b> a day against <b>$7.31</b> mining Pearl, while our own RTX 5070 Ti earns more mining.</p></div>
+          <div class="step"><span class="n">03 · GPUS TOO</span><h3>Host it or mine it</h3><p>For each GPU model, what renters pay on <b>Clore.ai</b> and <b>Vast.ai</b> after their cuts, against what that card earns mining. Data-centre parts show their AI rental rate. Live this morning: an RTX 5090 hosted on Vast.ai for <b>$10.56</b> a day against <b>$7.42</b> mining Pearl; an H100 SXM rents for <b>$29.28</b> a day.</p></div>
         </div>
       </div>
-      <p class="sample mono">Live capture from our own rig · 20 Nov 2026, 07:55 CST · real numbers, nothing staged: pool 45,642 vs NiceHash seller 43,865 sats per PH/s per day. Right now the pool wins by 4.9%, and OUTBOUND says so.</p>
+      <p class="sample mono">Live capture from our own rig · 20 Nov 2026, 09:00 CST · real numbers, nothing staged: pool 45,648 vs NiceHash seller 42,444 sats per PH/s per day, so right now the pool wins and OUTBOUND says so. On the GPU side, Vast.ai and Clore.ai hosting beat mining Pearl for most current cards.</p>
       <div class="ob-build">
         <h3>Built <em>live</em> for your fleet.</h3>
         <p>Outbound routing isn't a checkbox. Every operator has a different pool contract, fleet and set of venues, so we build it with you, on your infrastructure, in stages you approve.</p>
@@ -1139,7 +1139,7 @@ odin --market nicehash live      <span class="c"># resume</span></div>
           <div class="ent-cards">
             <div><h3>Linux x86_64</h3><p>Ubuntu 22.04+ and Debian 12+. Sandboxed systemd services, a no-login service account and root-only keys.</p></div>
             <div><h3>Offline licences</h3><p>Signed <span class="mono">.lic</span> files: machine-bound or site-wide, with optional expiry. No licence server needed.</p></div>
-            <div><h3>Outbound routing <span class="newpill">NEW</span></h3><p>Sell your hashrate when buyers pay more than your pool. Shadow-measured first, then built live on your pool, venues and limits.</p></div>
+            <div><h3>Outbound routing <span class="newpill">NEW</span></h3><p>Sell your hashrate when buyers pay more than your pool, or host GPUs on Clore.ai and Vast.ai when that beats mining. Shadow-measured first, then built live on your pool, venues and limits.</p></div>
             <div><h3>Audit ledger</h3><p>Hash-chained JSON lines for every decision. Feed it to Loki, Splunk or Elastic.</p></div>
             <div><h3>Published network list</h3><p>Outbound HTTPS to a short list of hosts. Nothing listens on the network; HUGINN uses loopback plus Tailscale.</p></div>
           </div>

@@ -93,15 +93,15 @@ Each venue connects through an adapter that translates its native instrument (or
   <img src="assets/outbound-gpu.jpg" alt="HUGINN OUTBOUND GPUs: hosting on Clore vs mining, per model" width="31%">
 </p>
 
-ODIN prices every venue from the buyer's side. **OUTBOUND** turns the same models around for operators who own their machines. Every minute it compares what your pool pays (after its fee) with what buyers pay right now on **NiceHash** (clearing price, 2% seller fee) and **MiningRigRentals** (median rented price, 3% fee), less a 1% switching cost. For GPUs it compares hosting each model on **Clore.ai** (after its host fee) with mining on it.
+ODIN prices every venue from the buyer's side. **OUTBOUND** turns the same models around for operators who own their machines. Every minute it compares what your pool pays (after its fee) with what buyers pay right now on **NiceHash** (clearing price, 2% seller fee) and **MiningRigRentals** (median rented price, 3% fee), less a 1% switching cost. For GPUs it compares hosting each model on **Clore.ai** and **Vast.ai** (after their cuts) with mining on it, and shows the AI rental rate for data-centre parts (H100, H200, B200, A100).
 
 | | What it does |
 | --- | --- |
 | **Shadow · live in HUGINN today** | Measures and sells nothing. Shows how often selling would have beaten the pool and what that was worth per PH/s per day. **Tier 1 / 2 / 3** views reprice the pool side at the fee each class of operator pays. |
 | **Routing · built per customer** | Built live with you: your pool connected (Foundry, Luxor, F2Pool, AntPool, ViaBTC, Braiins, OCEAN, …), one relay so miners are pointed once, seller accounts in your name with list-and-price keys only, caps per machine and site, SLEIPNIR heat cut-offs, a kill switch, and every switch in the hash-chained audit ledger. A 72-hour shadow run on your own numbers comes first. |
-| **Venues** | NiceHash and MiningRigRentals (SHA-256), Clore.ai (GPU hosting). Braiins Hashpower is buy-only, so there is nothing to sell into. Vast.ai is next for GPUs. |
+| **Venues** | NiceHash and MiningRigRentals (SHA-256); Clore.ai and Vast.ai (GPU hosting). Braiins Hashpower is buy-only, so there is nothing to sell into. Vast.ai does not publish its host cut; OUTBOUND assumes 25% and prices from the cheapest quarter of live asks. |
 
-<sub>Live capture from our own rig, 20 Nov 2026 07:55 CST: pool 45,642 vs NiceHash seller 43,865 sats per PH/s per day, so the pool wins by 4.9% and OUTBOUND says so. On Clore an RTX 5090 hosted for $10.40/day against $7.31 mining Pearl. <a href="https://asgardhashworks.github.io/odin-suite-releases/#outbound">Talk to us about your fleet →</a></sub>
+<sub>Live capture from our own rig, 20 Nov 2026 09:00 CST: pool 45,648 vs NiceHash seller 42,444 sats per PH/s per day, so the pool wins and OUTBOUND says so. On Vast.ai an RTX 5090 hosts for $10.56/day against $7.42 mining Pearl, and an H100 SXM rents for $29.28/day. <a href="https://asgardhashworks.github.io/odin-suite-releases/#outbound">Talk to us about your fleet →</a></sub>
 
 <img src="assets/h05.png" alt="05 Quantitative engine" width="100%">
 
