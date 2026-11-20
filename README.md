@@ -141,7 +141,8 @@ Vulnerability reports: [SECURITY.md](SECURITY.md) · Support channels and respon
 
 <img src="assets/h07.png" alt="07 Operator telemetry" width="100%">
 
-<p align="center"><img src="assets/huginn-v3.png" alt="HUGINN on a phone: execution with verified P/L, live order book, quant desk and Clore GPU spot with auto-rent" width="100%"></p>
+<p align="center"><img src="assets/huginn-live.png" alt="HUGINN live capture, 20 Nov 2026: verified +194 sats, live order book, quant desk and Clore GPU spot" width="100%"></p>
+<p align="center"><sub>Live capture from our own rig, 20 Nov 2026 03:38 CST. Real numbers, nothing staged: verified <b>+194 sats</b> (NiceHash charged 16,587 · Kryptex credited 16,781), audit chain intact at 158 records. ODIN is parked at 0.4331 because the market sits above its profitable ceiling: the profit guard holds rather than overpay.</sub></p>
 
 <img src="assets/h08.png" alt="08 Deployment" width="100%">
 
