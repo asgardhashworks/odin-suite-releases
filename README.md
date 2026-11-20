@@ -71,7 +71,7 @@ Each venue connects through an adapter that translates its native instrument (or
 
 <img src="assets/h05.png" alt="05 Quantitative engine" width="100%">
 
-Ten models, one decision every 2 seconds.
+Eighteen models, one decision every 2 seconds. Every model reports a statistic that can be checked, and `odin --quant-report` replays recorded order books through the whole desk so anyone with the recordings can reproduce the numbers.
 
 | Model | Method |
 | --- | --- |
@@ -84,7 +84,20 @@ Ten models, one decision every 2 seconds.
 | Fill curve | Isotonic regression of served share versus distance from the clearing price. |
 | Competitive bid pricing | Auction venues are valued at the best rival bid plus the venue's minimum increment, never at the listed floor; unverified prices cannot raise an alert. |
 | GPU valuation | Each rented card is valued per coin from measured hashrate and power, derated for host power limits, net of pool and venue fees. |
-| Walk-forward validation | `odin --optimize` replays recorded markets with no look-ahead; a setting is adopted only if it wins out of sample. |
+| Walk-forward validation | `odin --optimize` replays recorded markets with no look-ahead; a setting is adopted only if it wins out of sample and passes the overfitting test below. |
+
+**Quant desk (models 11–18)**
+
+| Model | Method | Measured on 72 h of live NiceHash data (17–20 Nov 2026) |
+| --- | --- | --- |
+| Bayesian change-points | Online run-length posterior (Adams & MacKay 2007) with a Normal-Gamma prior and Student-t predictive; a shift counts only once the new level has held for 20 minutes. A confirmed shift re-plans the park price. | 9 confirmed shifts; two-sided CUSUM fired 22 times on the same data |
+| Kalman-filtered delivery | Local-level state-space model of the share of modelled income the pool credits, with innovation-adaptive measurement noise (Mehra 1970). Its posterior sd replaces the fixed model error band once 12 h of credits exist. | Normalised innovation squared 0.78 (ideal 1.0) |
+| Adaptive conformal inference | Online conformal intervals with adaptive miscoverage (Gibbs & Candès 2021). Coverage holds for any data sequence. The dip-speed boost requires the 90% conformal lower bound on 6-hour delivery to clear the margin rule. | Coverage reported live |
+| Quantile forecast | Online linear quantile regression (Koenker & Bassett 1978) of the 30-minute clearing-price move, rearranged to prevent crossing, conformalised (CQR, Romano et al. 2019). Scored against a random walk on the same pinball loss. | 81% coverage of an 80% band over 365 forecasts; +7.7% skill vs random walk |
+| Mean reversion | Ornstein-Uhlenbeck on two time scales by exact AR(1) maximum likelihood with a Dickey-Fuller test; exact mean first-passage times; renewal-reward optimal dip depth. A dip classed as transient noise gets no paid dip order. | 13-minute half-life on 10-minute prices (DF t = −5.7); hourly scale not significant |
+| Rival ceiling posterior | Each Clore rival's ceiling bracketed between its highest bid and the bid it walked away from; product-limit (Kaplan-Meier) survival pooled across rivals for bots still fighting. A war against a rival whose ceiling is above yours with 85%+ probability is declined. | Learned live |
+| War-step bandit | Thompson sampling (Beta-Bernoulli, discounted) over jump sizes of 2–15%, scored by whether the GPUs were held through the rival's measured reaction window, weighed by the profit headroom left. | Learned live |
+| Probability of backtest overfitting | Combinatorially symmetric cross-validation over 8 time blocks (70 splits, both directions; Bailey, Borwein, López de Prado & Zhu 2017). `--optimize` adopts nothing when PBO exceeds 30%. | On current history the candidates tie out of sample, so the default is kept |
 
 <img src="assets/h06.png" alt="06 Risk and security" width="100%">
 

@@ -332,6 +332,29 @@ footer .row { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 500 12px/1.4 
 @keyframes tick { to { transform: translateX(-50%); } }
 /* engine section */
 .models { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border: 1px solid var(--line); }
+/* hero proof strip: real measured numbers */
+.proof { margin-top: 22px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--gold-lo); background: linear-gradient(180deg, rgba(216,170,69,.08), rgba(216,170,69,.02)), rgba(10,12,13,.92); backdrop-filter: blur(2px); position: relative; overflow: hidden; }
+.proof::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 30%, rgba(246,220,140,.10) 50%, transparent 70%); background-size: 250% 100%; animation: proofSweep 5s ease-in-out infinite; pointer-events: none; }
+@keyframes proofSweep { 0%, 100% { background-position: 120% 0; } 50% { background-position: -20% 0; } }
+.proof .pf { padding: 14px 14px 12px; display: grid; gap: 6px; min-width: 0; }
+.proof .pf + .pf { border-left: 1px solid rgba(216,170,69,.25); }
+.proof .pf b { font: 700 28px/1 var(--display); background: linear-gradient(180deg, #fff3c9, var(--amber) 60%, var(--gold-lo)); -webkit-background-clip: text; background-clip: text; color: transparent; white-space: nowrap; }
+.proof .pf span { font: 500 10.5px/1.35 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--dim); }
+.proof small { grid-column: 1 / -1; border-top: 1px solid rgba(216,170,69,.25); padding: 8px 14px; font: 500 11px/1.4 var(--mono); color: var(--dim); }
+.proof code { color: var(--gold-hi); }
+@media (max-width: 560px) { .proof { grid-template-columns: repeat(2, minmax(0, 1fr)); } .proof .pf:nth-child(3) { border-left: 0; } .proof .pf:nth-child(n+3) { border-top: 1px solid rgba(216,170,69,.25); } .proof .pf b { font-size: 24px; } }
+/* quant desk models: hairline grid, gold frame */
+.qmodels { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: rgba(216,170,69,.28); border: 1px solid var(--gold-lo); margin-top: 18px; box-shadow: 0 0 60px rgba(216,170,69,.08); }
+.qmodels .model { background: linear-gradient(180deg, #0f1214, #0a0c0d); border: 0 !important; }
+.qmodels .model .k { display: flex; justify-content: space-between; gap: 8px; }
+.qmodels .model .k i { font-style: normal; color: var(--ok); letter-spacing: .1em; }
+.qmodels .model .ref { font: 500 10.5px/1.4 var(--mono); color: var(--gold-lo); letter-spacing: .04em; }
+.qmodels .model .meas { font: 600 11px/1.4 var(--mono); color: var(--ok); }
+.qhead { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-top: 34px; }
+.qhead b { font: 700 13px/1 var(--mono); letter-spacing: .22em; color: var(--amber); }
+.qhead span { color: var(--dim); font: 500 12px/1.4 var(--mono); }
+@media (max-width: 960px) { .qmodels { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .qmodels { grid-template-columns: minmax(0, 1fr); } }
 .model { padding: 20px 18px; display: grid; gap: 8px; align-content: start; min-width: 0; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); position: relative; }
 .model:nth-child(4n) { border-right: 0; }
 .model:nth-last-child(-n+4) { border-bottom: 0; }
@@ -614,10 +637,17 @@ footer .hits img { display: block; height: 20px; width: auto; }
   <div class="hero-coin coin-wrap" aria-hidden="true"><img class="coin" src="media/btc-coin.png" alt="" width="118" height="118"></div>
   <div class="wrap hero">
     <div>
-      <div class="eyebrow"><b>// OPS</b> Multi-venue execution · Rust</div>
-      <h1>Run your mining farm like an <em>operations center</em>.</h1>
-      <p class="lead">ODIN Suite is a multi-venue execution engine for mining capital. It prices SHA-256 hashrate and rented GPU compute across four marketplaces in one unit of account, and commits capital only where the margin clears your rules.</p>
-      <p class="lead" style="margin-top:12px">Every two seconds it reprices, weighs the rival bids it would have to beat, and checks itself against what your pool actually pays. It also supervises every miner you own, from one GPU to a warehouse of ASICs, and the whole operation fits on your phone.</p>
+      <div class="eyebrow"><b>// QUANT</b> 18 live models · 2-second loop · Rust</div>
+      <h1>The market moves. <em>ODIN has already priced it.</em></h1>
+      <p class="lead">A quantitative execution engine for mining capital. Bayesian change-point inference, Kalman filtering, conformal prediction and exact first-passage times price hashrate and GPU compute across four venues, and commit capital only when the <b>lower bound</b> of the margin clears your rules.</p>
+      <p class="lead" style="margin-top:12px">Every forecast earns its error bar in public. It runs inside your perimeter, hash-chains every decision, and never holds a withdrawal key.</p>
+      <div class="proof" aria-label="Measured on live NiceHash data">
+        <div class="pf"><b data-to="81" data-suf="%">81%</b><span>realised coverage<br>of an 80% band</span></div>
+        <div class="pf"><b data-to="7.7" data-pre="+" data-suf="%" data-dp="1">+7.7%</b><span>forecast skill<br>vs random walk</span></div>
+        <div class="pf"><b data-to="13" data-suf=" min">13 min</b><span>reversion half-life<br>DF t = −5.7</span></div>
+        <div class="pf"><b data-to="9">9</b><span>regime shifts<br>confirmed in 72 h</span></div>
+        <small>Measured by <code>odin --quant-report</code> on 72 h of live NiceHash SHA256AsicBoost order books, 17–20 Nov 2026.</small>
+      </div>
       <div class="cta">
         <a class="btn solid" href="https://github.com/asgardhashworks/odin-suite-releases/releases/latest" target="_blank" rel="noopener">Download free</a>
         <a class="btn" href="#plans">See plans</a>
@@ -673,17 +703,17 @@ footer .hits img { display: block; height: 20px; width: auto; }
   </section>
 
   <div class="ticker" aria-hidden="true"><div class="ticker-in">
-    <span><b>01</b>Live hashvalue</span><span><b>02</b>Delay-aware calibration</span><span><b>03</b>Retarget forecast <span class="nc" style="padding:0">± σ</span></span><span><b>04</b>Budget pacing · Lagrangian</span><span><b>05</b>Spend into the dip</span><span><b>06</b>CUSUM change-points</span><span><b>07</b>Partial-fill curve · isotonic</span><span><b>08</b>Walk-forward tuning</span><span><b>09</b>Priced to win · auction bids</span><span><b>10</b>GPU valuation · every coin</span><span><b>◆</b>NiceHash · Braiins · MiningRigRentals · Clore.ai · hot switch</span><span><b>◆</b>Rent-or-skip · rigs ≥ 7 PH/s</span><span><b>🔥</b>Hot windows · phone + e-mail alerts</span><span><b>🔒</b>DPAPI · Ed25519 · SHA-256 · WireGuard · zero custody</span><span><b>◆</b>Clore order guard · auto re-bid · auto-stop</span>
-    <span><b>01</b>Live hashvalue</span><span><b>02</b>Delay-aware calibration</span><span><b>03</b>Retarget forecast <span class="nc" style="padding:0">± σ</span></span><span><b>04</b>Budget pacing · Lagrangian</span><span><b>05</b>Spend into the dip</span><span><b>06</b>CUSUM change-points</span><span><b>07</b>Partial-fill curve · isotonic</span><span><b>08</b>Walk-forward tuning</span><span><b>09</b>Priced to win · auction bids</span><span><b>10</b>GPU valuation · every coin</span><span><b>◆</b>NiceHash · Braiins · MiningRigRentals · Clore.ai · hot switch</span><span><b>◆</b>Rent-or-skip · rigs ≥ 7 PH/s</span><span><b>🔥</b>Hot windows · phone + e-mail alerts</span><span><b>🔒</b>DPAPI · Ed25519 · SHA-256 · WireGuard · zero custody</span><span><b>◆</b>Clore order guard · auto re-bid · auto-stop</span>
+    <span><b>01</b>Live hashvalue</span><span><b>02</b>Delay-aware calibration</span><span><b>03</b>Retarget forecast <span class="nc" style="padding:0">± σ</span></span><span><b>04</b>Budget pacing · Lagrangian</span><span><b>05</b>Spend into the dip</span><span><b>06</b>CUSUM change-points</span><span><b>07</b>Partial-fill curve · isotonic</span><span><b>08</b>Walk-forward tuning</span><span><b>09</b>Priced to win · auction bids</span><span><b>10</b>GPU valuation · every coin</span><span><b>11</b>Bayesian change-points</span><span><b>12</b>Kalman-filtered delivery</span><span><b>13</b>Adaptive conformal bands</span><span><b>14</b>Quantile forecast · CQR</span><span><b>15</b>OU first-passage times</span><span><b>16</b>Rival ceiling posterior</span><span><b>17</b>Thompson-sampled wars</span><span><b>18</b>PBO · CSCV</span><span><b>◆</b>NiceHash · Braiins · MiningRigRentals · Clore.ai · hot switch</span><span><b>◆</b>Rent-or-skip · rigs ≥ 7 PH/s</span><span><b>🔥</b>Hot windows · phone + e-mail alerts</span><span><b>🔒</b>DPAPI · Ed25519 · SHA-256 · WireGuard · zero custody</span><span><b>◆</b>Clore order guard · auto re-bid · auto-stop</span>
+    <span><b>01</b>Live hashvalue</span><span><b>02</b>Delay-aware calibration</span><span><b>03</b>Retarget forecast <span class="nc" style="padding:0">± σ</span></span><span><b>04</b>Budget pacing · Lagrangian</span><span><b>05</b>Spend into the dip</span><span><b>06</b>CUSUM change-points</span><span><b>07</b>Partial-fill curve · isotonic</span><span><b>08</b>Walk-forward tuning</span><span><b>09</b>Priced to win · auction bids</span><span><b>10</b>GPU valuation · every coin</span><span><b>11</b>Bayesian change-points</span><span><b>12</b>Kalman-filtered delivery</span><span><b>13</b>Adaptive conformal bands</span><span><b>14</b>Quantile forecast · CQR</span><span><b>15</b>OU first-passage times</span><span><b>16</b>Rival ceiling posterior</span><span><b>17</b>Thompson-sampled wars</span><span><b>18</b>PBO · CSCV</span><span><b>◆</b>NiceHash · Braiins · MiningRigRentals · Clore.ai · hot switch</span><span><b>◆</b>Rent-or-skip · rigs ≥ 7 PH/s</span><span><b>🔥</b>Hot windows · phone + e-mail alerts</span><span><b>🔒</b>DPAPI · Ed25519 · SHA-256 · WireGuard · zero custody</span><span><b>◆</b>Clore order guard · auto re-bid · auto-stop</span>
   </div></div>
 
   <section class="edge" id="edge">
     <div class="wrap">
       <figure class="edge-quote">
         <div class="eyebrow"><b>// DOCTRINE</b> Multi-venue execution · engineered in Rust</div>
-        <div class="big"><span>Speed isn't the edge.</span><em>Quantitative precision is.</em></div>
-        <p>HFT platforms race in nanoseconds on markets that move in nanoseconds. Hashrate and GPU compute markets move in seconds and minutes, so ODIN runs a <b>quantitative execution engine</b> built for that time scale.</p>
-        <p style="margin-top:12px">Every two seconds it prices each venue against live network economics, values the rival bids it would have to beat and checks its numbers against what your pool really credits. It learns which levels hold, when each market dips and how much of each order fills, and refuses any trade the math can't justify. <b>The longer it runs, the sharper it gets.</b></p>
+        <div class="big"><span>Speed isn't the edge.</span><em>Calibrated uncertainty is.</em></div>
+        <p>HFT races in nanoseconds on markets that move in nanoseconds. Hashrate and GPU compute reprice over seconds to hours, where the winner isn't the fastest bidder. It's the one who knows <b>how wrong its own numbers can be</b>, and sizes every decision to that error.</p>
+        <p style="margin-top:12px">So ODIN separates signal from noise the way a research desk does. A posterior over regime age tells a real shift from a spike. Exact first-passage times say how long a dip will last before it costs a fee. Conformal bands carry a coverage guarantee into every bid. A survival model reads each rival bot's ceiling from where it gave up. Each one is fitted to your account, re-tested against what your pool actually credits, and refuses any trade the math can't defend. <b>The longer it runs, the sharper it gets.</b></p>
       </figure>
 
       <div class="scale" role="img" aria-label="Time scale: HFT works in nanoseconds to microseconds; hashrate and GPU markets move over seconds to minutes; ODIN re-prices every 2 seconds; hashrate is delivered over hours.">
@@ -699,7 +729,7 @@ footer .hits img { display: block; height: 20px; width: auto; }
 
       <div class="edge-stats">
         <div class="edge-stat"><div class="v">2 s</div><div class="l">Re-pricing loop</div><p>Live difficulty, block rewards, coin prices, rival bids and every venue fee, recalculated every cycle.</p></div>
-        <div class="edge-stat"><div class="v">10 MODELS</div><div class="l">Learning in real time</div><p>Calibration, retarget forecast, pacing, dip speed, change-points, fill curve, auction pricing, GPU valuation and more, all fitted to your own account.</p></div>
+        <div class="edge-stat"><div class="v">18 MODELS</div><div class="l">Learning in real time</div><p>Bayesian change-points, Kalman-filtered delivery, conformal error bars, mean-reversion first-passage times, rival-ceiling posteriors and Thompson-sampled war moves, all fitted to your own account.</p></div>
         <div class="edge-stat"><div class="v">ZERO</div><div class="l">Bids above your maximum</div><p>Above break-even, the profit guard parks the order and waits for a dip.</p></div>
       </div>
     </div>
@@ -709,8 +739,8 @@ footer .hits img { display: block; height: 20px; width: auto; }
     <div class="wrap">
       <div class="sec-head">
         <div class="eyebrow"><b>// 00</b> The engine</div>
-        <h2>Ten models. One decision every 2 seconds.</h2>
-        <p class="lead">Every number ODIN can measure, it measures on your own account: the pool's payout delay, the price cut NiceHash accepts, the fill rate at each price, the dip hours, and the regime the market is in. Every number it has to estimate carries its uncertainty into the decision.</p>
+        <h2>Eighteen models. One decision every 2 seconds.</h2>
+        <p class="lead">Every number ODIN can measure, it measures on your own account: the pool's payout delay, the price cut NiceHash accepts, the fill rate at each price, the regime the market is in and how fast it reverts. Every number it has to estimate carries a calibrated uncertainty into the decision, and every model reports a statistic you can check.</p>
       </div>
       <div class="models">
         <div class="model"><span class="k">01 · HASHVALUE</span><h3>Live income per EH/s</h3><div class="eq">86400·R / (2³²·D) · (1−fee) · k</div><p>Difficulty and real block rewards, fees included, net of pool and buyer fees.</p></div>
@@ -720,9 +750,20 @@ footer .hits img { display: block; height: 20px; width: auto; }
         <div class="model"><span class="k">05 · DIP SPEED</span><h3>Spend into the dip</h3><div class="eq">L = L₀ + ΔL·clamp((m−m*)/2σ)</div><p>Speed climbs only when the margin clears the model's own error band. Changing speed is free.</p></div>
         <div class="model"><span class="k">06 · CUSUM</span><h3>Change-point alarm</h3><div class="eq">S⁺ = max(0, S⁺ + z − k) &gt; h</div><p>Detects when the market jumps to a new level and down-weights stale history immediately.</p></div>
         <div class="model"><span class="k">07 · FILL CURVE</span><h3>How much really fills</h3><div class="eq">q(gap) = isotonic( served / limit )</div><p>Learns the share of each order served at each distance from the clearing price.</p></div>
-        <div class="model"><span class="k">08 · VALIDATION</span><h3>Walk-forward tuning</h3><div class="eq">replay · no look-ahead · 2 halves</div><p>Replays your own recorded market, and adopts a setting only if it wins out of sample.</p></div>
+        <div class="model"><span class="k">08 · VALIDATION</span><h3>Walk-forward tuning</h3><div class="eq">replay · no look-ahead · CSCV</div><p>Replays your own recorded market, and adopts a setting only if it wins out of sample and passes the overfitting test (18).</p></div>
         <div class="model"><span class="k">09 · AUCTION</span><h3>Priced to win</h3><div class="eq">p* = max(floor, (1+ε)·max bids)</div><p>Auction venues are valued at the bid that would actually win, never the listed floor. Unverified prices can't raise an alert.</p></div>
         <div class="model"><span class="k">10 · GPU VALUE</span><h3>Every card, every coin</h3><div class="eq">v = maxₖ rₖ · min(1, PL/W) · (1−fee)</div><p>Each rented card valued per coin from measured hashrate and power, derated for host power limits.</p></div>
+      </div>
+      <div class="qhead"><b>// QUANT DESK · 11–18</b><span>each model ships with the statistic that proves it, and a reference you can look up</span></div>
+      <div class="qmodels">
+        <div class="model"><span class="k">11 · REGIME <i>● LIVE</i></span><h3>Bayesian change-points</h3><div class="eq">P(rₜ|x₁:ₜ) ∝ Σ P(xₜ|r)·P(r|rₜ₋₁)</div><p>The full posterior over how long the current market regime has lasted. A Student-t predictive means one spike cannot fool it; a new level that holds cannot hide from it.</p><div class="ref">Adams &amp; MacKay, 2007</div><div class="meas">9 confirmed shifts in 72 h · CUSUM fired 22×</div></div>
+        <div class="model"><span class="k">12 · DELIVERY <i>● LIVE</i></span><h3>Kalman-filtered pool credit</h3><div class="eq">x̂ ← x̂ + K(z − x̂) · K = P/(P+R)</div><p>What your pool really pays, tracked as a hidden state with its own error bar. Noise is learned from the innovations, and the filter's consistency is chi-square tested.</p><div class="ref">Kalman, 1960 · Mehra, 1970</div><div class="meas">NIS 0.78 (ideal 1.0)</div></div>
+        <div class="model"><span class="k">13 · CONFORMAL <i>● LIVE</i></span><h3>Error bars with a guarantee</h3><div class="eq">αₜ₊₁ = αₜ + γ(α − errₜ)</div><p>Distribution-free intervals whose coverage holds for any sequence, even after the market shifts. A dip boost needs the 90% lower bound of its margin to clear, not just the estimate.</p><div class="ref">Gibbs &amp; Candès, 2021</div><div class="meas">coverage measured, every forecast</div></div>
+        <div class="model"><span class="k">14 · FORECAST <i>● LIVE</i></span><h3>Quantile regression, online</h3><div class="eq">min Σ ρτ(y − xᵀβ) · CQR</div><p>The clearing price 30 minutes ahead as a full 10–50–90 distribution, learned online, conformalised, and scored against a random walk on every single forecast.</p><div class="ref">Koenker &amp; Bassett, 1978 · Romano et al., 2019</div><div class="meas">81% coverage of 80% · +7.7% skill</div></div>
+        <div class="model"><span class="k">15 · REVERSION <i>● LIVE</i></span><h3>Exact first-passage times</h3><div class="eq">T = θ⁻¹∫ √(2π)·exp(u²/2)·Φ(u) du</div><p>Ornstein–Uhlenbeck on two time scales separates noise that snaps back in minutes from a regime worth an order. A dip classed as transient noise never gets a paid dip order.</p><div class="ref">Uhlenbeck &amp; Ornstein, 1930 · Bertram, 2010</div><div class="meas">half-life 13 min · DF t −5.7</div></div>
+        <div class="model"><span class="k">16 · RIVALS <i>● LIVE</i></span><h3>Posterior on a bot's ceiling</h3><div class="eq">Ŝ(x) = Πᵢ (1 − dᵢ/nᵢ)</div><p>Every rival bot's ceiling is bracketed from where it walked away, and estimated by product-limit survival for the ones still fighting. ODIN declines wars it is going to lose.</p><div class="ref">Kaplan &amp; Meier, 1958</div><div class="meas">learns from every Clore war</div></div>
+        <div class="model"><span class="k">17 · WAR GAME <i>● LIVE</i></span><h3>Thompson-sampled bids</h3><div class="eq">θₐ ~ Beta(αₐ, βₐ) · argmax θₐ·h(a)</div><p>Learns which jump size actually wins against each market's bots, weighed against the profit headroom it leaves. Discounted so it re-learns when a bot changes behaviour.</p><div class="ref">Thompson, 1933 · Russo et al., 2018</div><div class="meas">every war move scored</div></div>
+        <div class="model"><span class="k">18 · OVERFIT <i>● LIVE</i></span><h3>Probability of backtest overfitting</h3><div class="eq">PBO = P(λ ≤ 0) over C(8,4) splits</div><p>Every candidate setting faces combinatorially symmetric cross-validation, 140 tests. If the in-sample winner is likely a fluke, nothing changes. Most tuners never ask.</p><div class="ref">Bailey, Borwein, López de Prado &amp; Zhu, 2017</div><div class="meas">gate on every --optimize</div></div>
       </div>
       <div class="viz">
         <figure class="vz" style="margin:0"><div class="con-head"><span>CUSUM · change-points</span><span class="sim">SIM</span></div><canvas id="vzCusum" aria-label="Animated simulation: clearing price with a CUSUM detector flagging a level shift"></canvas><figcaption class="cap"><b>Market shift detected.</b> When the clearing price settles at a new level, ODIN discounts the old fill history.</figcaption></figure>
@@ -1316,5 +1357,23 @@ odin --verify-audit odin_audit.jsonl   <span class="c"># AUDIT OK · hash chain 
     if (vis && !d.classList.contains('lit') && !t) t = setTimeout(function(){ t = null; ignite(); }, 900);
     if (!vis){ clearTimeout(t); t = null; d.classList.remove('lit'); }
   }); }, { threshold: [0, .45, .8] }).observe(d);
+})();
+</script>
+<script>
+/* hero proof strip: count up to the measured value once visible */
+(() => {
+  const els = document.querySelectorAll('.proof .pf b[data-to]');
+  if (!els.length) return;
+  const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fmt = (el, v) => (el.dataset.pre || '') + v.toFixed(+(el.dataset.dp || 0)) + (el.dataset.suf || '');
+  const run = el => {
+    const to = +el.dataset.to, t0 = performance.now(), dur = 1400;
+    const step = t => { const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3); el.textContent = fmt(el, to * e); if (k < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  };
+  if (reduce || !('IntersectionObserver' in window)) return;
+  els.forEach(el => el.textContent = fmt(el, 0));
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { run(e.target); io.unobserve(e.target); } }), { threshold: .4 });
+  els.forEach(el => io.observe(el));
 })();
 </script>
