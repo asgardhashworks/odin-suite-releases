@@ -19,6 +19,21 @@
   <a href="SECURITY.md"><b>SECURITY POLICY</b></a>
 </p>
 
+<p align="center">
+  <a href="https://youtu.be/5db7Qg8hieY"><img src="assets/odin-teaser.gif" alt="ODIN Suite film: Bayesian change-points on real NiceHash data, the PEAK profit window, and the end card" width="100%"></a><br>
+  <sub><b>▶ Click for the 65-second film</b> · real NiceHash order books · eighteen live models · sound on</sub>
+</p>
+
+<div align="center">
+
+| 81% | +7.6% | 13 min | 9 vs 22 |
+| :---: | :---: | :---: | :---: |
+| realised coverage of an 80% conformal band | forecast skill over a random walk (pinball loss) | Ornstein-Uhlenbeck reversion half-life · DF t = −5.7 | Bayesian regime shifts confirmed vs raw CUSUM alarms |
+
+<sub>Measured on 72 h of live NiceHash SHA256AsicBoost order books (17–20 Nov 2026). Reproduce with <code>odin --quant-report</code>. Raw output in <a href="samples/">samples/</a>.</sub>
+
+</div>
+
 <p align="center"><img src="assets/btc-mark.png" alt="Hash in, sats out: SHA-256 and GPU spot, verified at the pool" width="440"></p>
 
 <img src="assets/h01.png" alt="01 Overview" width="100%">
