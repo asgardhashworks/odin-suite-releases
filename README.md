@@ -141,7 +141,7 @@ Vulnerability reports: [SECURITY.md](SECURITY.md) · Support channels and respon
 
 <img src="assets/h07.png" alt="07 Operator telemetry" width="100%">
 
-<p align="center"><img src="assets/huginn.png" alt="HUGINN on a phone: execution view, fleet console, fleet cards and Clore GPU spot" width="100%"></p>
+<p align="center"><img src="assets/huginn-v3.png" alt="HUGINN on a phone: execution with verified P/L, live order book, quant desk and Clore GPU spot with auto-rent" width="100%"></p>
 
 <img src="assets/h08.png" alt="08 Deployment" width="100%">
 
