@@ -19,6 +19,8 @@
   <a href="SECURITY.md"><b>SECURITY POLICY</b></a>
 </p>
 
+> **New in 1.5.0** (20 Nov 2026): **OUTBOUND**, a sell-side shadow that compares your pool against NiceHash and MRR buyers, with Tier 1/2/3 views and a head-to-head panel. **GPU hosting on Clore.ai and Vast.ai**, including B300, B200, H200 and H100 rates. A redesigned **HUGINN** command interface: gold LOCKED ON order book, war-game rows for each venue, branded coins with live spot prices. The **SLEIPNIR 2.5** live console: one gold heartbeat, a uniform grid, your local clock, fans in RPM and a price strip for whatever you mine. [Download →](https://github.com/asgardhashworks/odin-suite-releases/releases/latest)
+
 <p align="center">
   <a href="https://youtu.be/5db7Qg8hieY"><img src="assets/odin-teaser.gif" alt="ODIN Suite film: Bayesian change-points on real NiceHash data, the PEAK profit window, and the end card" width="100%"></a><br>
   <sub><b>▶ Click for the 65-second film</b> · real NiceHash order books · eighteen live models · sound on</sub>
@@ -167,7 +169,7 @@ Vulnerability reports: [SECURITY.md](SECURITY.md) · Support channels and respon
 **Linux (Ubuntu 22.04+ / Debian 12+)**
 
 ```bash
-tar -xzf odin-suite-v1.4.0-linux-x64.tar.gz && cd odin-suite
+tar -xzf odin-suite-v1.5.0-linux-x64.tar.gz && cd odin-suite
 sudo ./install.sh                 # verifies checksums, creates the service account and systemd units
 sudo journalctl -u odin -f -o cat # follow the engine
 odin --verify-audit /var/lib/odin-suite/odin/odin_audit.jsonl

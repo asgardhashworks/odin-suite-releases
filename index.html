@@ -695,7 +695,8 @@ footer .hits img { display: block; height: 20px; width: auto; }
       <a href="#engine">Engine</a>
       <a href="#markets">Markets</a>
       <a href="#hot">Hot windows</a>
-      <a href="#outbound">Outbound<span class="newpill">NEW</span></a>
+      <a href="#new">1.5<span class="newpill">NEW</span></a>
+      <a href="#outbound">Outbound</a>
       <a href="#enterprise">Enterprise</a>
       <a href="#plans">Plans</a>
       <a href="#order">Order</a>
@@ -732,7 +733,7 @@ footer .hits img { display: block; height: 20px; width: auto; }
         <a class="ven lv" href="#markets"><i></i>Clore.ai<span>LIVE</span></a>
       </div>
       <a class="ob-flag" href="#outbound"><span class="newpill" style="margin:0">NEW</span>OUTBOUND · would selling your hashrate beat your pool? Measured live, built for your fleet →</a>
-      <div class="facts"><span>Free to install</span><span>Keys stay on your machine</span><span>Starts in watch-only mode</span><span>Windows · Ubuntu · Debian</span></div>
+      <div class="facts"><span>v1.5.0 · 20 Nov 2026</span><span>Free to install</span><span>Keys stay on your machine</span><span>Starts in watch-only mode</span><span>Windows · Ubuntu · Debian</span></div>
     </div>
 
     <div class="console" role="img" aria-label="Sample ODIN order book: price levels with pass or fail status and the locked level highlighted">
@@ -806,6 +807,25 @@ footer .hits img { display: block; height: 20px; width: auto; }
         <div class="edge-stat"><div class="v">18 MODELS</div><div class="l">Learning in real time</div><p>Bayesian change-points, Kalman-filtered delivery, conformal error bars, mean-reversion first-passage times, rival-ceiling posteriors and Thompson-sampled war moves, all fitted to your own account.</p></div>
         <div class="edge-stat"><div class="v">ZERO</div><div class="l">Bids above your maximum</div><p>Above break-even, the profit guard parks the order and waits for a dip.</p></div>
       </div>
+    </div>
+  </section>
+
+  <section class="band" id="new">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow"><b>// RELEASE 1.5.0</b> ODIN 1.5.0 · SLEIPNIR 2.5.0 · 20 Nov 2026</div>
+        <h2>One release. <span class="gold-text">The whole command deck, alive.</span></h2>
+        <p class="lead">ODIN Suite 1.5 brings the sell side, GPU hosting and a redesigned command interface to every install, free or Pro. Download it, unzip, run <code>Install.bat</code>. Your settings carry over.</p>
+      </div>
+      <div class="ob-list">
+        <div><b>OUTBOUND · sell-side shadow</b><p>Pool payout against NiceHash and MiningRigRentals buyers, every minute, after fees. Tier 1, 2 and 3 views and a head-to-head panel that crowns whoever pays more right now.</p></div>
+        <div><b>GPU hosting · Clore &amp; Vast</b><p>Host it or mine it, per card. Data-centre rates for B300, GB300, B200, H200, H100, A100 and L40S next to what your own GPUs earn mining.</p></div>
+        <div><b>HUGINN · command interface</b><p>Enterprise header, gold LOCKED ON order book, a war-game row for every venue, live up/down price ticks, and a phone layout that holds up mid-lock.</p></div>
+        <div><b>Any coin, branded</b><p>A coin registry gives every coin your rigs mine its icon and live spot price: BTC, PRL, XMR, KAS, RVN, ERG and more, with no setup.</p></div>
+        <div><b>SLEIPNIR 2.5 · live console</b><p>One gold heartbeat across the whole window, one column grid on every unit, your PC's own clock and time zone, fans in RPM, CPU clocks, and a price strip that follows what you mine.</p></div>
+        <div><b>Quant desk &amp; ledger</b><p>Change-points, mean reversion and conformal bands with <code>odin --quant-report</code>. Every day's billed, credited and verified P/L goes into the hash-chained audit ledger.</p></div>
+      </div>
+      <div class="cta" style="margin-top:22px"><a class="btn solid" href="https://github.com/asgardhashworks/odin-suite-releases/releases/latest" target="_blank" rel="noopener">Download 1.5.0</a><a class="btn" href="#outbound">See OUTBOUND</a></div>
     </div>
   </section>
 
@@ -944,7 +964,7 @@ odin --market nicehash live      <span class="c"># resume</span></div>
   <section class="band" id="outbound">
     <div class="wrap">
       <div class="sec-head">
-        <div class="eyebrow"><b>// NEW · OUTBOUND</b> For operators who own their machines</div>
+        <div class="eyebrow"><b>// OUTBOUND</b> For operators who own their machines</div>
         <h2>Your hashrate, sold <span class="gold-text">only when it pays more.</span></h2>
         <p class="lead">ODIN already prices every venue from the buyer's side. OUTBOUND turns the same models around. Every minute it measures what your pool pays against what buyers on NiceHash and MiningRigRentals pay for hashrate, and what Clore.ai and Vast.ai renters pay for GPUs, right now, after every fee and a switching cost. When renting out beats the pool, you see it, how often, and what it would have been worth per PH/s.</p>
         <p class="lead" style="margin-top:12px">Today it runs in <b>shadow mode</b> inside HUGINN: it measures and sells nothing. For your fleet, we build the routing <b>live, on your pool and your venues</b>, and prove it on your own numbers before a single machine is switched.</p>
@@ -1147,7 +1167,7 @@ odin --market nicehash live      <span class="c"># resume</span></div>
             <div><h3>Published network list</h3><p>Outbound HTTPS to a short list of hosts. Nothing listens on the network; HUGINN uses loopback plus Tailscale.</p></div>
           </div>
           <div class="term"><span class="c"># deploy on Linux</span>
-tar -xzf odin-suite-v1.4.0-linux-x64.tar.gz &amp;&amp; cd odin-suite
+tar -xzf odin-suite-v1.5.0-linux-x64.tar.gz &amp;&amp; cd odin-suite
 sudo ./install.sh --license-file site.lic
 sudo journalctl -u odin -f -o cat
 odin --verify-audit odin_audit.jsonl   <span class="c"># AUDIT OK · hash chain intact</span></div>
