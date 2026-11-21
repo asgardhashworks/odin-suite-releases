@@ -733,7 +733,7 @@ footer .hits img { display: block; height: 20px; width: auto; }
         <a class="ven lv" href="#markets"><i></i>Clore.ai<span>LIVE</span></a>
       </div>
       <a class="ob-flag" href="#outbound"><span class="newpill" style="margin:0">NEW</span>OUTBOUND · would selling your hashrate beat your pool? Measured live, built for your fleet →</a>
-      <div class="facts"><span>v1.5.1 · 20 Nov 2026</span><span>Free to install</span><span>Keys stay on your machine</span><span>Starts in watch-only mode</span><span>Windows · Ubuntu · Debian</span></div>
+      <div class="facts"><span>v1.6.0 · 21 Nov 2026</span><span>Free to install</span><span>Keys stay on your machine</span><span>Starts in watch-only mode</span><span>Windows · Ubuntu · Debian</span></div>
     </div>
 
     <div class="console" role="img" aria-label="Sample ODIN order book: price levels with pass or fail status and the locked level highlighted">
@@ -813,10 +813,11 @@ footer .hits img { display: block; height: 20px; width: auto; }
   <section class="band" id="new">
     <div class="wrap">
       <div class="sec-head">
-        <div class="eyebrow"><b>// RELEASE 1.5.1</b> ODIN 1.5.1 · SLEIPNIR 2.5.1 · 20 Nov 2026</div>
+        <div class="eyebrow"><b>// RELEASE 1.6.0</b> ODIN 1.6.0 · SLEIPNIR 2.6.0 · 21 Nov 2026</div>
         <h2>One release. <span class="gold-text">The whole command deck, alive.</span></h2>
         <p class="lead">ODIN Suite 1.5 brings the sell side, GPU hosting and a redesigned command interface to every install, free or Pro. Download it, unzip, run <code>Install.bat</code>. Your settings carry over.</p>
-        <p class="lead" style="margin-top:12px"><b>New in 1.5.1: help is one tap away.</b> The gold <b>SUPPORT</b> button in HUGINN opens an e-mail to us with your diagnostics already filled in, and never your keys, balances or addresses. It turns red when something needs attention. On the command line, <code>odin --support</code> does the same.</p>
+        <p class="lead" style="margin-top:12px"><b>New in 1.6.0: hardened.</b> Every release now ships a software bill of materials and passes a RustSec vulnerability scan with zero findings. Licence answers are signed by the licence server, and every outside price is checked before it reaches the maths. A recorded NiceHash order book and thousands of corrupted copies are replayed through every parser on each build. OUTBOUND is scored honestly: rental markets count only for the time rigs are actually rented.</p>
+        <p class="lead" style="margin-top:12px"><b>Help is one tap away.</b> The gold <b>SUPPORT</b> button in HUGINN opens an e-mail to us with your diagnostics already filled in, and never your keys, balances or addresses. It turns red when something needs attention. On the command line, <code>odin --support</code> does the same.</p>
       </div>
       <div class="ob-list">
         <div><b>OUTBOUND · sell-side shadow</b><p>Pool payout against NiceHash and MiningRigRentals buyers, every minute, after fees. Tier 1, 2 and 3 views and a head-to-head panel that crowns whoever pays more right now.</p></div>
@@ -826,7 +827,7 @@ footer .hits img { display: block; height: 20px; width: auto; }
         <div><b>SLEIPNIR 2.5 · live console</b><p>One gold heartbeat across the whole window, one column grid on every unit, your PC's own clock and time zone, fans in RPM, CPU clocks, and a price strip that follows what you mine.</p></div>
         <div><b>Quant desk &amp; ledger</b><p>Change-points, mean reversion and conformal bands with <code>odin --quant-report</code>. Every day's billed, credited and verified P/L goes into the hash-chained audit ledger.</p></div>
       </div>
-      <div class="cta" style="margin-top:22px"><a class="btn solid" href="https://github.com/asgardhashworks/odin-suite-releases/releases/latest" target="_blank" rel="noopener">Download 1.5.1</a><a class="btn" href="#outbound">See OUTBOUND</a></div>
+      <div class="cta" style="margin-top:22px"><a class="btn solid" href="https://github.com/asgardhashworks/odin-suite-releases/releases/latest" target="_blank" rel="noopener">Download 1.6.0</a><a class="btn" href="#outbound">See OUTBOUND</a></div>
     </div>
   </section>
 
@@ -1168,7 +1169,7 @@ odin --market nicehash live      <span class="c"># resume</span></div>
             <div><h3>Published network list</h3><p>Outbound HTTPS to a short list of hosts. Nothing listens on the network; HUGINN uses loopback plus Tailscale.</p></div>
           </div>
           <div class="term"><span class="c"># deploy on Linux</span>
-tar -xzf odin-suite-v1.5.1-linux-x64.tar.gz &amp;&amp; cd odin-suite
+tar -xzf odin-suite-v1.6.0-linux-x64.tar.gz &amp;&amp; cd odin-suite
 sudo ./install.sh --license-file site.lic
 sudo journalctl -u odin -f -o cat
 odin --verify-audit odin_audit.jsonl   <span class="c"># AUDIT OK · hash chain intact</span></div>
