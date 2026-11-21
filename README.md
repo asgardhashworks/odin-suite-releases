@@ -19,11 +19,19 @@
   <a href="SECURITY.md"><b>SECURITY POLICY</b></a>
 </p>
 
-> **New in 1.6.0:** hardened. Every release ships a CycloneDX software bill of materials and passes a RustSec vulnerability scan with zero findings. Licence answers are signed by the licence server. Every build replays a recorded NiceHash order book and thousands of corrupted copies through every parser. OUTBOUND is scored honestly. The threat model ships in every download (`docs/THREAT_MODEL.md`).
->
-> **New in 1.5.1:** a one-tap **SUPPORT** button in HUGINN (and `odin --support`) e-mails Asgard Hashworks with your diagnostics already filled in. It never includes keys, balances or addresses.
->
-> **New in 1.5.0** (20 Nov 2026): **OUTBOUND**, a sell-side shadow that compares your pool against NiceHash and MRR buyers, with Tier 1/2/3 views and a head-to-head panel. **GPU hosting on Clore.ai and Vast.ai**, including B300, B200, H200 and H100 rates. A redesigned **HUGINN** command interface: gold LOCKED ON order book, war-game rows for each venue, branded coins with live spot prices. The **SLEIPNIR 2.5** live console: one gold heartbeat, a uniform grid, your local clock, fans in RPM and a price strip for whatever you mine. [Download →](https://github.com/asgardhashworks/odin-suite-releases/releases/latest)
+<div align="center">
+
+### What's new
+
+| Release | Highlights |
+| :--- | :--- |
+| **1.6.0** · 21 Nov 2026 | **Hardened.** Every release ships a CycloneDX software bill of materials and passes a RustSec vulnerability scan with zero findings. Licence answers are signed by the licence server. Every build replays a recorded NiceHash order book and thousands of corrupted copies through every parser. OUTBOUND is scored honestly. Threat model included. |
+| **1.5.1** · 20 Nov 2026 | **One-tap SUPPORT** in HUGINN and `odin --support`: an e-mail to us with your diagnostics filled in, never your keys, balances or addresses. |
+| **1.5.0** · 20 Nov 2026 | **OUTBOUND** sell-side shadow with Tier 1/2/3 views. **GPU hosting** on Clore.ai and Vast.ai (B300, B200, H200, H100). Redesigned **HUGINN** command interface. **SLEIPNIR** live console. |
+
+<a href="https://github.com/asgardhashworks/odin-suite-releases/releases/latest"><b>Download the latest release →</b></a>
+
+</div>
 
 <p align="center">
   <a href="https://youtu.be/5db7Qg8hieY"><img src="assets/odin-teaser.gif" alt="ODIN Suite film: Bayesian change-points on real NiceHash data, the PEAK profit window, and the end card" width="100%"></a><br>
@@ -91,7 +99,7 @@ Each venue connects through an adapter that translates its native instrument (or
 | **MiningRigRentals** | Fixed-term rentals, SHA256 Asicboost and SHA-256 | **Live** | Rent-or-skip engine: scores every rig ≥ 7 PH/s on delivered hashrate, post-retarget price and fundable hours, then rents inside hard caps on rentals and sats per day. Signed API v2 (HMAC); the key carries no withdraw permission. |
 | **Clore.ai** | GPU spot rentals, paid in BTC | **Live** | Values every bitcoin-payable GPU at live Kryptex rates (Pearl, any coin, or each card's best), net of pool, renter and creation fees, start-up time and host power limits, then re-prices each candidate at the bid that would win its live auction. Hot-order alerts carry a direct server link, the winning bid and sats per day. Rented orders are guarded: ODIN re-bids 1% over any rival up to a profit ceiling and an absolute sats/day cap, steps back down while winning, and stops a rental that runs unprofitable for 10 minutes. |
 
-<h2 align="center">◆ NEW · OUTBOUND: your hashrate, sold only when it pays more</h2>
+<h2 align="center">◆ OUTBOUND: your hashrate, sold only when it pays more</h2>
 
 <p align="center">
   <img src="assets/outbound-you.jpg" alt="HUGINN OUTBOUND tab, live: pool vs NiceHash seller price" width="31%">&nbsp;
@@ -105,9 +113,10 @@ ODIN prices every venue from the buyer's side. **OUTBOUND** turns the same model
 | --- | --- |
 | **Shadow · live in HUGINN today** | Measures and sells nothing. Shows how often selling would have beaten the pool and what that was worth per PH/s per day. **Tier 1 / 2 / 3** views reprice the pool side at the fee each class of operator pays. |
 | **Routing · built per customer** | Built live with you: your pool connected (Foundry, Luxor, F2Pool, AntPool, ViaBTC, Braiins, OCEAN, …), one relay so miners are pointed once, seller accounts in your name with list-and-price keys only, caps per machine and site, SLEIPNIR heat cut-offs, a kill switch, and every switch in the hash-chained audit ledger. A 72-hour shadow run on your own numbers comes first. |
+| **Scored honestly** | A rental market only counts for the share of the time comparable rigs are actually rented; idle time earns the pool. MRR needs at least 5 rented rigs to count, and is labelled low, medium or high confidence by sample size. The headline is the record ("selling won X% of the time, averaged Y sats per PH/s per day"), never a momentary spike. |
 | **Venues** | NiceHash and MiningRigRentals (SHA-256); Clore.ai and Vast.ai (GPU hosting). Braiins Hashpower is buy-only, so there is nothing to sell into. Vast.ai does not publish its host cut; OUTBOUND assumes 25% and prices from the cheapest quarter of live asks. |
 
-<sub>Live capture from our own rig, 20 Nov 2026 09:00 CST: pool 45,648 vs NiceHash seller 42,444 sats per PH/s per day, so the pool wins and OUTBOUND says so. On Vast.ai an RTX 5090 hosts for $10.56/day against $7.42 mining Pearl, an H100 SXM rents for $29.28/day and a B300 for $189/day. BTC and PRL prices on the site and in SLEIPNIR tick green on an up-move and red on a down-move. <a href="https://asgardhashworks.github.io/odin-suite-releases/#outbound">Talk to us about your fleet →</a></sub>
+<sub>Live capture from our own rig, 21 Nov 2026 00:59 CST: pool 45,250 vs NiceHash seller 44,522 sats per PH/s per day after the 1% switching cost, so the pool wins by 1.6% and OUTBOUND says so. Only 0.6% of comparable MRR rigs were rented, so MRR was left out as too thin to count. On the GPU side an RTX 5090 hosts for $10.40/day on Clore ($8.64 on Vast.ai) against $6.66 mining Pearl; an H100 SXM rents for $28.08/day and a B300 for $182.70. BTC and PRL prices on the site and in SLEIPNIR tick green on an up-move and red on a down-move. <a href="https://asgardhashworks.github.io/odin-suite-releases/#outbound">Talk to us about your fleet →</a></sub>
 
 <img src="assets/h05.png" alt="05 Quantitative engine" width="100%">
 
@@ -158,15 +167,28 @@ Eighteen models, one decision every 2 seconds. Every model reports a statistic t
 | Network exposure | Outbound HTTPS to a short published host list. No listening ports; HUGINN binds to loopback and is published only through Tailscale. |
 | Audit trail | Every decision is appended to `odin_audit.jsonl` as a SHA-256 hash chain. `odin --verify-audit` detects any edited, deleted or reordered entry; the JSON lines feed Loki, Splunk or Elastic. |
 | Secrets at rest | API keys, secrets and passwords sealed with Windows DPAPI on first start, bound to the operator's account; owner-only file on Linux. |
-| Licensing | Ed25519-signed offline licence files, machine-bound or site-wide, verified locally. Air-gapped sites never contact a licence server. |
-| Supply chain | Binaries are built by GitHub Actions from tagged source. Every release ships `SHA256SUMS.txt`; the Linux installer refuses a mismatch. |
+| Licensing | Online keys: the licence server signs every answer (Ed25519) and offline grace runs from that signature, so a hand-edited licence cache unlocks nothing. Air-gapped sites use Ed25519-signed licence files, machine-bound or site-wide, verified locally. |
+| Supply chain | Binaries are built by GitHub Actions from tagged source. Every build must pass `clippy` with zero warnings and a RustSec vulnerability scan (zero findings in 1.6.0). Every release ships a CycloneDX SBOM (`odin-sbom.json`, `sleipnir-sbom.json`) and `SHA256SUMS.txt`; the Linux installer refuses a mismatch. |
+| Hostile input | Every number from an outside API is checked to be finite before it reaches the maths. Each build replays a recorded NiceHash order book and thousands of corrupted copies (wrong types, nulls, `NaN`, `1e308`, truncated bodies, outage pages) through every parser: NiceHash, MRR, Clore, Braiins, the licence server and the miner and sensor APIs. |
+| Threat model | `docs/THREAT_MODEL.md` (in every download) lists what is protected, the defence for each threat and the residual risks. An outside penetration-test scope is in `docs/PENTEST_SCOPE.md`. |
 
 Vulnerability reports: [SECURITY.md](SECURITY.md) · Support channels and response targets: [SUPPORT.md](SUPPORT.md)
 
 <img src="assets/h07.png" alt="07 Operator telemetry" width="100%">
 
-<p align="center"><img src="assets/huginn-live.png" alt="HUGINN live capture, 20 Nov 2026: verified +194 sats, live order book, quant desk and Clore GPU spot" width="100%"></p>
-<p align="center"><sub>Live capture from our own rig, 20 Nov 2026 03:38 CST. Real numbers, nothing staged: verified <b>+194 sats</b> (NiceHash charged 16,587 · Kryptex credited 16,781), audit chain intact at 158 records. ODIN is parked at 0.4331 because the market sits above its profitable ceiling: the profit guard holds rather than overpay.</sub></p>
+- **HUGINN**: your whole operation on your phone, read-only:
+  - the gold LOCKED ON order book and a war-game row for every venue;
+  - OUTBOUND and GPU hosting;
+  - every coin your rigs mine, with its icon and live spot price.
+- **SUPPORT, one tap**: opens an e-mail to us with version, plan, mode, markets, kill switch, rig states and recent events already filled in, never keys, balances or addresses. It turns red (URGENT) when the kill switch trips or a rig needs attention. From a shell: `odin --support`.
+- **SLEIPNIR 2.6**: a live fleet console:
+  - one gold heartbeat across the window and the same column grid on every unit;
+  - your PC's own clock and time zone;
+  - fans in RPM and CPU clocks;
+  - a price strip that follows whatever coins your rigs mine.
+
+<p align="center"><img src="assets/huginn-live.png" alt="HUGINN live capture, 21 Nov 2026: a NiceHash profit window open, ODIN executing, live order and verified +411 sats" width="100%"></p>
+<p align="center"><sub>Live capture from our own rig, 21 Nov 2026 00:59 CST. Real numbers, nothing staged: verified <b>+411 sats</b> (NiceHash charged 23,927 · Kryptex credited 24,338), audit chain intact at 551 records. A NiceHash profit window is open and ODIN is executing: 225 TH/s delivered on a 0.4298 order. Minutes later the profit guard parked it again when the market rose above its profitable maximum.</sub></p>
 
 <img src="assets/h08.png" alt="08 Deployment" width="100%">
 
