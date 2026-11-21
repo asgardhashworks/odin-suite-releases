@@ -222,9 +222,9 @@ The [Linux Deployment & Hardening Guide](ODIN_Suite_Linux_Deployment_Guide.pdf) 
 
 | Document | Audience |
 | --- | --- |
-| [Enterprise Brief](ODIN_Suite_Enterprise_Brief.pdf) · 2 pages | Executives, procurement |
-| [Architecture & Security Whitepaper](ODIN_Suite_Architecture_Security_Whitepaper.pdf) · 4 pages | Engineering, security review |
-| [Linux Deployment & Hardening Guide](ODIN_Suite_Linux_Deployment_Guide.pdf) · 3 pages | Site operations, systems administration |
+| [Enterprise Brief](ODIN_Suite_Enterprise_Brief.pdf) · 3 pages | Executives, procurement |
+| [Architecture & Security Whitepaper](ODIN_Suite_Architecture_Security_Whitepaper.pdf) · 5 pages | Engineering, security review |
+| [Linux Deployment & Hardening Guide](ODIN_Suite_Linux_Deployment_Guide.pdf) · 4 pages | Site operations, systems administration |
 | `docs/CONFIGURATION.md`, `docs/MARKETS.md`, `docs/ENTERPRISE.md`, `docs/HUGINN.md` | Included in every release package |
 
 <img src="assets/h09.png" alt="09 Licensing" width="100%">
